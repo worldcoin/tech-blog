@@ -1,6 +1,6 @@
-import '../styles/globals.css'
+import 'assets/globals.css'
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from '../src/contexts/ThemeContext'
+import { ThemeProvider } from '../contexts/ThemeContext'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXComponents } from 'mdx/types'
 import { useEffect, useState } from 'react'
