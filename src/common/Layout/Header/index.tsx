@@ -68,7 +68,7 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
       prevPos = window.scrollY
     }
 
-    setShowHeader(window.scrollY >= scrollDelta)
+    setShowHeader(window.scrollY <= scrollDelta)
 
     window.addEventListener('scroll', scrollHandler)
 
