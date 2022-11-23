@@ -21,9 +21,9 @@ export const SubscribeFormBase = memo(
     country?: string
     placeholder?: string
     inputClassName?: string
-    isTransparent?: boolean
     isStaticArrow?: boolean
     underline?: 'full' | 'field'
+    variant?: 'default' | 'cta'
     staticCaption?: boolean
   }) => {
     const {handleSubmit, formState, register, reset} = useForm<FormValues>({mode: 'all'})
@@ -33,6 +33,8 @@ export const SubscribeFormBase = memo(
     const buttonLabel = useMemo(() => props.stateToButtonLabel?.({isLoading, status}) || '', [status, isLoading, props])
 
     const caption = useMemo(() => props.stateToCaption?.({isLoading, status}) || '', [status, isLoading, props])
+
+    const variant = useMemo(() => props.variant ?? 'default', [props.variant])
 
     const submit = useCallback(
       async (values: FormValues) => {
@@ -47,8 +49,8 @@ export const SubscribeFormBase = memo(
 
         try {
           setIsLoading(true)
-
-          const response = await fetch(`${publicRuntimeConfig.NEXT_PUBLIC_APP_URL}/api/subscribe`, {
+          // FIXME: ask @pufflik for add CORS to /api/subscribe when we deploy tech-blog
+          const response = await fetch(`${publicRuntimeConfig.NEXT_PUBLIC_WEBSITE_URL}/api/subscribe`, {
             body: JSON.stringify({...values, ...(props.country && {country: props.country})}),
             headers: {'Content-Type': 'application/json'},
             method: 'POST',
@@ -82,32 +84,40 @@ export const SubscribeFormBase = memo(
         onSubmit={handleSubmit(submit)}
         className={clsx(
           props.className,
-          'group relative grid gap-x-2 grid-cols-1fr/auto py-1 disabled:opacity-50 transition-colors',
-          'text-183c4a',
-          {'border-b': props.underline !== 'field'},
-          {'border-dadada focus-within:border-183c4a hover:border-183c4a': status === 'default'},
-          {'border-183c4a': status !== 'default'},
+          'group relative grid gap-x-2 grid-cols-1fr/auto py-1 disabled:opacity-50 transition-colors font-sans',
+          {
+            'border-b': props.underline !== 'field',
+
+            'border-dadada focus-within:border-183c4a hover:border-183c4a dark:focus-within:border-7068fa dark:hover:border-7068fa':
+              status === 'default' && variant === 'default',
+
+            'border-010101/20 hover:border-010101 focus-within:border-010101 dark:border-ffffff/50 dark:hover:border-ffffff dark:focus-within:border-ffffff':
+              status === 'default' && variant === 'cta',
+          },
         )}
       >
         <input
           {...register('email', {required: true})}
           disabled={isLoading}
           className={clsx(
-            'text-16 sm:text-14 placeholder:text-8c8c92 outline-none disabled:opacity-50 transition-colors',
-            'bg-transparent autofill:[-webkit-text-fill-color:red]',
-            {'border-b border-inherit': props.underline === 'field'},
-            {'text-8c8c92 group-hover:focus:placeholder:text-8c8c92/0 focus:text-183c4a': status === 'default'},
-            {'group-hover:placeholder:text-183c4a group-hover:text-183c4a': status === 'default'},
-            {'text-183c4a': status !== 'default'},
+            'text-16 sm:text-14 outline-none disabled:opacity-50 transition-colors bg-transparent',
+            {
+              'border-b border-inherit': props.underline === 'field',
+
+              'placeholder:text-current [-webkit-text-fill-color:_#8c8c92] group-focus-within:[-webkit-text-fill-color:_#183c4a] dark:group-focus-within:[-webkit-text-fill-color:_#7068fa]':
+                status === 'default' && variant === 'default',
+
+              'placeholder:text-current dark:[-webkit-text-fill-color:_#ffffff90] dark:group-focus-within:[-webkit-text-fill-color:_#ffffff]':
+                status === 'default' && variant === 'cta',
+            },
             props.inputClassName,
-            {'bg-transparent': props.isTransparent},
           )}
           placeholder={props.placeholder}
         />
 
         <div
           className={clsx(
-            'absolute -bottom-px h-px from-ff6848 to-4940e0 bg-gradient-to-r transition-all duration-700',
+            'absolute -bottom-px h-px from-ff6848 to-7068fa bg-gradient-to-r transition-all duration-700',
             isLoading ? 'w-full' : 'z-[-1] w-0',
           )}
         />
@@ -116,8 +126,12 @@ export const SubscribeFormBase = memo(
           type="submit"
           disabled={isLoading || !formState.isValid}
           className={clsx(
-            'flex items-center font-normal whitespace-nowrap text-8c8c92 hover:text-4940e0 disabled:opacity-60',
+            'flex items-center font-normal whitespace-nowrap disabled:opacity-60',
             'disabled:hover:text-current transition-colors',
+            {
+              'text-8c8c92 hover:text-7068fa': variant === 'default',
+              'text-010101 dark:text-ffffff hover:text-7068fa dark:hover:text-ffffff': variant === 'cta',
+            },
           )}
         >
           {buttonLabel}

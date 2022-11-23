@@ -1,17 +1,19 @@
-import {MDXProvider} from '@mdx-js/react'
+import {Components as MDXComponents} from '@mdx-js/react/lib'
 import 'assets/globals.css'
+import {getMetadata} from 'common/helpers/get-metadata'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
 import {ThemeProvider} from 'contexts/ThemeContext'
-import {MDXComponents} from 'mdx/types'
 import type {AppProps} from 'next/app'
-import {useRouter} from 'next/router'
-import {createElement, Fragment, useEffect, useMemo, useState} from 'react'
+import {Fragment, useEffect, useMemo, useState} from 'react'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const components = {
+const getComponents = (render: boolean = true): MDXComponents => ({
+  // @ts-ignore -- custom element, only for parse meta
+  Meta: (props) => (render ? null : <pagemeta>{props.children}</pagemeta>),
   // NOTE: fix hydration error for mathjax
+  // @ts-ignore
   style: (args: [string]) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
     const [style, setStyle] = useState<string>('')
@@ -19,22 +21,18 @@ const components = {
     useEffect(() => setStyle(args[0]), [args])
     return <style>{style}</style>
   },
-} as MDXComponents
+})
 
 export default function App(props: AppProps) {
-  const router = useRouter()
-
-  const pathname = useMemo(() => {
-    if (!router?.asPath || router.asPath === '/') {
-      return ''
-    }
-
-    return router.asPath
-  }, [router?.asPath])
+  const pathname = useMemo(() => props.router.asPath.replace(/\/$/, ''), [props.router.asPath])
+  const meta = useMemo(
+    () => getMetadata(<props.Component {...props.pageProps} components={getComponents(false)} />),
+    [props],
+  )
 
   return (
     <Fragment>
-      <Meta title="Worldcoin" description={'Tech-blog'}>
+      <Meta title={meta?.title ? `${meta?.title} | Worldcoin tech blog` : 'Worldcoin tech blog'} description={''}>
         <meta key="og:type" property="og:type" content="website" />
         <meta key="og:site_name" property="og:site_name" content="Worldcoin" />
         <meta key="og:url" property="og:url" content={process.env.NEXT_PUBLIC_APP_URL} />
@@ -76,10 +74,9 @@ export default function App(props: AppProps) {
             },
           ]}
         >
-          <MDXProvider components={components}>{createElement(props.Component, props.pageProps)}</MDXProvider>
+          <props.Component {...props.pageProps} components={getComponents()} />
         </Layout>
       </ThemeProvider>
-
       <ToastContainer />
     </Fragment>
   )

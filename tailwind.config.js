@@ -68,6 +68,7 @@ module.exports = {
           '#232526',
           '#353535',
           '#4940e0',
+          '#596673',
           '#626467',
           '#7068fa',
           '#868686',
@@ -75,6 +76,7 @@ module.exports = {
           '#8c8c92',
           '#8e9095',
           '#938ca7',
+          '#9eafc0',
           '#a3b1b7',
           '#a7a7a7',
           '#afafaf',
@@ -161,6 +163,7 @@ module.exports = {
       transitionProperty: {
         'transform/opacity': 'transform, opacity',
         'visibility/opacity': 'visibility, opacity',
+        'transform/colors': 'transform, colors',
       },
 
       width: {

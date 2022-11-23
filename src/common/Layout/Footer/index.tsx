@@ -20,7 +20,7 @@ export const Footer = memo(function Footer(props: {className?: string; footerBor
       className={clsx(
         layout.paddingHorizontal,
         props.className,
-        'grid gap-y-5 lg:gap-y-12 grid-cols-1fr/auto lg:grid-cols-auto/1fr/auto content-end text-14',
+        'grid gap-y-5 lg:gap-y-12 grid-cols-1fr/auto lg:grid-cols-auto/1fr/auto content-end text-14 font-sans',
         'pt-15 lg:pt-16 pb-5 lg:pb-10',
         {'mt-28 lg:mt-40 border-t border-e8e8ea': props.footerBorder},
       )}

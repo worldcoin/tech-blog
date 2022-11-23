@@ -7,8 +7,9 @@ export const SubscribeForm = memo(
     className?: string
     placeholder?: string
     inputClassName?: string
-    isTransparent?: boolean
     isStaticArrow?: boolean
+    underline?: 'full' | 'field'
+    variant?: 'default' | 'cta'
   }) => {
     const stateToButtonLabel = useCallback(
       ({status}: {status: string}) => {
@@ -36,8 +37,9 @@ export const SubscribeForm = memo(
         stateToButtonLabel={stateToButtonLabel}
         stateToCaption={stateToCaption}
         placeholder={props.placeholder ? props.placeholder : 'Get Email Updates'}
-        isTransparent={props.isTransparent}
         isStaticArrow={props.isStaticArrow}
+        underline={props.underline}
+        variant={props.variant}
       />
     )
   },
