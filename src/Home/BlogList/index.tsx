@@ -26,8 +26,6 @@ export const BlogList = memo(function BlogList(props: {categories: Array<string>
   }, [props.categories])
 
   const handleChangeFilter = useCallback(async (data: BlogListFilterValues) => {
-    console.log('fetch new posts', data)
-
     const newPosts = await apiFetch<ApiGetBlogPostsResponse>('/get-blog-posts', data)
     setPosts(newPosts.posts)
   }, [])

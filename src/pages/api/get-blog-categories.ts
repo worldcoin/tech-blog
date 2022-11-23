@@ -22,7 +22,6 @@ export default async function getBlogCategories(req: NextApiRequest, res: NextAp
 
       if (categoryElement) {
         const categoryName = categoryElement.textContent.replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ')
-        console.log('found', categoryName)
 
         if (!categories.includes(categoryName)) {
           categories.push(categoryName)
