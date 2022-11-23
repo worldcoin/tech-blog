@@ -10,15 +10,15 @@ export const Hero = memo(function Hero() {
     <section
       className={clsx(
         layout.paddingHorizontal,
-        'grid min-h-[calc(100vh-68px)] lg:min-h-[unset] py-25 border-b border-b-010101/10',
-        'gap-6 content-start',
-        '2xl:grid-flow-col 2xl:auto-cols-max 2xl:justify-between 2xl:text-left 2xl:gap-25 2xl:items-center',
+        'grid py-25 border-b border-010101/10 dark:border-ffffff/10',
+        'content-start justify-items-center',
+        'md:grid-flow-col md:auto-cols-max md:justify-between md:items-center',
       )}
     >
-      <div className="space-y-4 2xl:space-y-9 w-min grid justify-items-center 2xl:justify-items-start">
+      <div className="space-y-4 2xl:space-y-9 w-min grid justify-items-center md:justify-items-start text-center md:text-left">
         <h1 className="text-26 md:text-32 2xl:text-42 whitespace-nowrap">The Worldcoin Tech Blog</h1>
 
-        <h2 className="text-596673 text-16 md:text-20 2xl:pr-25">
+        <h2 className="text-596673 text-16 md:text-20 md:pr-25">
           Completely free resource for blockchain technology and community services
         </h2>
 
@@ -27,7 +27,7 @@ export const Hero = memo(function Hero() {
           Start reading
         </ArrowLink>
       </div>
-      <div className="-order-1 2xl:order-1">
+      <div className="-order-1 md:order-1">
         <Image src={heroImage} alt="The Worldcoin Tech Blog" />
       </div>
     </section>
