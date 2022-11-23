@@ -6,7 +6,11 @@ import {memo} from 'react'
 
 export const Article = memo(function Article(props: {post: PageMeta}) {
   return (
-    <article className="space-y-12 pt-20" itemScope itemType="https://schema.org/BlogPosting">
+    <article
+      className="space-y-12 pt-10 mt-10 border-t border-010101/10 dark:border-ffffff/10 md:border-transparent"
+      itemScope
+      itemType="https://schema.org/BlogPosting"
+    >
       <div className="grid md:grid-cols-[2fr_1fr] justify-between gap-8 md:gap-16 2xl:gap-32">
         <div className="space-y-5">
           <div className="flex gap-2 text-9eafc0 text-14 items-center" itemScope itemType="https://schema.org/Person">
@@ -37,20 +41,14 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
           </div>
         </div>
 
-        <div className="md:justify-self-end -order-1 md:order-1">
-          {props.post.poster && (
-            <Image
-              src={props.post.poster}
-              width={125}
-              height={125}
-              alt={props.post.title}
-              className="w-full md:w-auto"
-            />
-          )}
-        </div>
+        {props.post.poster && (
+          <div className="md:justify-self-end -order-1 md:order-1 md:w-[125px] aspect-square">
+            <Image src={props.post.poster} width={125} height={125} alt={props.post.title} className="w-full" />
+          </div>
+        )}
       </div>
 
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="text-9eafc0 flex gap-2">
           <span itemProp="datePublished">{dayjs(props.post.date).format('MMMM DD, YYYY')}</span>
           &middot;
