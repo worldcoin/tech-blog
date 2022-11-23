@@ -54,7 +54,10 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
         <div className="text-9eafc0 flex gap-2">
           <span itemProp="datePublished">{dayjs(props.post.date).format('MMMM DD, YYYY')}</span>
           &middot;
-          <span>{props.post.readTime}m read</span>
+          <span>
+            {props.post.readTime < 1 && 'less than minute read'}
+            {props.post.readTime >= 1 && `${props.post.readTime}m read`}
+          </span>
         </div>
 
         <ArrowLink href={props.post.url} className="text-7068fa text-18 font-normal">
