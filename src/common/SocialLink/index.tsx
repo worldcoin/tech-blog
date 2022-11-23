@@ -7,7 +7,12 @@ export const SocialLink = memo(function SocialLink(props: {className?: string; i
     <a
       href={props.href}
       target="_blank"
-      className={clsx('flex w-5 h-5 transition-all', {'text-010101 hover:opacity-60': !props.className}, props.className)} rel="noreferrer"
+      className={clsx(
+        'flex w-5 h-5 transition-all',
+        {'text-010101 hover:opacity-60': !props.className},
+        props.className,
+      )}
+      rel="noreferrer"
     >
       <Icon className="w-full h-full" name={props.icon} />
     </a>

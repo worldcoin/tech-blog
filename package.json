@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "format": "ofmt ./src",
-    "format:check": "ofmt -l ./src"
+    "lint": "ofmt --lint ./src && eslint --ext .ts,.tsx,.js,.jsx ./src",
+    "lint-next": "npx next lint -- --dir ./src",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.1.5",
@@ -45,8 +46,5 @@
     "postcss-nesting": "^10.2.0",
     "tailwindcss": "^3.2.4"
   },
-  "prettier": "@ottofeller/prettier-config-ofmt",
-  "eslintConfig": {
-    "extends": "@ottofeller/eslint-config-ofmt/eslint.quality.cjs"
-  }
+  "prettier": "@ottofeller/prettier-config-ofmt"
 }
