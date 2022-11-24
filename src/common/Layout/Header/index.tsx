@@ -83,8 +83,8 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
         'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium font-sans',
         'fixed top-0 transition-transform/colors border-b',
         {
-          'border-transparent': !isShowHeader || !isScrolled,
-          'bg-white dark:bg-010101 border-010101/10 dark:border-ffffff/10': isShowHeader && isScrolled,
+          'border-transparent': !isScrolled,
+          'bg-white dark:bg-010101 border-010101/10 dark:border-ffffff/10': isScrolled,
           '-translate-y-full': !isShowHeader,
         },
       )}
