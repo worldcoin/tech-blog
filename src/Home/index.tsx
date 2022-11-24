@@ -31,7 +31,7 @@ export const Home = memo(function Home(props: HomePageProps) {
 
         <SubscribeForm
           className="text-20"
-          inputClassName="!text-20 md:min-w-[428px]"
+          inputClassName="!text-20 min-w-[0px] md:min-w-[428px]"
           placeholder="Enter email"
           underline="field"
           variant="cta"

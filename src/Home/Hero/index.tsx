@@ -16,14 +16,14 @@ export const Hero = memo(function Hero() {
       )}
     >
       <div className="space-y-4 2xl:space-y-9 w-min grid justify-items-center md:justify-items-start text-center md:text-left">
-        <h1 className="text-26 md:text-32 2xl:text-42 whitespace-nowrap">The Worldcoin Tech Blog</h1>
+        <h1 className="text-20 sm:text-26 md:text-32 2xl:text-42 whitespace-nowrap">The Worldcoin Tech Blog</h1>
 
-        <h2 className="text-596673 text-16 md:text-20 md:pr-25">
+        <h2 className="text-596673 text-14 sm:text-16 md:text-20 md:pr-25">
           Completely free resource for blockchain technology and community services
         </h2>
 
         {/* FIXME: add link */}
-        <ArrowLink href="#!" className="text-7068fa text-20">
+        <ArrowLink href="#!" className="text-7068fa text-14 sm:text-20">
           Start reading
         </ArrowLink>
       </div>
