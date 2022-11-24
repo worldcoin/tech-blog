@@ -43,7 +43,7 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
 
         {props.post.poster && (
           <div className="md:justify-self-end -order-1 md:order-1 md:w-[125px] aspect-square">
-            <Image src={props.post.poster} width={125} height={125} alt={props.post.title} className="w-full" />
+            <Image src={props.post.poster} width={400} height={400} alt={props.post.title} className="w-full" />
           </div>
         )}
       </div>
