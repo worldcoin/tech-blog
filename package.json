@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format": "ofmt ./src",
-    "lint": "ofmt --lint ./src && eslint --ext .ts,.tsx,.js,.jsx ./src",
+    "format": "ofmt './src/**/*.{ts,tsx}'",
+    "lint": "olint './src/**/*.{ts,tsx}'",
     "lint-next": "npx next lint -- --dir ./src",
     "typecheck": "tsc"
   },
