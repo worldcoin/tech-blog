@@ -37,11 +37,11 @@ export const Footer = memo(function Footer(props: {className?: string; footerBor
       >
         <Section title="Explore">
           <Link href="/">Home</Link>
-          <Link href="/become-an-operator">Become an Orb Operator</Link>
-          <Link href="/blog">Blog</Link>
+          <Link href="/sign-up">Sing Up</Link>
+          {/* FIXME: add link */}
+          <Link href="#!">Become a Worldcoin Partner</Link>
           <Link href="/privacy">Privacy</Link>
-          <Link href="https://developer.worldcoin.org">Developers</Link>
-          <Link href="/articles">Resources</Link>
+          <Link href="/blog">Blog</Link>
         </Section>
 
         <Section title="Company">
