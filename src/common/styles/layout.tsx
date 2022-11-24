@@ -6,4 +6,5 @@ export const layout = {
   paddingHorizontal: 'px-3.5 lg:px-9 2xl:px-[calc((100%-1470px)/2)]',
   paddingLeft: 'pl-3.5 lg:pl-9 2xl:pl-[calc((100%-1470px)/2)]',
   paddingRight: 'pr-3.5 lg:pr-9 2xl:pr-[calc((100%-1470px)/2)]',
+  paddingRight2xl: '2xl:pr-[calc((100%-1470px)/2)]',
 }
