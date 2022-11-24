@@ -1,6 +1,6 @@
 import {Components as MDXComponents} from '@mdx-js/react/lib'
 import 'assets/globals.css'
-import {getMetadata} from 'common/helpers/get-metadata'
+import {getMetadata} from 'common/helpers'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
 import {ThemeProvider} from 'contexts/ThemeContext'

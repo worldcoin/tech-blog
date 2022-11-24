@@ -1,4 +1,4 @@
-import {getMdxFiles} from 'common/helpers'
+import {getMdxFiles} from 'common/helpers/server'
 import {readFile} from 'fs/promises'
 import {NextApiRequest, NextApiResponse} from 'next'
 import parse from 'node-html-parser'

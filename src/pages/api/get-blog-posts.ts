@@ -1,4 +1,5 @@
-import {filePathToUrl, getMdxFiles, getMetadata} from 'common/helpers'
+import {getMetadata} from 'common/helpers'
+import {filePathToUrl, getMdxFiles} from 'common/helpers/server'
 import {PageMeta} from 'common/types'
 import {readFile} from 'fs/promises'
 import {NextApiRequest, NextApiResponse} from 'next'

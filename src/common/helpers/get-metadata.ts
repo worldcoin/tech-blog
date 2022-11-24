@@ -1,4 +1,4 @@
-import {calculateReadingTime} from 'common/helpers/calculate-reading-time'
+import {calculateReadingTime} from 'common/helpers'
 import {PageMeta} from 'common/types'
 import dayjs from 'dayjs'
 import parse from 'node-html-parser'

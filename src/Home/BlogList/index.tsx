@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {fetchApi} from 'common/helpers/fetch-api'
+import {fetchApi} from 'common/helpers'
 import {layout} from 'common/styles'
 import {ApiGetBlogPostsResponse, PageMeta} from 'common/types'
 import dayjs from 'dayjs'

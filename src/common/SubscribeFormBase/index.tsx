@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {fetchApi} from 'common/helpers/fetch-api'
+import {fetchApi} from 'common/helpers'
 import {Icon} from 'common/Icon'
 import {memo, useCallback, useMemo, useState} from 'react'
 import {useForm} from 'react-hook-form'

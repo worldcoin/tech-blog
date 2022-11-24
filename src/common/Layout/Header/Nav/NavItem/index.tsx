@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {generateDecoratedLinkClassName} from 'common/helpers/generate-decorated-link-classname'
+import {generateDecoratedLinkClassName} from 'common/helpers'
 import {Link} from 'common/Link'
 import {useRouter} from 'next/router'
 import {memo, ReactNode} from 'react'
