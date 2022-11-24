@@ -33,7 +33,7 @@ export const BlogList = memo(function BlogList(props: {categories: Array<string>
   return (
     <section
       className={clsx(
-        'relative overflow-clip pt-28 pb-48 flex flex-col md:flex-row md:gap-32 2xl:gap-60',
+        'relative overflow-clip pt-28 pb-48 flex flex-col lg:flex-row md:gap-32 2xl:gap-60',
         layout.paddingHorizontal,
       )}
     >

@@ -10,9 +10,9 @@ export const Hero = memo(function Hero() {
     <section
       className={clsx(
         layout.paddingHorizontal,
-        'grid py-25 border-b border-010101/10 dark:border-ffffff/10',
+        'grid py-25 border-b border-010101/10 dark:border-ffffff/10 max-w-screen-x overflow-hidden',
         'content-start justify-items-center',
-        'md:grid-flow-col md:auto-cols-max md:justify-between md:items-center',
+        'md:grid-flow-col md:auto-cols-fit md:justify-between md:items-center',
       )}
     >
       <div className="space-y-4 2xl:space-y-9 w-min grid justify-items-center md:justify-items-start text-center md:text-left">

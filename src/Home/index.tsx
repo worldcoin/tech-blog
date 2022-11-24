@@ -16,7 +16,7 @@ export const Home = memo(function Home(props: HomePageProps) {
       <section
         className={clsx(
           'flex flex-col gap-12 md:gap-0 md:flex-row justify-between items-center py-28',
-          'bg-dde7ea text-010101 dark:bg-7068fa dark:text-ffffff',
+          'bg-dde7ea text-010101 dark:bg-7068fa dark:text-ffffff text-center md:text-left',
           layout.paddingHorizontal,
         )}
       >
