@@ -20,10 +20,11 @@ const jsonIsApiError = (json: Record<string, any>): json is ApiErrorResponse => 
   return typeof json.code === 'number' && typeof json.message === 'string'
 }
 
-export const apiFetch = async <T = any>(endpoint: string, init?: ApiFetchInit) => {
+export const fetchApi = async <T = any>(endpoint: string, init?: ApiFetchInit) => {
   const {body, headers, params, ...restInit} = init ?? {}
   const hasBody = typeof body === 'object'
   let _params = ''
+
   // NOTE: filter empty values
   if (params && Object.entries(params).length) {
     const clearedParams = Object.fromEntries(Object.entries(params).filter((param) => !!param[1]))
@@ -33,6 +34,7 @@ export const apiFetch = async <T = any>(endpoint: string, init?: ApiFetchInit) =
   }
 
   const url = `${process.env.NEXT_PUBLIC_APP_URL}/api${endpoint}${_params}`
+
   const result = await fetch(url, {
     method: body ? 'POST' : 'GET',
     body: hasBody ? JSON.stringify(body) : undefined,

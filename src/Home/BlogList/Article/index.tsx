@@ -1,5 +1,5 @@
 import {ArrowLink} from 'common/ArrowLink'
-import {PageMeta} from 'common/types/page-meta'
+import {PageMeta} from 'common/types'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import {memo} from 'react'

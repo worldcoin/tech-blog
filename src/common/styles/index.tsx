@@ -1,1 +1,1 @@
-export {layout} from './layout'
+export * from './layout'

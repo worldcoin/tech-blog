@@ -1,11 +1,7 @@
-import {getMdxFiles} from 'common/helpers/get-mdx-files'
+import {getMdxFiles} from 'common/helpers'
 import {readFile} from 'fs/promises'
 import {NextApiRequest, NextApiResponse} from 'next'
 import parse from 'node-html-parser'
-
-export type ApiGetBlogCategoriesResponse = {
-  categories: Array<string>
-}
 
 /**
  * Parse and return all blog posts categories

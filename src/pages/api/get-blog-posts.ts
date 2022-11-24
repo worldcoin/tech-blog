@@ -1,17 +1,13 @@
-import {filePathToUrl} from 'common/helpers/file-path-to-url'
-import {getMdxFiles} from 'common/helpers/get-mdx-files'
-import {getMetadata} from 'common/helpers/get-metadata'
-import {PageMeta} from 'common/types/page-meta'
+import {filePathToUrl, getMdxFiles, getMetadata} from 'common/helpers'
+import {PageMeta} from 'common/types'
 import {readFile} from 'fs/promises'
 import {NextApiRequest, NextApiResponse} from 'next'
 
-export type ApiGetBlogPostsResponse = {
-  posts: Array<PageMeta>
-  total: number
-}
+const simpleOrderKeys = ['title', 'description', 'category'] as const
+type simpleOrderKey = typeof simpleOrderKeys[number]
 
-const isOrderByString = (key: string): key is 'title' | 'description' | 'category' => {
-  return ['title', 'description', 'category'].includes(key)
+const isSimpleOrderField = (key: unknown): key is simpleOrderKey => {
+  return simpleOrderKeys.includes(key as simpleOrderKey)
 }
 
 /**
@@ -68,7 +64,7 @@ export default async function getBlogPosts(req: NextApiRequest, res: NextApiResp
       const a = orderDir === 'ASC' ? first : second
       const b = orderDir === 'ASC' ? second : first
 
-      if (isOrderByString(orderBy)) {
+      if (isSimpleOrderField(orderBy)) {
         return a[orderBy]?.localeCompare(b[orderBy] || 'ZZZ') || 0
       }
 

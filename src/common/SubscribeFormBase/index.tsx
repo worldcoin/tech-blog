@@ -1,11 +1,9 @@
 import clsx from 'clsx'
-import {apiFetch} from 'common/helpers/fetch-api'
+import {fetchApi} from 'common/helpers/fetch-api'
 import {Icon} from 'common/Icon'
-import getConfig from 'next/config'
 import {memo, useCallback, useMemo, useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {toast} from 'react-toastify'
-const {publicRuntimeConfig} = getConfig()
 type FormValues = Record<string, string>
 type Status = 'success' | 'error' | 'default'
 
@@ -30,11 +28,8 @@ export const SubscribeFormBase = memo(
     const {handleSubmit, formState, register, reset} = useForm<FormValues>({mode: 'all'})
     const [isLoading, setIsLoading] = useState(false)
     const [status, setStatus] = useState<Status>('default')
-
     const buttonLabel = useMemo(() => props.stateToButtonLabel?.({isLoading, status}) || '', [status, isLoading, props])
-
     const caption = useMemo(() => props.stateToCaption?.({isLoading, status}) || '', [status, isLoading, props])
-
     const variant = useMemo(() => props.variant ?? 'default', [props.variant])
 
     const submit = useCallback(
@@ -50,9 +45,11 @@ export const SubscribeFormBase = memo(
 
         try {
           setIsLoading(true)
-          const result = await apiFetch(`/subscribe`, {
+
+          const result = await fetchApi(`/subscribe`, {
             body: {...values, ...(props.country && {country: props.country})},
           })
+
           setIsLoading(false)
 
           if (result.error) {

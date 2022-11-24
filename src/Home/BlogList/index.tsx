@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import {apiFetch} from 'common/helpers/fetch-api'
+import {fetchApi} from 'common/helpers/fetch-api'
 import {layout} from 'common/styles'
-import {PageMeta} from 'common/types/page-meta'
+import {ApiGetBlogPostsResponse, PageMeta} from 'common/types'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
-import {ApiGetBlogPostsResponse} from 'pages/api/get-blog-posts'
 import {memo, useCallback, useMemo, useState} from 'react'
 import {Article} from './Article'
 import {Filter} from './Filter'
@@ -26,7 +25,7 @@ export const BlogList = memo(function BlogList(props: {categories: Array<string>
   }, [props.categories])
 
   const handleChangeFilter = useCallback(async (data: BlogListFilterValues) => {
-    const newPosts = await apiFetch<ApiGetBlogPostsResponse>('/get-blog-posts', {params: data})
+    const newPosts = await fetchApi<ApiGetBlogPostsResponse>('/get-blog-posts', {params: data})
     setPosts(newPosts.posts)
   }, [])
 

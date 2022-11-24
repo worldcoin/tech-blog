@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {generateDecoratedLinkClassName} from 'common/helpers'
+import {generateDecoratedLinkClassName} from 'common/helpers/generate-decorated-link-classname'
 import {Link as CommonLink} from 'common/Link'
 import {memo, ReactNode} from 'react'
 const linkClassName = generateDecoratedLinkClassName({activeCondition: 'lg:hover:before:w-full'})

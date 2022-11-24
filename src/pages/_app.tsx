@@ -12,8 +12,9 @@ import 'react-toastify/dist/ReactToastify.css'
 const getComponents = (render: boolean = true): MDXComponents => ({
   // @ts-ignore -- custom element, only for parse meta
   Meta: (props) => (render ? null : <pagemeta>{props.children}</pagemeta>),
+
   // NOTE: fix hydration error for mathjax
-  // @ts-ignore
+  // @ts-ignore -- need for workaround style tag
   style: (args: [string]) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
     const [style, setStyle] = useState<string>('')
@@ -25,6 +26,7 @@ const getComponents = (render: boolean = true): MDXComponents => ({
 
 export default function App(props: AppProps) {
   const pathname = useMemo(() => props.router.asPath.replace(/\/$/, ''), [props.router.asPath])
+
   const meta = useMemo(
     () => getMetadata(<props.Component {...props.pageProps} components={getComponents(false)} />),
     [props],
@@ -43,7 +45,6 @@ export default function App(props: AppProps) {
         <meta key="twitter:url" property="og:url" content={process.env.NEXT_PUBLIC_APP_URL} />
         {/* FIXME: add image */}
         {/* <meta name="twitter:image" property="twitter:image" content={metaImageUrl} /> */}
-
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -60,14 +61,17 @@ export default function App(props: AppProps) {
               title: 'About',
               url: '/about',
             },
+
             {
               title: 'Blog',
               url: '/blog',
             },
+
             {
               title: 'Privacy',
               url: '/privacy',
             },
+
             {
               title: 'Signup',
               url: '/sign-up',
@@ -77,6 +81,7 @@ export default function App(props: AppProps) {
           <props.Component {...props.pageProps} components={getComponents()} />
         </Layout>
       </ThemeProvider>
+
       <ToastContainer />
     </Fragment>
   )

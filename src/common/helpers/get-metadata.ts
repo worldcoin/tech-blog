@@ -1,9 +1,9 @@
-import {PageMeta} from 'common/types/page-meta'
+import {calculateReadingTime} from 'common/helpers/calculate-reading-time'
+import {PageMeta} from 'common/types'
 import dayjs from 'dayjs'
 import parse from 'node-html-parser'
 import {ReactElement} from 'react'
 import {renderToString} from 'react-dom/server'
-import {calculateReadingTime} from './calculate-reading-time'
 
 /**
  * Parse metadata from ReactElement or html string

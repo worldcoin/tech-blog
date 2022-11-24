@@ -77,20 +77,25 @@ export const Footer = memo(function Footer(props: {className?: string; footerBor
         >
           <SocialLink href="https://twitter.com/worldcoin" icon="twitter" className={linkClassName} />
           <SocialLink href="https://discord.gg/worldcoin" icon="discord" className={linkClassName} />
+
           <SocialLink
             href="https://www.facebook.com/Worldcoin-102231972238962"
             icon="facebook"
             className={linkClassName}
           />
+
           <SocialLink href="https://instagram.com/worldcoin/" icon="instagram" className={linkClassName} />
+
           <SocialLink
             href="https://www.youtube.com/channel/UCokOstyncOgi1VvhE-U7aXA"
             icon="youtube"
             className={linkClassName}
           />
+
           <SocialLink href="https://t.me/worldcoin" icon="telegram" className={linkClassName} />
           <SocialLink href="https://www.tiktok.com/@worldcoin" icon="tiktok" className={linkClassName} />
           <SocialLink href="https://github.com/worldcoin" icon="github" className={linkClassName} />
+
           <SocialLink
             href="https://www.linkedin.com/company/worldcoinfoundation"
             icon="linkedin"
@@ -112,14 +117,21 @@ export const Footer = memo(function Footer(props: {className?: string; footerBor
 
         <div className="w-0.5 h-0.5 bg-8c8c92 rounded-full" />
 
+        {/* FIXME: add link */}
         <Link href={`${publicRuntimeConfig.NEXT_PUBLIC_PRIVACY_STATEMENT_URL}`} target="_blank">
           Privacy
         </Link>
 
         <div className="w-0.5 h-0.5 bg-8c8c92 rounded-full" />
 
+        {/* FIXME: add link */}
         <Link href={`${publicRuntimeConfig.NEXT_PUBLIC_USER_AGREEMENT_URL}`} target="_blank">
           Terms
+        </Link>
+
+        {/* FIXME: add link */}
+        <Link href={`#!`} target="_blank">
+          Support
         </Link>
       </div>
     </footer>

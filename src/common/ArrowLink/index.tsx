@@ -9,7 +9,7 @@ type ArrowLinkCommonProps = {
   children: ReactNode
 }
 
-type ArrowLinkWithHrefProps = ArrowLinkCommonProps & {
+type ArrowCommonLinkProps = ArrowLinkCommonProps & {
   href: string
   to?: never
   smooth?: never
@@ -17,20 +17,20 @@ type ArrowLinkWithHrefProps = ArrowLinkCommonProps & {
   target?: string
 }
 
-type ArrowLinkWithToProps = ArrowLinkCommonProps & {
+type ArrowScrollLinkProps = ArrowLinkCommonProps & {
   href?: never
   to: string
   smooth?: boolean
   duration?: number
 }
 
-type ArrowLinkProps = ArrowLinkWithHrefProps | ArrowLinkWithToProps
+type ArrowLinkProps = ArrowCommonLinkProps | ArrowScrollLinkProps
 
-const isArrowLinkWithHrefProps = (props: ArrowLinkProps): props is ArrowLinkWithHrefProps => {
+const isArrowLinkWithHrefProps = (props: ArrowLinkProps): props is ArrowCommonLinkProps => {
   return 'href' in props
 }
 
-export const ArrowLink = memo(function ArrowLink(props: ArrowLinkWithHrefProps | ArrowLinkWithToProps) {
+export const ArrowLink = memo(function ArrowLink(props: ArrowCommonLinkProps | ArrowScrollLinkProps) {
   const className = clsx(
     'group grid gap-x-2 grid-cols-auto/1fr justify-start items-center',
     'font-medium hover:underline transition-all cursor-pointer',
@@ -40,7 +40,6 @@ export const ArrowLink = memo(function ArrowLink(props: ArrowLinkWithHrefProps |
   const children = (
     <Fragment>
       <span>{props.children}</span>
-
       <Icon name="arrow-right" className="w-3.5 h-3.5 lg:group-hover:translate-x-1.5 transition-transform" />
     </Fragment>
   )

@@ -23,7 +23,6 @@ export const Layout = memo(function Layout(props: LayoutProps) {
       )}
     >
       <Header menuItems={props.menuItems} />
-
       {props.children}
       <Footer footerBorder={props.footerBorder} />
     </div>

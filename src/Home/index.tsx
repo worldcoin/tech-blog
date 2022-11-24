@@ -2,10 +2,15 @@ import clsx from 'clsx'
 import {Cta} from 'common/Cta'
 import {layout} from 'common/styles'
 import {SubscribeForm} from 'common/SubscribeForm'
-import {HomePageProps} from 'pages'
+import {ApiGetBlogCategoriesResponse, ApiGetBlogPostsResponse} from 'common/types'
 import {Fragment, memo} from 'react'
 import {BlogList} from './BlogList'
 import {Hero} from './Hero'
+
+export type HomePageProps = {
+  categories: ApiGetBlogCategoriesResponse['categories']
+  posts: ApiGetBlogPostsResponse['posts']
+}
 
 export const Home = memo(function Home(props: HomePageProps) {
   return (

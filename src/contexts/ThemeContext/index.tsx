@@ -1,21 +1,13 @@
-import {
-  createContext,
-  memo,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import {createContext, memo, ReactNode, useCallback, useEffect, useMemo, useState} from 'react'
 
 export type SystemThemes = 'light' | 'dark'
 export type Themes = SystemThemes | 'system'
 
 type ContextValue = {
   currentTheme: SystemThemes | null
-  preferedTheme: Themes | null
+  preferredTheme: Themes | null
   systemTheme: SystemThemes | null
-  changePreferedTheme: (value: Themes) => void
+  changePreferredTheme: (value: Themes) => void
   themes: typeof themes
 }
 
@@ -36,29 +28,27 @@ const themes = [
 
 export const ThemeContext = createContext<ContextValue>({
   currentTheme: null,
-  preferedTheme: null,
+  preferredTheme: null,
   systemTheme: null,
-  changePreferedTheme: (value: Themes) => {},
+  changePreferredTheme: (_value: Themes) => {},
   themes,
 })
 
-export const ThemeProvider = memo(function ThemeProvider(props: {
-  children: ReactNode
-}) {
+export const ThemeProvider = memo(function ThemeProvider(props: {children: ReactNode}) {
   const [systemTheme, setSystemTheme] = useState<SystemThemes | null>(null)
-  const [preferedTheme, setPreferedTheme] = useState<Themes>('system')
+  const [preferredTheme, setPreferredTheme] = useState<Themes>('system')
 
   const currentTheme = useMemo(() => {
-    if (preferedTheme !== 'system') {
-      return preferedTheme
+    if (preferredTheme !== 'system') {
+      return preferredTheme
     }
 
-    if (preferedTheme === 'system' && systemTheme) {
+    if (preferredTheme === 'system' && systemTheme) {
       return systemTheme
     }
 
     return null
-  }, [preferedTheme, systemTheme])
+  }, [preferredTheme, systemTheme])
 
   // @NOTE: listen system scheme
   useEffect(() => {
@@ -78,14 +68,14 @@ export const ThemeProvider = memo(function ThemeProvider(props: {
 
   // NOTE: listen change from another tab
   useEffect(() => {
-    setPreferedTheme((localStorage.getItem('theme') ?? 'system') as Themes)
+    setPreferredTheme((localStorage.getItem('theme') ?? 'system') as Themes)
 
     const handleChangeStorage = (event: StorageEvent) => {
       if (event.key !== 'theme') {
         return
       }
 
-      setPreferedTheme(event.newValue as Themes)
+      setPreferredTheme(event.newValue as Themes)
     }
 
     addEventListener('storage', handleChangeStorage)
@@ -95,17 +85,17 @@ export const ThemeProvider = memo(function ThemeProvider(props: {
     }
   }, [])
 
+  // set theme key to body data attribute
   useEffect(() => {
     if (!systemTheme) {
       return
     }
 
-    document.documentElement.dataset['theme'] =
-      preferedTheme === 'system' ? systemTheme : preferedTheme
-  }, [systemTheme, preferedTheme])
+    document.documentElement.dataset['theme'] = preferredTheme === 'system' ? systemTheme : preferredTheme
+  }, [systemTheme, preferredTheme])
 
-  const changePreferedTheme = useCallback((value: Themes) => {
-    setPreferedTheme(value)
+  const changePreferredTheme = useCallback((value: Themes) => {
+    setPreferredTheme(value)
     localStorage.setItem('theme', value)
   }, [])
 
@@ -113,16 +103,12 @@ export const ThemeProvider = memo(function ThemeProvider(props: {
     () => ({
       currentTheme,
       systemTheme,
-      preferedTheme,
-      changePreferedTheme,
+      preferredTheme: preferredTheme,
+      changePreferredTheme,
       themes,
     }),
-    [currentTheme, systemTheme, preferedTheme, changePreferedTheme]
+    [changePreferredTheme, currentTheme, preferredTheme, systemTheme],
   )
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {props.children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={value}>{props.children}</ThemeContext.Provider>
 })

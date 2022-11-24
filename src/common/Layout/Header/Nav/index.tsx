@@ -1,6 +1,6 @@
 import {disableBodyScroll, enableBodyScroll} from 'body-scroll-lock'
 import clsx from 'clsx'
-import {generateDecoratedLinkClassName} from 'common/helpers'
+import {generateDecoratedLinkClassName} from 'common/helpers/generate-decorated-link-classname'
 import {Link} from 'common/Link'
 import {SubscribeForm} from 'common/SubscribeForm'
 import {MenuItem} from 'common/types'
