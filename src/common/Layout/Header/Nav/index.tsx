@@ -78,15 +78,16 @@ export const Nav = memo(
               Press
             </Link>
 
+            {/* FIXME: add link */}
             <Link
-              href="/become-an-operator"
+              href="#!"
               onClick={props.closeMenu}
               className={clsx(
                 'row-start-2 justify-self-start text-16',
                 generateDecoratedLinkClassName({activeCondition: 'hover:before:w-full'}),
               )}
             >
-              Orb Operators
+              Become a Partner
             </Link>
 
             <a
