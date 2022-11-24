@@ -1,27 +1,22 @@
-import cn from 'classnames'
-import { CSSProperties, memo } from 'react'
+import clsx from 'clsx'
+import {CSSProperties, memo} from 'react'
 import styles from './icon.module.css'
 
 const iconNames = [
-  'attention',
-  'book',
-  'close',
-  'code',
-  'coin',
-  'cpu',
+  'arrow-right',
+  'check',
+  'discord',
+  'exclamation-mark',
+  'facebook',
   'github',
-  'hand',
-  'info',
-  'lightning',
-  'logo-full',
+  'instagram',
+  'linkedin',
+  'logo-small',
   'logo',
-  'menu',
-  'question',
-  'search',
-  'speaker',
-  'theme-dark',
-  'theme-light',
-  'theme-system',
+  'telegram',
+  'tiktok',
+  'twitter',
+  'youtube',
 ] as const
 
 export type IconType = typeof iconNames[number]
@@ -40,11 +35,11 @@ export const Icon = memo(function Icon(
         name?: never
         path: string
       }
-  )
+  ),
 ) {
   return (
     <span
-      className={cn(
+      className={clsx(
         styles.icon,
         'pointer-events-none flex',
 
@@ -53,9 +48,9 @@ export const Icon = memo(function Icon(
           'no-mask': props.noMask,
         },
 
-        props.className
+        props.className,
       )}
-      {...(props.testId && { 'data-testid': props.testId })}
+      {...(props.testId && {'data-testid': props.testId})}
       role="icon"
       style={
         {

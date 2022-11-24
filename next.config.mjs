@@ -1,20 +1,22 @@
-import mdx from '@next/mdx'
-import remarkMath from 'remark-math'
+import nextMDX from '@next/mdx'
 import rehypeMathjax from 'rehype-mathjax'
+import remarkMath from 'remark-math'
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  pageExtensions: ['tsx', 'md', 'mdx'],
-}
-
-const withMDX = mdx({
+const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathjax],
+    providerImportSource: '@mdx-js/react',
   },
 })
 
-export default withMDX(nextConfig)
+/** @type {import('next').NextConfig} */
+export default withMDX({
+  reactStrictMode: true,
+  swcMinify: true,
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
+  publicRuntimeConfig: {
+    ...Object.fromEntries(Object.entries(process.env).filter(([key]) => key.startsWith('NEXT_PUBLIC_'))),
+  },
+})
