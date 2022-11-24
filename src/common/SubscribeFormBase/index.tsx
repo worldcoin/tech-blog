@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import {apiFetch} from 'common/helpers/fetch-api'
 import {Icon} from 'common/Icon'
 import getConfig from 'next/config'
 import {memo, useCallback, useMemo, useState} from 'react'
@@ -49,15 +50,10 @@ export const SubscribeFormBase = memo(
 
         try {
           setIsLoading(true)
-          // FIXME: ask @pufflik for add CORS to /api/subscribe when we deploy tech-blog
-          const response = await fetch(`${publicRuntimeConfig.NEXT_PUBLIC_WEBSITE_URL}/api/subscribe`, {
-            body: JSON.stringify({...values, ...(props.country && {country: props.country})}),
-            headers: {'Content-Type': 'application/json'},
-            method: 'POST',
+          const result = await apiFetch(`/subscribe`, {
+            body: {...values, ...(props.country && {country: props.country})},
           })
-
           setIsLoading(false)
-          const result = await response.json()
 
           if (result.error) {
             console.error(result)
