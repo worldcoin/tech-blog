@@ -42,46 +42,44 @@ export default async function getBlogPosts(req: NextApiRequest, res: NextApiResp
     )
   ).filter((meta) => typeof meta.title === 'string')
 
-  const posts = (() => {
-    let result = allPostsMeta
-
+  const filterPost = (post: Partial<PageMeta>) => {
     // NOTE: filter by query
     if (query) {
-      result = result.filter((meta) => {
-        const _query = query.toLocaleLowerCase()
-        const title = meta.title?.toLocaleLowerCase()
-        const description = meta.title?.toLocaleLowerCase()
+      const _query = query.toLocaleLowerCase()
+      const title = post.title?.toLocaleLowerCase()
+      const description = post.title?.toLocaleLowerCase()
 
-        return title?.includes(_query) || description?.includes(_query)
-      }, [])
+      return title?.includes(_query) || description?.includes(_query)
     }
 
     // NOTE: filter by category
     if (category) {
-      result = result.filter((meta) => meta.category === category)
+      return post.category === category
     }
 
-    result = result.sort((first, second) => {
-      const a = orderDir === 'ASC' ? first : second
-      const b = orderDir === 'ASC' ? second : first
+    return true
+  }
 
-      if (isSimpleOrderField(orderBy)) {
-        return a[orderBy]?.localeCompare(b[orderBy] || 'ZZZ') || 0
-      }
+  const sortPost = (first: Partial<PageMeta>, second: Partial<PageMeta>) => {
+    const a = orderDir === 'ASC' ? first : second
+    const b = orderDir === 'ASC' ? second : first
 
-      if ('author' === orderBy) {
-        return a.author?.name.localeCompare(b.author?.name || 'ZZZ') || 0
-      }
+    if (isSimpleOrderField(orderBy)) {
+      return a[orderBy]?.localeCompare(b[orderBy] || 'ZZZ') || 0
+    }
 
-      if (orderBy === 'date') {
-        return Number(a[orderBy]) - Number(b[orderBy])
-      }
+    if ('author' === orderBy) {
+      return a.author?.name.localeCompare(b.author?.name || 'ZZZ') || 0
+    }
 
-      return 0
-    })
+    if (orderBy === 'date') {
+      return Number(a[orderBy]) - Number(b[orderBy])
+    }
 
-    return result
-  })()
+    return 0
+  }
+
+  const posts = allPostsMeta.filter(filterPost).sort(sortPost)
 
   return res.status(200).json({posts, total: allPostsMeta.length})
 }
