@@ -9,7 +9,9 @@
     "format": "ofmt './src/**/*.{ts,tsx}'",
     "lint": "olint './src/**/*.{ts,tsx}'",
     "lint-next": "npx next lint -- --dir ./src",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "test": "jest --env=jsdom --no-cache --onlyChanged",
+    "test:all": "jest --env=jsdom --no-cache"
   },
   "dependencies": {
     "@mdx-js/loader": "^2.1.5",
@@ -36,16 +38,68 @@
     "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.2",
     "@ottofeller/eslint-config-ofmt": "1.5.1",
     "@ottofeller/ofmt": "1.5.1",
     "@ottofeller/prettier-config-ofmt": "1.5.1",
+    "@testing-library/react": "^13.4.0",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react-scroll": "^1.8.5",
     "autoprefixer": "^10.4.13",
+    "babel-jest": "^29.3.1",
     "eslint-plugin-ottofeller": "0.1.9",
+    "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
+    "jest-fetch-mock": "^3.0.3",
     "postcss": "^8.4.19",
     "postcss-nesting": "^10.2.0",
-    "tailwindcss": "^3.2.4"
+    "react-test-renderer": "^18.2.0",
+    "tailwindcss": "^3.2.4",
+    "ts-jest": "^29.0.3"
   },
-  "prettier": "@ottofeller/prettier-config-ofmt"
+  "prettier": "@ottofeller/prettier-config-ofmt",
+  "babel": {
+    "presets": [
+      "next/babel"
+    ]
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ],
+    "globals": {
+      "ts-jest": {
+        "babelConfig": true,
+        "tsConfig": "jest.tsconfig.json"
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/config/style-mock.js",
+      "^[./a-zA-Z0-9$_-]+\\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/config/file-stub.js"
+    },
+    "setupFiles": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ],
+    "transform": {
+      ".*": "babel-jest",
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  }
 }
