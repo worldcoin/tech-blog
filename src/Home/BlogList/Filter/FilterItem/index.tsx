@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import {BlogListFilter, BlogListFilterValues} from 'Home/BlogList'
 import {Dispatch, memo, SetStateAction} from 'react'
 
-export const Item = memo(function Item(props: {
+export const FilterItem = memo(function Item(props: {
   category: BlogListFilter['category'][number]
   className?: string
   current?: boolean
