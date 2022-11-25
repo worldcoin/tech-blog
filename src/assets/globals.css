@@ -3,14 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 /* Fonts */
-/* Mono */
-@font-face {
-  src: url('/fonts/ABCDiatypeMono-Regular.woff2') format('woff2');
-  font-display: block;
-  font-weight: 400;
-  font-style: normal;
-  font-family: 'ABC Diatype Mono';
-}
 /* Sans */
 @font-face {
   font-family: 'Basel';
@@ -123,7 +115,7 @@
 }
 body {
   -webkit-tap-highlight-color: transparent;
-  @apply overflow-x-hidden overflow-y-auto min-h-screen text-black font-mono antialiased bg-white;
+  @apply overflow-x-hidden overflow-y-auto min-h-screen text-black font-sans antialiased bg-white;
 }
 @responsive {
   .scrollbar-hidden {

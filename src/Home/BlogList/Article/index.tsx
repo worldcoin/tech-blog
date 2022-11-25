@@ -13,7 +13,7 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
     >
       <div className="grid md:grid-cols-[2fr_1fr] justify-between gap-8 md:gap-16 2xl:gap-32">
         <div className="space-y-5">
-          <div className="flex gap-2 text-9eafc0 text-14 items-center" itemScope itemType="https://schema.org/Person">
+          <div className="flex gap-2 text-14 items-center" itemScope itemType="https://schema.org/Person">
             {props.post.author.picture && (
               <Image
                 src={props.post.author.picture}
@@ -31,11 +31,11 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
           </div>
 
           <div className="space-y-3">
-            <h3 itemProp="name" className="text-32">
+            <h3 itemProp="name" className="text-32 font-bold">
               {props.post.title}
             </h3>
 
-            <div itemProp="description" className="text-596673">
+            <div itemProp="description" className="text-18 text-626467 dark:text-828589 font-serif">
               {props.post.description}
             </div>
           </div>
@@ -49,7 +49,7 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="text-9eafc0 flex gap-2">
+        <div className="text-626467 dark:text-828589 flex gap-2">
           <span itemProp="datePublished">{dayjs(props.post.date).format('MMMM DD, YYYY')}</span>
           &middot;
           <span>

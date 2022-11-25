@@ -77,7 +77,7 @@ export const SubscribeFormBase = memo(
         onSubmit={handleSubmit(submit)}
         className={clsx(
           props.className,
-          'group relative grid gap-x-2 grid-cols-1fr/auto py-1 disabled:opacity-50 transition-colors font-sans',
+          'group relative grid gap-x-2 grid-cols-1fr/auto py-1 disabled:opacity-50 transition-colors',
           {
             'border-b': props.underline !== 'field',
 

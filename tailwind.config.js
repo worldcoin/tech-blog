@@ -66,11 +66,13 @@ module.exports = {
           '#191919',
           '#217237',
           '#232526',
+          '#29343f',
           '#353535',
           '#4940e0',
           '#596673',
           '#626467',
           '#7068fa',
+          '#828589',
           '#868686',
           '#8c8c8c',
           '#8c8c92',
@@ -172,7 +174,6 @@ module.exports = {
     },
 
     fontFamily: {
-      mono: ['ABC Diatype Mono', 'monospace'],
       sans: ['Basel', 'sans-serif'],
       serif: ['Untitled Serif', 'serif'],
     },

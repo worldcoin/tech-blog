@@ -10,8 +10,8 @@ export const Item = memo(function Item(props: {
 }) {
   return (
     <li
-      className={clsx('text-center text-18', props.className, {
-        'bg-7068fa text-ffffff': props.current,
+      className={clsx('text-center text-18 leading-[1.5]', props.className, {
+        'bg-29343f dark:bg-7068fa text-ffffff': props.current,
         'bg-010101/5 dark:bg-ffffff/10 text-010101 dark:text-ffffff': !props.current,
       })}
     >

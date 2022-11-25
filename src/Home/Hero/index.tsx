@@ -19,9 +19,9 @@ export const Hero = memo(function Hero() {
         )}
       >
         <div className="w-min space-y-2 md:space-y-5">
-          <h1 className="text-26 md:text-42 whitespace-nowrap">{title}</h1>
+          <h1 className="text-26 md:text-42 whitespace-nowrap font-bold xl:pr-13">{title}</h1>
 
-          <h2 className="text-596673 text-18 md:text-20 xl:pr-25">
+          <h2 className="text-626467 dark:text-ffffff text-18 md:text-24 font-serif tracking-[-0.005em]">
             Completely free resource for blockchain technology and community services
           </h2>
         </div>
