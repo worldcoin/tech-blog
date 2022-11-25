@@ -80,7 +80,7 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
     <div
       className={clsx(
         layout.paddingHorizontal,
-        'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium font-sans',
+        'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium',
         'fixed top-0 transition-transform/colors border-b',
         {
           'border-transparent': !isScrolled,

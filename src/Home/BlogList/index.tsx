@@ -47,7 +47,7 @@ export const BlogList = memo(function BlogList(props: {categories: Array<string>
       </main>
 
       <div className="bg-[url('/images/octagon-pattern.svg')] absolute bottom-[-270px] left-[-168px] w-[860px] h-[913px] bg-no-repeat z-0 pointer-events-none" />
-      <div className="bg-[url('/images/octagon-pattern.svg')] absolute bottom-[-500px] right-[-200px] w-[860px] h-[913px] bg-no-repeat -scale-x-100 z-0 pointer-events-none" />
+      <div className="hidden md:block bg-[url('/images/octagon-pattern.svg')] absolute bottom-[-500px] right-[-200px] w-[860px] h-[913px] bg-no-repeat -scale-x-100 z-0 pointer-events-none" />
     </section>
   )
 })
