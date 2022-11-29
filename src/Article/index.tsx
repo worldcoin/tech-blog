@@ -35,7 +35,7 @@ export const Article = memo(function Article(props: BlogPageProps) {
         ))}
       </Head>
 
-      <article>
+      <article className="mb-17 md:mb-64">
         <header className="grid relative max-h-[calc(100vh-68px)] min-h-[384px]">
           <div className={clsx(layout.paddingHorizontal, layoutClassName, 'relative z-10 items-center')}>
             <div className="space-y-2 md:col-start-2">
