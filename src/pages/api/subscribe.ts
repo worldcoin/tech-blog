@@ -26,11 +26,11 @@ export default async function subscribe(req: NextApiRequest, res: NextApiRespons
       },
     })
     const json = await result.json()
-    console.log(json)
 
     if (result.ok) {
       return res.status(200).json(json)
     }
+
     throw new Error('Unexpected error')
   } catch (err) {
     console.warn(`[api/subscribe]: `, err)

@@ -3,15 +3,12 @@ import {Icon} from 'common/Icon'
 import {Link} from 'common/Link'
 import {layout} from 'common/styles'
 import {MenuItem} from 'common/types'
-import {memo, useCallback, useEffect, useRef, useState} from 'react'
+import {memo, useCallback, useEffect, useRef} from 'react'
 import {useToggle} from 'usehooks-ts'
 import {Nav} from './Nav'
-const scrollDelta = 68
 
 export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [isOpenedMenu, triggerOpenedMenu, setOpenedMenu] = useToggle()
-  const [isShowHeader, , setShowHeader] = useToggle(true)
   const ref = useRef<HTMLDivElement | null>(null)
   const handleCloseMenu = useCallback(() => setOpenedMenu(false), [setOpenedMenu])
 
@@ -58,35 +55,13 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
     }
   }, [handleCloseMenu, isOpenedMenu])
 
-  // show or hide menu on scroll
-  useEffect(() => {
-    let prevPos: number = 0
-
-    const scrollHandler = () => {
-      setIsScrolled(window.scrollY >= scrollDelta)
-      setShowHeader(window.scrollY <= scrollDelta || prevPos > window.scrollY)
-      prevPos = window.scrollY
-    }
-
-    setShowHeader(window.scrollY <= scrollDelta)
-
-    window.addEventListener('scroll', scrollHandler)
-
-    return () => window.removeEventListener('scroll', scrollHandler)
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- setShowHeader is just setState function
-  }, [])
-
   return (
     <div
       className={clsx(
         layout.paddingHorizontal,
+        'bg-white border-010101/10',
         'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium',
         'fixed top-0 transition-transform/colors border-b',
-        {
-          'border-transparent': !isScrolled,
-          'bg-white dark:bg-010101 border-010101/10 dark:border-ffffff/10': isScrolled,
-          '-translate-y-full': !isShowHeader,
-        },
       )}
     >
       <Link href="/" className={clsx('flex items-center transition-colors')}>

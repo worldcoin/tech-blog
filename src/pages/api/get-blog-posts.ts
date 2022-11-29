@@ -30,19 +30,18 @@ export default async function getBlogPosts(req: NextApiRequest, res: NextApiResp
   const orderDir = [req.query.dir].flat()[0] ?? 'DESC'
   const start = Number([req.query.start].flat()[0] ?? 0)
   const limit = Number([req.query.limit].flat()[0] ?? 3)
-
-  const postsFiles = await getMdxFiles('./src/pages/blog')
+  const files = await getMdxFiles('./src/pages/blog')
 
   const allPostsMeta = (
     await Promise.all(
-      postsFiles.slice(start, start + limit).map(async (file) => {
+      files.slice(start, start + limit).map(async (file) => {
         const fileString = (await readFile(file)).toString()
-        return getMetadata(fileString, {tag: 'meta', url: filePathToUrl(file, {base: 'blog'})})
+        return getMetadata(fileString, filePathToUrl(file, {base: 'blog'}), 'meta')
       }),
     )
   ).filter((meta) => typeof meta.title === 'string')
 
-  const filterPost = (post: Partial<PageMeta>) => {
+  const filterPost = (post: PageMeta) => {
     // NOTE: filter by query
     if (query) {
       const _query = query.toLocaleLowerCase()
@@ -60,7 +59,7 @@ export default async function getBlogPosts(req: NextApiRequest, res: NextApiResp
     return true
   }
 
-  const sortPost = (first: Partial<PageMeta>, second: Partial<PageMeta>) => {
+  const sortPost = (first: PageMeta, second: PageMeta) => {
     const a = orderDir === 'ASC' ? first : second
     const b = orderDir === 'ASC' ? second : first
 

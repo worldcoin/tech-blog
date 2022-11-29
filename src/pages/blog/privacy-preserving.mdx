@@ -10,4 +10,70 @@
   <category>Security</category>
 </Meta>
 
-# Test blog page
+### Consider this simple function:
+
+![temp 1 image](/images/blog/tmp-1.png)
+
+you may recognize it from such hits as the normal distribution and gaussian blur. It has loads of applications, so we want to use it!
+But what if we are in strange new lands where we only have basic math operations? Or a direct implementation doesn't have quite the performance we are looking for?
+
+## Taylor series
+
+The first thing a calculus 101 graduate does is compute the Taylor series. After a moment with pen and paper the first ten terms turn out to be:
+
+$$ p(x) = 1 - 2 \cdot x^2 + 12 \cdot x^4 - 12 \cdot x^6 + 1680 \cdot x^8 $$
+
+Every other term turned out zero! That feels a bit wasteful. It must have something to do with odd and even functions.
+Now we have a nice polynomial that we can compute using basic operations. We can even trade off accuracy for performance by using fewer terms. Let's see what it looks like with the 3, 5, 7 and 9th Taylor polynomial (dashed line is the target function):
+
+![temp 2 image](/images/blog/tmp-2.png)
+
+That's... terrible. We'll never get our function implemented this way. Time to think.
+
+## Minimize the maximum error
+
+So what is the goal? We want to find a simple-to-implement function that best approximates our target function f on the domain of interest [−3,3].
+
+$$ \underset{p}{\arg \min } \underset{x \in[a, b]}\max |f(x)-p(x)| $$
+
+What makes an approximation better or worse? We want to give some hard guarantee like "this approximation is accurate to 12 decimals". For that, we need to consider the worst case behaviour, where the error is largest. This is maximum of ∣f(x)−p(x)∣ in the domain. We want the p(x) that minimizes this value. In math-speak, we want:
+
+```java
+public class SampleApp extends Application {
+  private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
+  private static final String POSTHOG_HOST = "<ph_instance_address>";
+});
+```
+
+Now we just need to implement p(x) on [0,3] using only basic operations.
+
+## Owning Stocks and Cryptocurrencies
+
+### Test
+
+Traditional investors, however, argue that an unregulated cryptosystem and its many outright scams make it too risky to maintain a sustainable financial structure. It’s essential for potential investors to understand the ins and outs of cryptocurrency and how it compares to traditional stock to efficiently plan and start a new investment portfolio. This is our beginner’s guide on crypto vs. stock market.
+
+![temp 3 image](/images/blog/tmp-3.png)
+
+In simple terms, cryptocurrency is a digital asset that, at its core, is self-custodial, censorship-resistant, borderless, and fully transparent. It provides an alternative to traditional currencies like the US dollar or the euro, which are known as “fiat.” Cryptocurrency is decentralized, meaning that fiat authorities like central banks and governments don’t control it.
+
+![temp 4 image](/images/blog/tmp-4.png)
+
+In simple terms, cryptocurrency is a digital asset that, at its core, is self-custodial, censorship-resistant, borderless, and fully transparent.
+
+```java
+public class SampleApp extends Application {
+  private static final String POSTHOG_API_KEY = "<ph_project_api_key>";
+  private static final String POSTHOG_HOST = "<ph_instance_address>";
+
+  @Override
+  public void onCreate() {
+    // Create a PostHog client with the given context, API key and host.
+    PostHog posthog = new PostHog.Builder(this, POSTHOG_API_KEY, POSTHOG_HOST)
+    .captureApplicationLifecycleEvents() // Record certain application events autom
+    .recordScreenViews() // Record screen views automatically!
+    .recordScreenViews() // Record screen views automatically!
+});
+```
+
+In simple terms, cryptocurrency is a digital asset that, at its core, is self-custodial, censorship-resistant, borderless, and fully transparent.

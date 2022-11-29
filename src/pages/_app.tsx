@@ -1,17 +1,21 @@
 import {Components as MDXComponents} from '@mdx-js/react/lib'
+import slugify from '@sindresorhus/slugify'
+import {Article} from 'Article'
 import 'assets/globals.css'
-import {getMetadata} from 'common/helpers'
+import {CodeBlock} from 'common/CodeBlock'
+import {collectHeadings, fetchApi, getMetadata} from 'common/helpers'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
+import {ApiGetBlogPostsResponse, PageMeta, TOC} from 'common/types'
 import {ThemeProvider} from 'contexts/ThemeContext'
-import type {AppProps} from 'next/app'
-import {Fragment, useEffect, useMemo, useState} from 'react'
+import NextApp, {AppContext, AppInitialProps, AppProps as NextAppProps} from 'next/app'
+import path from 'path'
+import {Fragment, ReactNode, useEffect, useState} from 'react'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-const getComponents = (render: boolean = true): MDXComponents => ({
-  // @ts-ignore -- custom element, only for parse meta
-  Meta: (props) => (render ? null : <pagemeta>{props.children}</pagemeta>),
+const components: MDXComponents = {
+  Meta: () => null,
 
   // NOTE: fix hydration error for mathjax
   // @ts-ignore -- need for workaround style tag
@@ -22,15 +26,40 @@ const getComponents = (render: boolean = true): MDXComponents => ({
     useEffect(() => setStyle(args[0]), [args])
     return <style>{style}</style>
   },
-})
 
-export default function App(props: AppProps) {
-  const pathname = useMemo(() => props.router.asPath.replace(/\/$/, ''), [props.router.asPath])
+  h2: (props: {children?: ReactNode}) => <h2 id={slugify(props.children as string)}>{props.children}</h2>,
+  h3: (props: {children?: ReactNode}) => <h3 id={slugify(props.children as string)}>{props.children}</h3>,
 
-  const meta = useMemo(
-    () => getMetadata(<props.Component {...props.pageProps} components={getComponents(false)} />),
-    [props],
-  )
+  pre: (props) => (
+    <pre {...props}>
+      {/* @ts-ignore */}
+      <CodeBlock {...props.children.props} />
+    </pre>
+  ),
+
+  code: (props) => (
+    <span className="[&_.token.plain]:text-010101 bg-dadada/50 px-1.5 py-0.5 rounded-md">
+      <CodeBlock {...props} />
+    </span>
+  ),
+}
+
+type AppProps =
+  | {
+      isBlog: false
+      meta: never
+      toc: never
+      relatedPosts: never
+    }
+  | {
+      isBlog: true
+      meta: PageMeta
+      toc: TOC
+      relatedPosts: Array<PageMeta>
+    }
+
+export function App(props: NextAppProps<AppProps>) {
+  const {isBlog, meta, toc, relatedPosts} = props.pageProps
 
   return (
     <Fragment>
@@ -51,11 +80,12 @@ export default function App(props: AppProps) {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#191919" />
-        <link key="canonical" rel="canonical" href={`${process.env.NEXT_PUBLIC_APP_URL}${pathname}`} />
+        <link key="canonical" rel="canonical" href={`${process.env.NEXT_PUBLIC_APP_URL}${props.router.asPath}`} />
       </Meta>
 
       <ThemeProvider>
         <Layout
+          isAlt={isBlog}
           menuItems={[
             {
               title: 'About',
@@ -78,7 +108,13 @@ export default function App(props: AppProps) {
             },
           ]}
         >
-          <props.Component {...props.pageProps} components={getComponents()} />
+          {isBlog && (
+            <Article meta={meta} toc={toc} relatedPosts={relatedPosts}>
+              <props.Component {...props.pageProps} components={components} />
+            </Article>
+          )}
+
+          {!isBlog && <props.Component {...props.pageProps} />}
         </Layout>
       </ThemeProvider>
 
@@ -86,3 +122,31 @@ export default function App(props: AppProps) {
     </Fragment>
   )
 }
+
+App.getInitialProps = async (ctx: AppContext) => {
+  const appProps = (await NextApp.getInitialProps(ctx)) as AppInitialProps<AppProps>
+  appProps.pageProps.isBlog = /^\/blog/.test(ctx.router.asPath)
+
+  if (!appProps.pageProps.isBlog) {
+    return {...appProps}
+  }
+
+  // @ts-ignore
+  const pageElement = <ctx.Component components={{Meta: (props) => <pagemeta {...props} />}} />
+  const allPosts = await fetchApi<ApiGetBlogPostsResponse>('/get-blog-posts', {params: {limit: 5}})
+  const relatedPosts = allPosts.posts.filter((post) => path.basename(post.url) !== path.basename(ctx.router.asPath))
+  const meta = await getMetadata(pageElement, ctx.router.asPath)
+  const toc = collectHeadings(pageElement)
+
+  return {
+    ...appProps,
+    pageProps: {
+      ...appProps.pageProps,
+      meta,
+      toc,
+      relatedPosts,
+    },
+  }
+}
+
+export default App
