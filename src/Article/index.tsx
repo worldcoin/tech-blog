@@ -15,7 +15,8 @@ import planetsDarkLeft from '/public/images/planets-dark-left.svg'
 import planetsDarkRight from '/public/images/planets-dark-right.svg'
 import planetsLightLeft from '/public/images/planets-light-left.svg'
 import planetsLightRight from '/public/images/planets-light-right.svg'
-const linkClassName = 'text-9eafc0 hover:text-8e87ff dark:text-ffffff/40 dark:hover:text-ffffff transition-colors'
+const linkClassName =
+  'text-9eafc0 hover:text-8e87ff dark:text-ffffff/40 dark:hover:text-ffffff transition-colors w-[15px] h-[15px] md:w-5 md:h-5'
 const layoutClassName = 'grid md:grid-cols-1/2/1 gap-2 md:gap-8'
 
 export const Article = memo(function Article(props: BlogPageProps) {
@@ -38,11 +39,11 @@ export const Article = memo(function Article(props: BlogPageProps) {
       <article className="mb-17 md:mb-64">
         <header className="grid relative max-h-[calc(100vh-68px)] min-h-[384px]">
           <div className={clsx(layout.paddingHorizontal, layoutClassName, 'relative z-10 items-center')}>
-            <div className="space-y-2 md:col-start-2">
+            <div className="space-y-2.5 md:space-y-2 md:col-start-2 text-14 md:text-16">
               <Breadcrumbs items={[{label: 'Tech Blog', link: '/'}, {label: props.meta.title}]} />
               <h1 className="font-bold text-28 md:text-42">{props.meta.title}</h1>
 
-              <div className="grid md:grid-flow-col justify-between gap-5">
+              <div className="grid md:grid-flow-col justify-between gap-2.5 md:gap-5 mt-5 md:mt-2">
                 <div className="space-x-1">
                   <span className="text-70868f dark:text-ffffff/40">Author:</span>
                   <span>{props.meta.author?.name}</span>
@@ -95,7 +96,7 @@ export const Article = memo(function Article(props: BlogPageProps) {
                 </span>
 
                 {props.meta.readTime && (
-                  <span className="text-70868f">{renderReadTime(props.meta.readTime, true)}</span>
+                  <span className="text-70868f capitalize">{renderReadTime(props.meta.readTime)}</span>
                 )}
               </div>
 

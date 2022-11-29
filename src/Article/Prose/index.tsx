@@ -15,7 +15,7 @@ export function Prose({
       className={clsx(
         //global
         className,
-        'text-20 leading-[1.6] font-serif',
+        'text-18 md:text-20 leading-[1.6] font-serif',
         'prose prose-slate max-w-none dark:prose-invert',
         // paragraph
         'prose-p:text-353535',
