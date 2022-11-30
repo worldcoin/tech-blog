@@ -10,7 +10,7 @@ import {Filter} from './Filter'
 dayjs.extend(localizedFormat)
 
 export type BlogListFilter = {
-  category: Array<{title: string; value: string | null}>
+  category: Array<{title: string; value?: string}>
 }
 
 export type BlogListFilterValues = {
