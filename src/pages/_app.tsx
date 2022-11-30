@@ -13,6 +13,20 @@ import {Fragment, ReactNode, useEffect, useState} from 'react'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+type AppProps =
+  | {
+      isBlog: false
+      meta: never
+      toc: never
+      relatedPosts: never
+    }
+  | {
+      isBlog: true
+      meta: PageMeta
+      toc: TOC
+      relatedPosts: Array<PageMeta>
+    }
+
 const components: MDXComponents = {
   Meta: () => null,
 
@@ -43,19 +57,12 @@ const components: MDXComponents = {
   ),
 }
 
-type AppProps =
-  | {
-      isBlog: false
-      meta: never
-      toc: never
-      relatedPosts: never
-    }
-  | {
-      isBlog: true
-      meta: PageMeta
-      toc: TOC
-      relatedPosts: Array<PageMeta>
-    }
+const menuItems = [
+  {title: 'About', url: '/about'},
+  {title: 'Blog', url: '/blog'},
+  {title: 'Privacy', url: '/privacy'},
+  {title: 'Signup', url: '/sign-up'},
+]
 
 export function App(props: NextAppProps<AppProps>) {
   const {isBlog, meta, toc, relatedPosts} = props.pageProps
@@ -82,14 +89,7 @@ export function App(props: NextAppProps<AppProps>) {
         <link key="canonical" rel="canonical" href={`${process.env.NEXT_PUBLIC_APP_URL}${props.router.asPath}`} />
       </Meta>
 
-      <Layout
-        menuItems={[
-          {title: 'About', url: '/about'},
-          {title: 'Blog', url: '/blog'},
-          {title: 'Privacy', url: '/privacy'},
-          {title: 'Signup', url: '/sign-up'},
-        ]}
-      >
+      <Layout menuItems={menuItems}>
         {isBlog && (
           <Article meta={meta} toc={toc} relatedPosts={relatedPosts}>
             <props.Component {...props.pageProps} components={components} />
