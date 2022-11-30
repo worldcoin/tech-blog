@@ -15,8 +15,7 @@ import planetsDarkLeft from '/public/images/planets-dark-left.svg'
 import planetsDarkRight from '/public/images/planets-dark-right.svg'
 import planetsLightLeft from '/public/images/planets-light-left.svg'
 import planetsLightRight from '/public/images/planets-light-right.svg'
-const linkClassName =
-  'text-9eafc0 hover:text-8e87ff dark:text-ffffff/40 dark:hover:text-ffffff transition-colors w-[15px] h-[15px] md:w-5 md:h-5'
+const linkClassName = 'text-9eafc0 hover:text-8e87ff transition-colors w-[15px] h-[15px] md:w-5 md:h-5'
 const layoutClassName = 'grid md:grid-cols-1/2/1 gap-2 md:gap-8'
 
 export const Article = memo(function Article(props: BlogPageProps) {
@@ -45,12 +44,12 @@ export const Article = memo(function Article(props: BlogPageProps) {
 
               <div className="grid md:grid-flow-col justify-between gap-2.5 md:gap-5 mt-5 md:mt-2">
                 <div className="space-x-1">
-                  <span className="text-70868f dark:text-ffffff/40">Author:</span>
+                  <span className="text-70868f">Author:</span>
                   <span>{props.meta.author?.name}</span>
                 </div>
 
                 <div className="flex gap-5 items-center">
-                  <span className="text-70868f dark:text-ffffff/40">Share</span>
+                  <span className="text-70868f">Share</span>
 
                   <SocialLink
                     href={`http://twitter.com/share?url=${shareUrl}`}
@@ -76,13 +75,11 @@ export const Article = memo(function Article(props: BlogPageProps) {
 
           <div className="z-0 absolute inset-0">
             <div className="absolute left-0 h-full hidden md:block">
-              <img src={planetsLightLeft.src} alt="" className="dark:hidden" />
-              <img src={planetsDarkLeft.src} alt="" className="hidden dark:block" />
+              <img src={planetsDarkLeft.src} alt="" />
             </div>
 
             <div className="absolute right-0 h-full opacity-20 sm:opacity-100">
-              <img src={planetsLightRight.src} alt="" className="dark:hidden" />
-              <img src={planetsDarkRight.src} alt="" className="hidden dark:block" />
+              <img src={planetsDarkRight.src} alt="" />
             </div>
           </div>
         </header>

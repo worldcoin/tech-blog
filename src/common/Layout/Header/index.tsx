@@ -69,10 +69,10 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
       className={clsx(
         layout.paddingHorizontal,
         'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium',
-        'fixed top-0 transition-all border-b',
+        'fixed top-0 transition-colors text-ffffff',
         {
-          'border-transparent': !isScrolled,
-          'bg-white border-010101/10': isScrolled,
+          'bg-transparent': !isScrolled,
+          'bg-010101': isScrolled,
         },
       )}
     >

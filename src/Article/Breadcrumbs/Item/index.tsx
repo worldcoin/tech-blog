@@ -18,7 +18,7 @@ export const BreadcrumbItem = memo(function BreadcrumbItem(props: {
 
         {!props.link && (
           <span itemProp="item">
-            <span itemProp="name" className="text-010101 dark:text-ffffff">
+            <span itemProp="name" className="text-010101">
               {props.label}
             </span>
           </span>

@@ -9,20 +9,15 @@ import {Header} from './Header'
 
 export type LayoutProps = {
   children: ReactNode
-  isAlt?: boolean
-  isTransparent?: boolean
-  menuItems: Array<MenuItem>
   footerBorder?: boolean
+  menuItems: Array<MenuItem>
 }
 
 export const Layout = memo(function Layout(props: LayoutProps) {
   return (
     <div
       className={clsx(
-        'grid grid-rows-auto/1fr/auto min-h-screen selection:text-ffffff selection:bg-4940e0 bg-ffffff dark:bg-010101 text-010101 dark:text-ffffff',
-        {
-          'pt-[68px]': !props.isAlt,
-        },
+        'grid grid-rows-auto/1fr/auto min-h-screen selection:text-ffffff selection:bg-4940e0 bg-ffffff text-010101',
       )}
     >
       <Header menuItems={props.menuItems} />
@@ -31,7 +26,7 @@ export const Layout = memo(function Layout(props: LayoutProps) {
       <section
         className={clsx(
           'flex flex-col gap-12 md:gap-0 md:flex-row justify-between items-center py-28',
-          'bg-dde7ea text-010101 dark:bg-7068fa dark:text-ffffff text-center md:text-left',
+          'bg-dde7ea text-010101 text-center md:text-left',
           layout.paddingHorizontal,
         )}
       >

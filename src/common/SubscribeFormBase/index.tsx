@@ -81,10 +81,10 @@ export const SubscribeFormBase = memo(
           {
             'border-b': props.underline !== 'field',
 
-            'border-dadada focus-within:border-183c4a hover:border-183c4a dark:focus-within:border-7068fa dark:hover:border-7068fa':
+            'border-dadada focus-within:border-183c4a hover:border-183c4a':
               status === 'default' && variant === 'default',
 
-            'border-010101/20 hover:border-010101 focus-within:border-010101 dark:border-ffffff/50 dark:hover:border-ffffff dark:focus-within:border-ffffff':
+            'border-010101/20 hover:border-010101 focus-within:border-010101':
               status === 'default' && variant === 'cta',
           },
         )}
@@ -97,11 +97,10 @@ export const SubscribeFormBase = memo(
             {
               'border-b border-inherit': props.underline === 'field',
 
-              'placeholder:text-current [-webkit-text-fill-color:_#8c8c92] group-focus-within:[-webkit-text-fill-color:_#183c4a] dark:group-focus-within:[-webkit-text-fill-color:_#7068fa]':
+              'placeholder:text-current [-webkit-text-fill-color:_#8c8c92] group-focus-within:[-webkit-text-fill-color:_#183c4a]':
                 status === 'default' && variant === 'default',
 
-              'placeholder:text-current dark:[-webkit-text-fill-color:_#ffffff90] dark:group-focus-within:[-webkit-text-fill-color:_#ffffff]':
-                status === 'default' && variant === 'cta',
+              'placeholder:text-current': status === 'default' && variant === 'cta',
             },
             props.inputClassName,
           )}
@@ -123,7 +122,7 @@ export const SubscribeFormBase = memo(
             'disabled:hover:text-current transition-colors',
             {
               'text-8c8c92 hover:text-7068fa': variant === 'default',
-              'text-010101 dark:text-ffffff hover:text-7068fa dark:hover:text-ffffff': variant === 'cta',
+              'text-010101 hover:text-7068fa': variant === 'cta',
             },
           )}
         >

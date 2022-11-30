@@ -7,7 +7,6 @@ import {collectHeadings, fetchApi, getMetadata} from 'common/helpers'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
 import {ApiGetBlogPostsResponse, PageMeta, TOC} from 'common/types'
-import {ThemeProvider} from 'contexts/ThemeContext'
 import NextApp, {AppContext, AppInitialProps, AppProps as NextAppProps} from 'next/app'
 import path from 'path'
 import {Fragment, ReactNode, useEffect, useState} from 'react'
@@ -83,40 +82,22 @@ export function App(props: NextAppProps<AppProps>) {
         <link key="canonical" rel="canonical" href={`${process.env.NEXT_PUBLIC_APP_URL}${props.router.asPath}`} />
       </Meta>
 
-      <ThemeProvider>
-        <Layout
-          isAlt={isBlog}
-          menuItems={[
-            {
-              title: 'About',
-              url: '/about',
-            },
+      <Layout
+        menuItems={[
+          {title: 'About', url: '/about'},
+          {title: 'Blog', url: '/blog'},
+          {title: 'Privacy', url: '/privacy'},
+          {title: 'Signup', url: '/sign-up'},
+        ]}
+      >
+        {isBlog && (
+          <Article meta={meta} toc={toc} relatedPosts={relatedPosts}>
+            <props.Component {...props.pageProps} components={components} />
+          </Article>
+        )}
 
-            {
-              title: 'Blog',
-              url: '/blog',
-            },
-
-            {
-              title: 'Privacy',
-              url: '/privacy',
-            },
-
-            {
-              title: 'Signup',
-              url: '/sign-up',
-            },
-          ]}
-        >
-          {isBlog && (
-            <Article meta={meta} toc={toc} relatedPosts={relatedPosts}>
-              <props.Component {...props.pageProps} components={components} />
-            </Article>
-          )}
-
-          {!isBlog && <props.Component {...props.pageProps} />}
-        </Layout>
-      </ThemeProvider>
+        {!isBlog && <props.Component {...props.pageProps} />}
+      </Layout>
 
       <ToastContainer />
     </Fragment>

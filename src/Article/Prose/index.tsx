@@ -16,7 +16,7 @@ export function Prose({
         //global
         className,
         'text-18 md:text-20 leading-[1.6] font-serif',
-        'prose prose-slate max-w-none dark:prose-invert',
+        'prose prose-slate max-w-none',
         // paragraph
         'prose-p:text-353535',
         // headings

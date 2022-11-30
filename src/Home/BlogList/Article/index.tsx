@@ -8,7 +8,7 @@ import {memo} from 'react'
 export const Article = memo(function Article(props: {post: PageMeta}) {
   return (
     <article
-      className="space-y-12 pt-10 mt-10 border-t border-010101/10 dark:border-ffffff/10 md:border-transparent"
+      className="space-y-12 pt-10 mt-10 border-t border-010101/10 md:border-transparent"
       itemScope
       itemType="https://schema.org/BlogPosting"
     >
@@ -38,7 +38,7 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
               {props.post.title}
             </h3>
 
-            <div itemProp="description" className="text-18 text-626467 dark:text-828589 font-serif">
+            <div itemProp="description" className="text-18 text-626467 font-serif">
               {props.post.description}
             </div>
           </div>
@@ -52,7 +52,7 @@ export const Article = memo(function Article(props: {post: PageMeta}) {
       </div>
 
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-        <div className="text-626467 dark:text-828589 flex gap-2">
+        <div className="text-626467 flex gap-2">
           <span itemProp="datePublished">{dayjs(props.post.date).format('MMMM DD, YYYY')}</span>
           &middot;
           <span className="lowercase">{renderReadTime(props.post.readTime, true)}</span>

@@ -50,7 +50,7 @@ export const Nav = memo(
         <div
           ref={ref}
           className={clsx(
-            'fixed z-20 right-0 grid content-between w-full sm:w-auto h-full bg-ffffff dark:bg-010101',
+            'fixed z-20 right-0 grid content-between w-full sm:w-auto h-full bg-ffffff',
             'sm:p-7.5 px-3.5 sm:pl-12 pt-36 sm:pt-40 pb-10 transition-transform/opacity duration-300',
             'lg:static lg:h-auto lg:p-0 lg:bg-transparent',
             {'translate-x-full lg:translate-x-0': !props.isShown},
