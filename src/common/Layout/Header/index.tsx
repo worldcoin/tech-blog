@@ -81,7 +81,10 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
       </Link>
 
       <button
-        className={clsx('relative z-[10000] flex lg:hidden flex-col justify-center w-6 h-6')}
+        className={clsx('relative z-[10000] flex lg:hidden flex-col justify-center w-6 h-6', {
+          'text-ffffff': !isOpenedMenu,
+          'text-010101': isOpenedMenu,
+        })}
         onClick={triggerOpenedMenu}
         type="button"
         aria-label="Mobile menu"
