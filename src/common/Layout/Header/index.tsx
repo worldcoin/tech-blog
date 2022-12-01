@@ -57,7 +57,7 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
     }
   }, [handleCloseMenu, isOpenedMenu])
 
-  // show or hide menu on scroll
+  // handle scroll
   useEffect(() => {
     const scrollHandler = () => setIsScrolled(window.scrollY >= scrollDelta)
     window.addEventListener('scroll', scrollHandler)
