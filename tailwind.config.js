@@ -168,6 +168,7 @@ module.exports = {
         full: '100%',
         'screen-x': '100vw',
         'screen-y': '100vh',
+        '1/5': '20%',
       },
 
       transitionDuration: {
