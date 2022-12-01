@@ -25,18 +25,18 @@ export const Layout = memo(function Layout(props: LayoutProps) {
 
       <section
         className={clsx(
-          'flex flex-col gap-12 md:gap-0 md:flex-row justify-between items-center py-28',
-          'bg-dde7ea text-010101 text-center md:text-left',
+          'flex flex-col md:flex-row gap-40 md:gap-40 justify-between md:items-center py-15 md:py-28',
+          'bg-dde7ea text-010101',
           layout.paddingHorizontal,
         )}
       >
-        <p className="text-24 md:text-32">
-          Stay up to date with <br className="hidden md:inline" /> all things crypto.
+        <p className="text-24 md:text-32 font-semibold">
+          Stay up to date with <br className="md:hidden" /> all things crypto.
         </p>
 
         <SubscribeForm
           className="text-20"
-          inputClassName="!text-20 min-w-[0px] md:min-w-[428px]"
+          inputClassName="!text-20 md:min-w-54 xl:min-w-[428px]"
           placeholder="Enter email"
           underline="field"
           variant="cta"
