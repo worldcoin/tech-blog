@@ -1,7 +1,7 @@
 export type PageMeta = {
   author?: {name: string; picture?: string}
   category?: string
-  date?: Date
+  date?: string
   description?: string
   poster?: string
   title: string

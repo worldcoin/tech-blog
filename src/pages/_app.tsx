@@ -3,10 +3,11 @@ import slugify from '@sindresorhus/slugify'
 import {Article} from 'Article'
 import 'assets/globals.css'
 import {CodeBlock} from 'common/CodeBlock'
-import {collectHeadings, fetchApi, getMetadata} from 'common/helpers'
+import {collectHeadings, getMetadata} from 'common/helpers'
+import {getBlogPosts} from 'common/helpers/server/get-blog-posts'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
-import {ApiGetBlogPostsResponse, PageMeta, TOC} from 'common/types'
+import {PageMeta, TOC} from 'common/types'
 import {ThemeProvider} from 'contexts/ThemeContext'
 import NextApp, {AppContext, AppInitialProps, AppProps as NextAppProps} from 'next/app'
 import path from 'path'
@@ -116,7 +117,7 @@ export function App(props: NextAppProps<AppProps>) {
 
           {!isBlog && <props.Component {...props.pageProps} />}
         </Layout>
-      </ThemeProvider>
+      </Th>
 
       <ToastContainer />
     </Fragment>
@@ -133,8 +134,9 @@ App.getInitialProps = async (ctx: AppContext) => {
 
   // @ts-ignore
   const pageElement = <ctx.Component components={{Meta: (props) => <pagemeta {...props} />}} />
-  const allPosts = await fetchApi<ApiGetBlogPostsResponse>('/get-blog-posts', {params: {limit: 5}})
-  const relatedPosts = allPosts.posts.filter((post) => path.basename(post.url) !== path.basename(ctx.router.asPath))
+  const relatedPosts = (await getBlogPosts({limit: 5})).posts.filter(
+    (post) => path.basename(post.url) !== path.basename(ctx.router.asPath),
+  )
   const meta = await getMetadata(pageElement, ctx.router.asPath)
   const toc = collectHeadings(pageElement)
 

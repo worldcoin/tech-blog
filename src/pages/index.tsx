@@ -1,13 +1,13 @@
-import {fetchApi} from 'common/helpers'
-import {ApiGetBlogCategoriesResponse, ApiGetBlogPostsResponse} from 'common/types'
+import {getBlogCategories} from 'common/helpers/server/get-blog-categories'
+import {getBlogPosts} from 'common/helpers/server/get-blog-posts'
 import {Home} from 'Home'
 export default Home
 
 export async function getStaticProps() {
   return {
     props: {
-      categories: (await fetchApi<ApiGetBlogCategoriesResponse>('/get-blog-categories')).categories,
-      posts: (await fetchApi<ApiGetBlogPostsResponse>('/get-blog-posts')).posts,
+      categories: await getBlogCategories(),
+      posts: await (await getBlogPosts()).posts,
     },
 
     revalidate: 5 * 60,
