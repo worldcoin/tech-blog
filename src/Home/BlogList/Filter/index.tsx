@@ -1,6 +1,6 @@
 import {BlogListFilter, BlogListFilterValues} from 'Home/BlogList'
 import {memo, useEffect, useState} from 'react'
-import {Item} from './Item'
+import {FilterItem} from './FilterItem'
 
 export const Filter = memo(function Filter(props: {
   categories: BlogListFilter['category']
@@ -15,14 +15,14 @@ export const Filter = memo(function Filter(props: {
 
   return (
     <ul className="space-y-2">
-      <Item
+      <FilterItem
         current={selectedCategory === null}
         onClick={setSelectedCategory}
         category={{title: 'All categories', value: null}}
       />
 
       {props.categories.map((category, index) => (
-        <Item
+        <FilterItem
           key={index}
           current={selectedCategory === category.value}
           onClick={setSelectedCategory}

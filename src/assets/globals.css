@@ -2,6 +2,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import './prism.css';
+
 /* Fonts */
 /* Sans */
 @font-face {
@@ -131,4 +134,12 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
+}
+
+mjx-container {
+  @apply grid justify-center my-10;
+}
+
+mjx-container svg {
+  @apply max-w-full;
 }

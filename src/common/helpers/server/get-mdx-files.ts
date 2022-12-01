@@ -1,4 +1,4 @@
-import {lstat, readdir} from 'fs/promises'
+import {promises as fs} from 'fs'
 import path from 'path'
 
 /**
@@ -7,11 +7,11 @@ import path from 'path'
 export const getMdxFiles = async (dir: string): Promise<Array<string>> => {
   dir = path.resolve(dir)
 
-  if (!(await lstat(dir)).isDirectory()) {
+  if (!(await fs.lstat(dir)).isDirectory()) {
     return []
   }
 
   return await Promise.all(
-    (await readdir(dir)).filter((file) => /mdx?$/.test(file)).map((file) => path.resolve(dir, file)),
+    (await fs.readdir(dir)).filter((file) => /mdx?$/.test(file)).map((file) => path.resolve(dir, file)),
   )
 }

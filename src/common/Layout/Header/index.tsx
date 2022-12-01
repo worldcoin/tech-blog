@@ -11,7 +11,6 @@ const scrollDelta = 68
 export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpenedMenu, triggerOpenedMenu, setOpenedMenu] = useToggle()
-  const [isShowHeader, , setShowHeader] = useToggle(true)
   const ref = useRef<HTMLDivElement | null>(null)
   const handleCloseMenu = useCallback(() => setOpenedMenu(false), [setOpenedMenu])
 
@@ -60,20 +59,9 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
 
   // show or hide menu on scroll
   useEffect(() => {
-    let prevPos: number = 0
-
-    const scrollHandler = () => {
-      setIsScrolled(window.scrollY >= scrollDelta)
-      setShowHeader(window.scrollY <= scrollDelta || prevPos > window.scrollY)
-      prevPos = window.scrollY
-    }
-
-    setShowHeader(window.scrollY <= scrollDelta)
-
+    const scrollHandler = () => setIsScrolled(window.scrollY >= scrollDelta)
     window.addEventListener('scroll', scrollHandler)
-
     return () => window.removeEventListener('scroll', scrollHandler)
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- setShowHeader is just setState function
   }, [])
 
   return (
@@ -81,11 +69,10 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
       className={clsx(
         layout.paddingHorizontal,
         'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium',
-        'fixed top-0 transition-transform/colors border-b',
+        'fixed top-0 transition-all border-b',
         {
           'border-transparent': !isScrolled,
-          'bg-white dark:bg-010101 border-010101/10 dark:border-ffffff/10': isScrolled,
-          '-translate-y-full': !isShowHeader,
+          'bg-white border-010101/10': isScrolled,
         },
       )}
     >

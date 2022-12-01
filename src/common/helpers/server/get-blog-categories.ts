@@ -1,14 +1,9 @@
-import {getMdxFiles} from 'common/helpers/server'
 import {readFile} from 'fs/promises'
-import {NextApiRequest, NextApiResponse} from 'next'
 import parse from 'node-html-parser'
+import {getMdxFiles} from './get-mdx-files'
 
-/**
- * Parse and return all blog posts categories
- */
-export default async function getBlogCategories(req: NextApiRequest, res: NextApiResponse) {
+export const getBlogCategories = async () => {
   let categories: Array<string> = []
-
   const blogFiles = await getMdxFiles('./src/pages/blog')
 
   await Promise.all(
@@ -32,5 +27,5 @@ export default async function getBlogCategories(req: NextApiRequest, res: NextAp
   // NOTE: remove empty
   categories = categories.filter((category) => category.length > 0)
 
-  res.status(200).json({categories})
+  return categories
 }

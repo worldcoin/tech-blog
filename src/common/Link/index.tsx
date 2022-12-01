@@ -1,21 +1,19 @@
 import clsx from 'clsx'
-import NextLink from 'next/link'
+import NextLink, {LinkProps as NextLinkProps} from 'next/link'
 import {useRouter} from 'next/router'
-import {CSSProperties, memo, ReactNode, useMemo} from 'react'
+import {memo, useMemo} from 'react'
 
-export const Link = memo(function Link(props: {
+type AnchorAndNextLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof NextLinkProps> &
+  NextLinkProps & {
+    children?: React.ReactNode
+  } & React.RefAttributes<HTMLAnchorElement>
+
+type LinkProps = AnchorAndNextLinkProps & {
   activeClassName?: string
-  as?: string
-  children: ReactNode
-  className?: string
-  href: string
   inactiveClassName?: string
-  onClick?: () => void
-  rel?: string
-  style?: CSSProperties
-  target?: string
-  title?: string
-}) {
+}
+
+export const Link = memo(function Link(props: LinkProps) {
   const router = useRouter()
   const hasClassName = props.className || props.activeClassName || props.inactiveClassName
 
@@ -32,16 +30,7 @@ export const Link = memo(function Link(props: {
   }, [hasClassName, props.activeClassName, props.className, props.href, props.inactiveClassName, router])
 
   return (
-    <NextLink
-      {...(props.as && {as: props.as})}
-      href={props.href}
-      className={linkClassName}
-      rel={props.rel}
-      onClick={props.onClick}
-      title={props.title}
-      {...(props.target && {target: props.target})}
-      {...(props.style && {style: props.style})}
-    >
+    <NextLink {...props} className={linkClassName}>
       {props.children}
     </NextLink>
   )

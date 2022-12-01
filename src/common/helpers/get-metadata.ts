@@ -10,14 +10,16 @@ import {renderToString} from 'react-dom/server'
  * @param arg {ReactElement | string} React element or html string
  * @param metaTag {string} Sought-for html tag which contains metadata
  */
-// eslint-disable-next-line complexity -- cannot simplify
-export function getMetadata(arg: ReactElement | string, options?: {tag?: string; url?: string}) {
-  const meta: Partial<PageMeta> = {}
+
+export function getMetadata(arg: ReactElement | string, url: string, tag = 'pagemeta') {
+  const meta: Partial<PageMeta> = {
+    url,
+  }
 
   try {
     const pageString = typeof arg === 'string' ? arg : renderToString(arg)
     const pageHtml = parse(pageString)
-    const metaElement = pageHtml.querySelector(options?.tag ?? 'pagemeta')
+    const metaElement = pageHtml.querySelector(tag)
 
     if (!metaElement) {
       throw new Error('Cannot find meta element')
@@ -33,6 +35,10 @@ export function getMetadata(arg: ReactElement | string, options?: {tag?: string;
 
     if (titleElement) {
       meta.title = titleElement?.textContent
+    } else {
+      meta.title = pageHtml
+        .querySelectorAll('h1,h2,h3,h4,h5,h6')
+        .sort((a, b) => b.tagName.localeCompare(a.tagName))[0].textContent
     }
 
     if (descriptionElement) {
@@ -47,7 +53,7 @@ export function getMetadata(arg: ReactElement | string, options?: {tag?: string;
     }
 
     if (dateElement) {
-      meta.date = dayjs(dateElement?.textContent).toDate()
+      meta.date = dayjs(dateElement?.textContent).toString()
     }
 
     if (posterElement && posterElement.hasAttribute('src')) {
@@ -65,12 +71,8 @@ export function getMetadata(arg: ReactElement | string, options?: {tag?: string;
       metaElement.remove()
       meta.readTime = calculateReadingTime(pageHtml.textContent)
     }
-
-    if (options?.url) {
-      meta.url = options.url
-    }
   } catch (err) {
   } finally {
-    return meta
+    return meta as PageMeta
   }
 }
