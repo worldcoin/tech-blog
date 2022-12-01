@@ -9,7 +9,5 @@ export async function getStaticProps() {
       categories: await getBlogCategories(),
       posts: await (await getBlogPosts()).posts,
     },
-
-    revalidate: 5 * 60,
   }
 }

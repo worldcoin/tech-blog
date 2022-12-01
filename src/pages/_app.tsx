@@ -1,49 +1,12 @@
-import {Components as MDXComponents} from '@mdx-js/react/lib'
-import slugify from '@sindresorhus/slugify'
-import {Article} from 'Article'
 import 'assets/globals.css'
-import {CodeBlock} from 'common/CodeBlock'
-import {collectHeadings, getMetadata} from 'common/helpers'
-import {getBlogPosts} from 'common/helpers/server/get-blog-posts'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
 import {PageMeta, TOC} from 'common/types'
 import {ThemeProvider} from 'contexts/ThemeContext'
-import NextApp, {AppContext, AppInitialProps, AppProps as NextAppProps} from 'next/app'
-import path from 'path'
-import {Fragment, ReactNode, useEffect, useState} from 'react'
+import {AppProps as NextAppProps} from 'next/app'
+import {Fragment} from 'react'
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
-const components: MDXComponents = {
-  Meta: () => null,
-
-  // NOTE: fix hydration error for mathjax
-  // @ts-ignore -- need for workaround style tag
-  style: (args: [string]) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
-    const [style, setStyle] = useState<string>('')
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
-    useEffect(() => setStyle(args[0]), [args])
-    return <style>{style}</style>
-  },
-
-  h2: (props: {children?: ReactNode}) => <h2 id={slugify(props.children as string)}>{props.children}</h2>,
-  h3: (props: {children?: ReactNode}) => <h3 id={slugify(props.children as string)}>{props.children}</h3>,
-
-  pre: (props) => (
-    <pre {...props}>
-      {/* @ts-ignore */}
-      <CodeBlock {...props.children.props} />
-    </pre>
-  ),
-
-  code: (props) => (
-    <span className="[&_.token.plain]:text-010101 bg-dadada/50 px-1.5 py-0.5 rounded-md">
-      <CodeBlock {...props} />
-    </span>
-  ),
-}
 
 type AppProps =
   | {
@@ -59,12 +22,10 @@ type AppProps =
       relatedPosts: Array<PageMeta>
     }
 
-export function App(props: NextAppProps<AppProps>) {
-  const {isBlog, meta, toc, relatedPosts} = props.pageProps
-
+export default function App(props: NextAppProps<AppProps>) {
   return (
     <Fragment>
-      <Meta title={meta?.title ? `${meta?.title} | Worldcoin tech blog` : 'Worldcoin tech blog'} description={''}>
+      <Meta title={'Worldcoin tech blog'} description={''}>
         <meta key="og:type" property="og:type" content="website" />
         <meta key="og:site_name" property="og:site_name" content="Worldcoin" />
         <meta key="og:url" property="og:url" content={process.env.NEXT_PUBLIC_APP_URL} />
@@ -86,7 +47,6 @@ export function App(props: NextAppProps<AppProps>) {
 
       <ThemeProvider>
         <Layout
-          isAlt={isBlog}
           menuItems={[
             {
               title: 'About',
@@ -109,46 +69,11 @@ export function App(props: NextAppProps<AppProps>) {
             },
           ]}
         >
-          {isBlog && (
-            <Article meta={meta} toc={toc} relatedPosts={relatedPosts}>
-              <props.Component {...props.pageProps} components={components} />
-            </Article>
-          )}
-
-          {!isBlog && <props.Component {...props.pageProps} />}
+          <props.Component {...props.pageProps} />
         </Layout>
-      </Th>
+      </ThemeProvider>
 
       <ToastContainer />
     </Fragment>
   )
 }
-
-App.getInitialProps = async (ctx: AppContext) => {
-  const appProps = (await NextApp.getInitialProps(ctx)) as AppInitialProps<AppProps>
-  appProps.pageProps.isBlog = /^\/blog/.test(ctx.router.asPath)
-
-  if (!appProps.pageProps.isBlog) {
-    return {...appProps}
-  }
-
-  // @ts-ignore
-  const pageElement = <ctx.Component components={{Meta: (props) => <pagemeta {...props} />}} />
-  const relatedPosts = (await getBlogPosts({limit: 5})).posts.filter(
-    (post) => path.basename(post.url) !== path.basename(ctx.router.asPath),
-  )
-  const meta = await getMetadata(pageElement, ctx.router.asPath)
-  const toc = collectHeadings(pageElement)
-
-  return {
-    ...appProps,
-    pageProps: {
-      ...appProps.pageProps,
-      meta,
-      toc,
-      relatedPosts,
-    },
-  }
-}
-
-export default App
