@@ -1,15 +1,22 @@
+import clsx from 'clsx'
 import {Link} from 'common/Link'
 import {Fragment, memo} from 'react'
 
 export const BreadcrumbItem = memo(function BreadcrumbItem(props: {
+  className?: string
   label: string
+  last: boolean
   link?: string
   position: number
-  last: boolean
 }) {
   return (
     <Fragment>
-      <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem" className="whitespace-nowrap">
+      <li
+        className={clsx('whitespace-nowrap', props.className)}
+        itemProp="itemListElement"
+        itemScope
+        itemType="https://schema.org/ListItem"
+      >
         {props.link && (
           <Link href={props.link} itemProp="item">
             <span itemProp="name">{props.label}</span>
@@ -18,7 +25,7 @@ export const BreadcrumbItem = memo(function BreadcrumbItem(props: {
 
         {!props.link && (
           <span itemProp="item">
-            <span itemProp="name" className="text-010101 dark:text-ffffff">
+            <span itemProp="name" className="text-ffffff">
               {props.label}
             </span>
           </span>

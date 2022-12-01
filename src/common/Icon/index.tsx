@@ -15,6 +15,7 @@ const iconNames = [
   'logo',
   'telegram',
   'tiktok',
+  'triangle',
   'twitter',
   'youtube',
 ] as const

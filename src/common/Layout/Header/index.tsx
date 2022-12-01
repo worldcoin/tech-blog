@@ -57,7 +57,7 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
     }
   }, [handleCloseMenu, isOpenedMenu])
 
-  // show or hide menu on scroll
+  // handle scroll
   useEffect(() => {
     const scrollHandler = () => setIsScrolled(window.scrollY >= scrollDelta)
     window.addEventListener('scroll', scrollHandler)
@@ -69,10 +69,10 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
       className={clsx(
         layout.paddingHorizontal,
         'z-20 inset-0 grid grid-cols-1fr/auto justify-items-start items-center h-[68px] text-18 font-medium',
-        'fixed top-0 transition-all border-b',
+        'fixed top-0 transition-colors text-ffffff',
         {
-          'border-transparent': !isScrolled,
-          'bg-white border-010101/10': isScrolled,
+          'bg-transparent': !isScrolled,
+          'bg-010101': isScrolled,
         },
       )}
     >
@@ -81,7 +81,10 @@ export const Header = memo(function Header(props: {menuItems: Array<MenuItem>}) 
       </Link>
 
       <button
-        className={clsx('relative z-[10000] flex lg:hidden flex-col justify-center w-6 h-6')}
+        className={clsx('relative z-[10000] flex lg:hidden flex-col justify-center w-6 h-6', {
+          'text-ffffff': !isOpenedMenu,
+          'text-010101': isOpenedMenu,
+        })}
         onClick={triggerOpenedMenu}
         type="button"
         aria-label="Mobile menu"

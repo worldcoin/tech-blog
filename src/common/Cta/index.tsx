@@ -13,15 +13,16 @@ export const Cta = memo(function Cta(props: {
   return (
     <div
       className={clsx(
-        'grid gap-y-8 md:grid-cols-1fr/auto justify-center md:justify-items-start w-full py-7 lg:py-7.5',
-        'justify-items-center items-center',
+        'flex justify-between items-center gap-y-8 w-full py-7 lg:py-7.5',
         layout.paddingHorizontal,
         props.className,
       )}
     >
-      <span className={clsx({'text-24 font-medium': !props.textClassName}, props.textClassName)}>{props.children}</span>
+      <span className={clsx({'text-18 md:text-24 font-medium': !props.textClassName}, props.textClassName)}>
+        {props.children}
+      </span>
 
-      <ArrowLink className="text-18 font-medium" href={props.href}>
+      <ArrowLink className="text-18 md:text-20 font-medium" href={props.href}>
         {props.text}
       </ArrowLink>
     </div>

@@ -4,16 +4,6 @@ export default {
   swcMinify: true,
   pageExtensions: ['ts', 'tsx'],
 
-  async redirects() {
-    return [
-      {
-        source: '/blog',
-        destination: '/',
-        permanent: true,
-      },
-    ]
-  },
-
   webpack: (config) => {
     config.resolve.fallback = {fs: false}
     return config

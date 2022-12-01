@@ -1,23 +1,29 @@
 import clsx from 'clsx'
-import {BlogListFilter, BlogListFilterValues} from 'Home/BlogList'
-import {Dispatch, memo, SetStateAction} from 'react'
+import {BlogListFilterValues} from 'Home/BlogList'
+import {memo, ReactNode} from 'react'
+
+type Value = BlogListFilterValues['category']
 
 export const FilterItem = memo(function Item(props: {
-  category: BlogListFilter['category'][number]
+  children: ReactNode
   className?: string
-  current?: boolean
-  onClick?: Dispatch<SetStateAction<BlogListFilterValues['category']>>
+  onClick?: (arg?: Value) => void
+  value?: Value
+  active?: boolean
 }) {
   return (
-    <li
-      className={clsx('text-center text-18 leading-[1.5]', props.className, {
-        'bg-29343f dark:bg-7068fa text-ffffff': props.current,
-        'bg-010101/5 dark:bg-ffffff/10 text-010101 dark:text-ffffff': !props.current,
-      })}
+    <button
+      className={clsx(
+        'text-18 text-left md:text-center py-2.5 w-full px-4.5 md:px-18',
+        {
+          'bg-29343f text-ffffff': props.active,
+          'bg-f9f9f9': !props.active,
+        },
+        props.className,
+      )}
+      onClick={() => props.onClick?.(props.value)}
     >
-      <button className="px-10 py-2.5 whitespace-nowrap" onClick={() => props.onClick?.(props.category.value)}>
-        {props.category.title}
-      </button>
-    </li>
+      {props.children}
+    </button>
   )
 })

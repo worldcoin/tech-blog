@@ -2,7 +2,6 @@ import 'assets/globals.css'
 import {Layout} from 'common/Layout'
 import {Meta} from 'common/Meta'
 import {PageMeta, TOC} from 'common/types'
-import {ThemeProvider} from 'contexts/ThemeContext'
 import {AppProps as NextAppProps} from 'next/app'
 import {Fragment} from 'react'
 import {ToastContainer} from 'react-toastify'
@@ -45,33 +44,31 @@ export default function App(props: NextAppProps<AppProps>) {
         <link key="canonical" rel="canonical" href={`${process.env.NEXT_PUBLIC_APP_URL}${props.router.asPath}`} />
       </Meta>
 
-      <ThemeProvider>
-        <Layout
-          menuItems={[
-            {
-              title: 'About',
-              url: '/about',
-            },
+      <Layout
+        menuItems={[
+          {
+            title: 'About',
+            url: '/about',
+          },
 
-            {
-              title: 'Blog',
-              url: '/blog',
-            },
+          {
+            title: 'Blog',
+            url: '/blog',
+          },
 
-            {
-              title: 'Privacy',
-              url: '/privacy',
-            },
+          {
+            title: 'Privacy',
+            url: '/privacy',
+          },
 
-            {
-              title: 'Signup',
-              url: '/sign-up',
-            },
-          ]}
-        >
-          <props.Component {...props.pageProps} />
-        </Layout>
-      </ThemeProvider>
+          {
+            title: 'Signup',
+            url: '/sign-up',
+          },
+        ]}
+      >
+        <props.Component {...props.pageProps} />
+      </Layout>
 
       <ToastContainer />
     </Fragment>
