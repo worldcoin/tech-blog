@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import {ArrowLink} from 'common/ArrowLink'
 import {layout} from 'common/styles'
 import Image from 'next/image'
-import heroImageDark from 'public/images/hero-dark.svg'
+import heroImageDark from 'public/images/hero.svg'
 import {memo} from 'react'
 
 const title = 'The Worldcoin Tech Blog'
