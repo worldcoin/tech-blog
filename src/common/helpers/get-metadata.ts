@@ -53,7 +53,7 @@ export function getMetadata(arg: ReactElement | string, url: string, tag = 'page
     }
 
     if (dateElement) {
-      meta.date = dayjs(dateElement?.textContent).toDate()
+      meta.date = dayjs(dateElement?.textContent).toString()
     }
 
     if (posterElement && posterElement.hasAttribute('src')) {
