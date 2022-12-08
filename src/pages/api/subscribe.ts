@@ -4,21 +4,16 @@ export type ApiSubscribeResponse = {
   status: string
 }
 
+export const SUBSCRIBE_API_URL = 'https://sendgrid.com/v3/contactdb/recipients'
+
 /**
  * Just proxy for subscribe form for workaround with cors
  * @param req
  * @param res
  */
 export default async function subscribe(req: NextApiRequest, res: NextApiResponse) {
-  const websiteUrl = process.env.NEXT_SERVER_WEBSITE_URL
-
-  if (!websiteUrl) {
-    console.warn('[api/subscribe]: you must specify NEXT_SERVER_WEBSITE_URL env')
-    return res.status(500).json({code: 500, message: 'Something went wrong'})
-  }
-
   try {
-    const result = await fetch(`${websiteUrl}/api/subscribe`, {
+    const result = await fetch(SUBSCRIBE_API_URL, {
       method: 'POST',
       body: JSON.stringify(req.body),
       headers: {
