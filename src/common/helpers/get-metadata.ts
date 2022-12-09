@@ -3,6 +3,7 @@ import { PageMeta } from "common/types";
 import dayjs from "dayjs";
 import parse from "node-html-parser";
 import { renderToString } from "react-dom/server";
+import { BlogCategory } from "../../../types";
 
 /**
  * Parse metadata from ReactElement or html string
@@ -62,7 +63,7 @@ export function getMetadata(arg: string, url: string) {
     }
 
     if (categoryElement) {
-      meta.category = categoryElement.textContent;
+      meta.category = categoryElement.textContent as BlogCategory;
     }
 
     if (readTimeElement) {

@@ -1,8 +1,8 @@
-import { Category } from "../../../types";
+import { BlogCategory } from "../../../types";
 
 export type PageMeta = {
   author?: { name: string; picture?: string };
-  category?: Category;
+  category?: BlogCategory;
   date?: string;
   description?: string;
   poster?: string;
