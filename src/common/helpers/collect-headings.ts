@@ -6,6 +6,7 @@ import { renderToString } from "react-dom/server";
 
 export const collectHeadings = (reactNode: ReactNode): TOC => {
   const html = parse(
+    // eslint-disable-next-line react/no-children-prop
     renderToString(createElement(Fragment, { children: reactNode }))
   );
 

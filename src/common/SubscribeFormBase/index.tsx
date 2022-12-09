@@ -175,3 +175,5 @@ export const SubscribeFormBase = memo(
     );
   }
 );
+
+SubscribeFormBase.displayName = "SubscribeFormBase";

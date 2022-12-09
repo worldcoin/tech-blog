@@ -46,3 +46,5 @@ export const SubscribeForm = memo(
     );
   }
 );
+
+SubscribeForm.displayName = "SubscribeForm";
