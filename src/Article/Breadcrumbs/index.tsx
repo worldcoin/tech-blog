@@ -1,14 +1,14 @@
-import clsx from 'clsx'
-import {memo} from 'react'
-import {BreadcrumbItem} from './Item'
+import clsx from "clsx";
+import { memo } from "react";
+import { BreadcrumbItem } from "./Item";
 
 export const Breadcrumbs = memo(function Breadcrumbs(props: {
-  className?: string
-  itemClassName?: string
-  items: Array<{label: string; link?: string}>
+  className?: string;
+  itemClassName?: string;
+  items: Array<{ label: string; link?: string }>;
 }) {
   if (props.items.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -16,7 +16,7 @@ export const Breadcrumbs = memo(function Breadcrumbs(props: {
       <ul
         itemScope
         itemType="https://schema.org/BreadcrumbList"
-        className={clsx('flex flex-wrap gap-x-2', props.className)}
+        className={clsx("flex flex-wrap gap-x-2", props.className)}
       >
         {props.items.map((item, index) => (
           <BreadcrumbItem
@@ -29,5 +29,5 @@ export const Breadcrumbs = memo(function Breadcrumbs(props: {
         ))}
       </ul>
     </nav>
-  )
-})
+  );
+});

@@ -8,18 +8,8 @@
     "noImplicitUseStrict": true,
     "removeComments": true,
     "moduleResolution": "node",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "typeRoots": [
-      "node_modules/@types",
-      "@types"
-    ]
+    "lib": ["es2017", "dom"],
+    "typeRoots": ["node_modules/@types", "@types"]
   },
-  "exclude": [
-    "node_modules",
-    "out",
-    ".next"
-  ]
+  "exclude": ["node_modules", "out", ".next"]
 }
