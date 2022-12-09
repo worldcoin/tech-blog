@@ -23,7 +23,7 @@ export const Home = memo(function Home(props: HomePageProps) {
         image={
           <Image
             src={heroImage}
-            alt="The worldcoin Tech Blog"
+            alt=""
             className="absolute bottom-0 right-0 origin-bottom scale-[60%] md:scale-100 translate-x-1/4 md:translate-x-[15%] 2xl:translate-x-0"
           />
         }
@@ -39,8 +39,11 @@ export const Home = memo(function Home(props: HomePageProps) {
           </h2>
         </div>
 
-        {/* FIXME: add link */}
-        <ArrowLink href="#!" className="text-7068fa text-18 md:text-20">
+        {/* FIXME: take user to most recent article automatically */}
+        <ArrowLink
+          href="/blog/4844-testimonial"
+          className="text-7068fa text-18 md:text-20"
+        >
           Start reading
         </ArrowLink>
       </Hero>

@@ -2,10 +2,16 @@ import "assets/globals.css";
 import { Layout } from "common/Layout";
 import { Meta } from "common/Meta";
 import { PageMeta, TOC } from "common/types";
+import { usePostHog } from "hooks/use-posthog";
 import { AppProps as NextAppProps } from "next/app";
-import { Fragment } from "react";
+import getConfig from "next/config";
+import { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import posthog from "posthog-js";
+
+const SITE_NAME = "Tech blog • Worldcoin";
+const { publicRuntimeConfig } = getConfig();
 
 type AppProps =
   | {
@@ -22,11 +28,30 @@ type AppProps =
     };
 
 export default function App(props: NextAppProps<AppProps>) {
+  usePostHog();
+
+  useEffect(() => {
+    const apiKey = publicRuntimeConfig.NEXT_PUBLIC_POSTHOG_API_KEY;
+
+    const persistence =
+      window.localStorage.getItem("cookieBanner") === "rejected"
+        ? "memory"
+        : "localStorage+cookie";
+
+    if (apiKey) {
+      // Only capture basic analytics on visits, IP addresses are not stored
+      posthog.init(apiKey, {
+        autocapture: false,
+        persistence,
+      });
+    }
+  }, []);
+
   return (
     <Fragment>
-      <Meta title={"Worldcoin tech blog"} description={""}>
+      <Meta title={SITE_NAME} description={""}>
         <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:site_name" property="og:site_name" content="Worldcoin" />
+        <meta key="og:site_name" property="og:site_name" content={SITE_NAME} />
         <meta
           key="og:url"
           property="og:url"
@@ -35,7 +60,7 @@ export default function App(props: NextAppProps<AppProps>) {
         {/* FIXME: add image */}
         {/* <meta key="og:image" property="og:image" content={metaImageUrl} /> */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="Worldcoin" />
+        <meta name="twitter:site" content={SITE_NAME} />
         <meta
           key="twitter:url"
           property="og:url"
@@ -77,23 +102,25 @@ export default function App(props: NextAppProps<AppProps>) {
       <Layout
         menuItems={[
           {
-            title: "About",
-            url: "/about",
+            title: "Docs",
+            url: "https://id.worldcoin.org",
+            target: "_blank",
+          },
+          {
+            title: "GitHub",
+            url: "https://github.com/worldcoin",
+            target: "_blank",
+          },
+          {
+            title: "Website",
+            url: "https://worldcoin.org",
+            target: "_blank",
           },
 
           {
-            title: "Blog",
-            url: "/blog",
-          },
-
-          {
-            title: "Privacy",
-            url: "/privacy",
-          },
-
-          {
-            title: "Signup",
-            url: "/sign-up",
+            title: "Careers",
+            url: "https://worldcoin.org/careers",
+            target: "_blank",
           },
         ]}
       >

@@ -14,7 +14,6 @@ const iconNames = [
   "logo-small",
   "logo",
   "telegram",
-  "tiktok",
   "triangle",
   "twitter",
   "youtube",
