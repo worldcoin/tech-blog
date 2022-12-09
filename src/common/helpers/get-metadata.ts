@@ -2,7 +2,6 @@ import {calculateReadingTime} from 'common/helpers'
 import {PageMeta} from 'common/types'
 import dayjs from 'dayjs'
 import parse from 'node-html-parser'
-import {ReactElement} from 'react'
 import {renderToString} from 'react-dom/server'
 
 /**
@@ -11,7 +10,7 @@ import {renderToString} from 'react-dom/server'
  * @param metaTag {string} Sought-for html tag which contains metadata
  */
 
-export function getMetadata(arg: ReactElement | string, url: string, tag = 'pagemeta') {
+export function getMetadata(arg: string, url: string) {
   const meta: Partial<PageMeta> = {
     url,
   }
@@ -19,7 +18,7 @@ export function getMetadata(arg: ReactElement | string, url: string, tag = 'page
   try {
     const pageString = typeof arg === 'string' ? arg : renderToString(arg)
     const pageHtml = parse(pageString)
-    const metaElement = pageHtml.querySelector(tag)
+    const metaElement = pageHtml.querySelector('meta')
 
     if (!metaElement) {
       throw new Error('Cannot find meta element')
