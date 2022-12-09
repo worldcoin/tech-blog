@@ -11,7 +11,8 @@
     "lint-next": "npx next lint -- --dir ./src",
     "typecheck": "tsc",
     "test": "jest --env=jsdom --no-cache --onlyChanged",
-    "test:all": "jest --env=jsdom --no-cache"
+    "test:all": "jest --env=jsdom --no-cache",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@sindresorhus/slugify": "^2.1.1",
@@ -26,6 +27,7 @@
     "eslint-config-next": "13.0.4",
     "next": "13.0.4",
     "next-mdx-remote": "^4.2.0",
+    "next-sitemap": "^3.1.32",
     "node-html-parser": "^6.1.4",
     "prism-react-renderer": "^1.3.5",
     "prismjs": "^1.29.0",
