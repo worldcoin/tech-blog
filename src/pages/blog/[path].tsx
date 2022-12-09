@@ -68,18 +68,22 @@ export async function getStaticPaths() {
 
 const getFileSource = async (path: string) => {
   const base = './src/pages/blog'
-  const mdFile = resolve(base, `${path}.md`)
-  const mdxFile = resolve(base, `${path}.mdx`)
+  const result: {
+    format?: 'md' | 'mdx'
+    fileSource?: string
+  } = {format: undefined, fileSource: undefined}
 
   try {
-    return await (await readFile(mdFile)).toString()
+    result.fileSource = await (await readFile(resolve(base, `${path}.md`))).toString()
+    result.format = 'md'
   } catch (err) {}
 
   try {
-    return await (await readFile(mdxFile)).toString()
+    result.fileSource = await (await readFile(resolve(base, `${path}.mdx`))).toString()
+    result.format = 'mdx'
   } catch (err) {}
 
-  return null
+  return result as Required<typeof result>
 }
 
 export async function getStaticProps(ctx: GetStaticPropsContext<{path: string}>) {
@@ -91,7 +95,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{path: string}>)
     }
   }
 
-  const fileSource = await getFileSource(path)
+  const {fileSource, format} = await getFileSource(path)
 
   if (!fileSource) {
     return {
@@ -103,14 +107,14 @@ export async function getStaticProps(ctx: GetStaticPropsContext<{path: string}>)
     mdxOptions: {
       remarkPlugins: [remarkMath],
       rehypePlugins: [rehypeMathJaxSvg],
-      format: 'mdx',
+      format: format ?? 'detect',
     },
   })
 
   const url = `/blog/${path}`
   // @ts-ignore
   const pageElement = <MDXRemote {...source} components={{Meta: (props) => <pagemeta {...props} />}} />
-  const meta = getMetadata(pageElement, url)
+  const meta = getMetadata(fileSource, url)
   const relatedPosts = (await getBlogPosts({limit: 5})).posts.filter((post) => post.url !== url)
   const toc = collectHeadings(pageElement)
 

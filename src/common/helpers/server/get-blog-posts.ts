@@ -42,7 +42,7 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
     await Promise.all(
       files.slice(start, start + limit).map(async (file) => {
         const fileString = (await readFile(file)).toString()
-        return getMetadata(fileString, filePathToUrl(file, {base: 'blog'}), 'meta')
+        return getMetadata(fileString, filePathToUrl(file, {base: 'blog'}))
       }),
     )
   ).filter((meta) => typeof meta.title === 'string')
