@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "16.17.0",
+    "node": "18",
     "npm": "8.1.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "prestart": "nvm use 16.17.0",
     "start": "next start",
     "format": "prettier -w ./",
     "format:check": "prettier --check ./",
