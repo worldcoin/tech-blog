@@ -30,34 +30,26 @@ export const Footer = memo(function Footer(props: {
       >
         <span>
           © {estimatedYear}
-          {currentYear > estimatedYear && `-${currentYear}`} Worldcoin
+          {currentYear > estimatedYear && `-${currentYear}`} Tools for Humanity
+          Corporation
         </span>
 
         <div className="w-0.5 h-0.5 bg-8c8c92 rounded-full" />
 
-        {/* FIXME: add link */}
-        <Link
-          href={`${publicRuntimeConfig.NEXT_PUBLIC_PRIVACY_STATEMENT_URL}`}
-          target="_blank"
-        >
+        <Link href="https://worldcoin.org/privacy-statement" target="_blank">
           Privacy
         </Link>
 
         <div className="w-0.5 h-0.5 bg-8c8c92 rounded-full" />
 
-        {/* FIXME: add link */}
-        <Link
-          href={`${publicRuntimeConfig.NEXT_PUBLIC_USER_AGREEMENT_URL}`}
-          target="_blank"
-        >
-          Terms
+        <Link href="https://discord.gg/worldcoin" target="_blank">
+          Discord
         </Link>
 
         <div className="w-0.5 h-0.5 bg-8c8c92 rounded-full" />
 
-        {/* FIXME: add link */}
-        <Link href={`#!`} target="_blank">
-          Support
+        <Link href="https://developer.worldcoin.org" target="_blank">
+          Developer Portal
         </Link>
       </div>
     </footer>

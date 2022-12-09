@@ -11,7 +11,7 @@ type AnchorAndNextLinkProps = Omit<
     children?: React.ReactNode;
   } & React.RefAttributes<HTMLAnchorElement>;
 
-type LinkProps = AnchorAndNextLinkProps & {
+export type LinkProps = AnchorAndNextLinkProps & {
   activeClassName?: string;
   inactiveClassName?: string;
 };

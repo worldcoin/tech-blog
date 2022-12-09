@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { generateDecoratedLinkClassName } from "common/helpers";
-import { Link } from "common/Link";
+import { Link, LinkProps } from "common/Link";
 import { useRouter } from "next/router";
 import { memo, ReactNode } from "react";
 
@@ -8,6 +8,7 @@ export const NavItem = memo(function NavItem(props: {
   className?: string;
   href: string;
   children: ReactNode;
+  target: LinkProps["target"];
   onClick?: () => void;
 }) {
   const router = useRouter();
@@ -25,6 +26,7 @@ export const NavItem = memo(function NavItem(props: {
       )}
       href={props.href}
       onClick={props.onClick}
+      target={props.target}
     >
       {props.children}
     </Link>

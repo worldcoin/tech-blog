@@ -71,6 +71,7 @@ export const Nav = memo(
                 key={`menuItem-${index}`}
                 href={item.url}
                 onClick={props.closeMenu}
+                target={item.target}
               >
                 {item.title}
               </NavItem>

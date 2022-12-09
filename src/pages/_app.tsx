@@ -79,17 +79,25 @@ export default function App(props: NextAppProps<AppProps>) {
       <Layout
         menuItems={[
           {
-            title: "GitHub",
-            url: "https://github.com/worldcoin",
+            title: "Docs",
+            url: "https://id.worldcoin.org",
+            target: "_blank",
           },
           {
-            title: "Worldcoin",
+            title: "GitHub",
+            url: "https://github.com/worldcoin",
+            target: "_blank",
+          },
+          {
+            title: "Website",
             url: "https://worldcoin.org",
+            target: "_blank",
           },
 
           {
             title: "Careers",
             url: "https://worldcoin.org/careers",
+            target: "_blank",
           },
         ]}
       >
