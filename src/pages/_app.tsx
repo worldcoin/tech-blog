@@ -2,12 +2,16 @@ import "assets/globals.css";
 import { Layout } from "common/Layout";
 import { Meta } from "common/Meta";
 import { PageMeta, TOC } from "common/types";
+import { usePostHog } from "hooks/use-posthog";
 import { AppProps as NextAppProps } from "next/app";
-import { Fragment } from "react";
+import getConfig from "next/config";
+import { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import posthog from "posthog-js";
 
 const SITE_NAME = "Tech blog • Worldcoin";
+const { publicRuntimeConfig } = getConfig();
 
 type AppProps =
   | {
@@ -24,6 +28,25 @@ type AppProps =
     };
 
 export default function App(props: NextAppProps<AppProps>) {
+  usePostHog();
+
+  useEffect(() => {
+    const apiKey = publicRuntimeConfig.NEXT_PUBLIC_POSTHOG_API_KEY;
+
+    const persistence =
+      window.localStorage.getItem("cookieBanner") === "rejected"
+        ? "memory"
+        : "localStorage+cookie";
+
+    if (apiKey) {
+      // Only capture basic analytics on visits, IP addresses are not stored
+      posthog.init(apiKey, {
+        autocapture: false,
+        persistence,
+      });
+    }
+  }, []);
+
   return (
     <Fragment>
       <Meta title={SITE_NAME} description={""}>
