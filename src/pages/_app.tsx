@@ -7,6 +7,8 @@ import { Fragment } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const SITE_NAME = "Tech blog • Worldcoin";
+
 type AppProps =
   | {
       isBlog: false;
@@ -24,9 +26,9 @@ type AppProps =
 export default function App(props: NextAppProps<AppProps>) {
   return (
     <Fragment>
-      <Meta title={"Worldcoin tech blog"} description={""}>
+      <Meta title={SITE_NAME} description={""}>
         <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:site_name" property="og:site_name" content="Worldcoin" />
+        <meta key="og:site_name" property="og:site_name" content={SITE_NAME} />
         <meta
           key="og:url"
           property="og:url"
@@ -35,7 +37,7 @@ export default function App(props: NextAppProps<AppProps>) {
         {/* FIXME: add image */}
         {/* <meta key="og:image" property="og:image" content={metaImageUrl} /> */}
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="Worldcoin" />
+        <meta name="twitter:site" content={SITE_NAME} />
         <meta
           key="twitter:url"
           property="og:url"
@@ -77,23 +79,17 @@ export default function App(props: NextAppProps<AppProps>) {
       <Layout
         menuItems={[
           {
-            title: "About",
-            url: "/about",
+            title: "GitHub",
+            url: "https://github.com/worldcoin",
+          },
+          {
+            title: "Worldcoin",
+            url: "https://worldcoin.org",
           },
 
           {
-            title: "Blog",
-            url: "/blog",
-          },
-
-          {
-            title: "Privacy",
-            url: "/privacy",
-          },
-
-          {
-            title: "Signup",
-            url: "/sign-up",
+            title: "Careers",
+            url: "https://worldcoin.org/careers",
           },
         ]}
       >

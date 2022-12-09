@@ -4,6 +4,7 @@ import { renderReadTime } from "common/helpers";
 import { PageMeta } from "common/types";
 import dayjs from "dayjs";
 import Image from "next/image";
+import Link from "next/link";
 import { memo } from "react";
 
 export const Article = memo(function Article(props: { post: PageMeta }) {
@@ -38,24 +39,28 @@ export const Article = memo(function Article(props: { post: PageMeta }) {
         )}
 
         <div className="grid grid-cols-[1fr_auto] items-center grid-flow-row gap-y-3 md:gap-x-38">
-          <h3
-            itemProp="name"
-            className={clsx("text-32 font-bold self-end", {
-              "col-span-2": !props.post.poster,
-            })}
-          >
-            {props.post.title}
-          </h3>
+          <Link href={props.post.url}>
+            <h3
+              itemProp="name"
+              className={clsx("text-32 font-bold self-end", {
+                "col-span-2": !props.post.poster,
+              })}
+            >
+              {props.post.title}
+            </h3>
+          </Link>
 
           {props.post.poster && (
             <div className="w-20 md:w-32 aspect-square md:row-span-2">
-              <Image
-                src={props.post.poster}
-                width={400}
-                height={400}
-                alt={props.post.title}
-                className="w-full"
-              />
+              <Link href={props.post.url}>
+                <Image
+                  src={props.post.poster}
+                  width={400}
+                  height={400}
+                  alt={props.post.title}
+                  className="w-full"
+                />
+              </Link>
             </div>
           )}
 
@@ -84,13 +89,6 @@ export const Article = memo(function Article(props: { post: PageMeta }) {
             {renderReadTime(props.post.readTime, true)}
           </span>
         </div>
-
-        <ArrowLink
-          href={props.post.url}
-          className="text-7068fa text-18 font-normal"
-        >
-          Learn more
-        </ArrowLink>
       </div>
     </article>
   );

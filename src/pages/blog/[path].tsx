@@ -134,6 +134,7 @@ export async function getStaticProps(
   const pageElement = (
     <MDXRemote
       {...source}
+      // @ts-expect-error
       components={{ Meta: (props) => <pagemeta {...props} /> }}
     />
   );
