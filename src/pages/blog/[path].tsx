@@ -15,21 +15,12 @@ import {
 import { serialize } from "next-mdx-remote/serialize";
 import { basename, extname, resolve } from "path";
 import { ReactNode, useEffect, useState } from "react";
-import rehypeMathJaxSvg from "rehype-mathjax";
+import rehypeKatex from "rehype-katex";
+import rehypeDocument from 'rehype-document'
 import remarkMath from "remark-math";
 
 const components: MDXRemoteProps["components"] = {
   Meta: () => null,
-
-  // NOTE: fix hydration error for mathjax
-  // @ts-ignore -- need for workaround style tag
-  style: (args: [string]) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
-    const [style, setStyle] = useState<string>("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
-    useEffect(() => setStyle(args[0]), [args]);
-    return <style>{style}</style>;
-  },
 
   h2: (props: { children?: ReactNode }) => (
     <h2 id={slugify(props.children as string)}>{props.children}</h2>
@@ -90,14 +81,14 @@ const getFileSource = async (path: string) => {
       await readFile(resolve(base, `${path}.md`))
     ).toString();
     result.format = "md";
-  } catch (err) {}
+  } catch (err) { }
 
   try {
     result.fileSource = await (
       await readFile(resolve(base, `${path}.mdx`))
     ).toString();
     result.format = "mdx";
-  } catch (err) {}
+  } catch (err) { }
 
   return result as Required<typeof result>;
 };
@@ -124,7 +115,12 @@ export async function getStaticProps(
   const source = await serialize(fileSource, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeMathJaxSvg],
+      rehypePlugins: [rehypeKatex, {
+        output: "html",
+      },
+        rehypeDocument, {
+          css: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
+        }],
       format: format ?? "detect",
     },
   });
