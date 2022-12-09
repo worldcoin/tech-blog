@@ -1,0 +1,43 @@
+<Meta>
+  <title>Why Worldcoin Is Contributing to EIP-4844 development</title>
+  <description>EIP-4844 (proto-danksharding) is part of Ethereum's scaling roadmap and will add more data throughput for rollups which will make the network a lot more affordable and enable more resource-intensive applications to exist.</description>
+  <author picture="/images/dcbuilder.webp">dcbuilder.eth</author>
+  <date>2022/11/07</date>
+  <poster src="/images/blog/4844-header.png" />
+  <category>Crypto</category>
+</Meta>
+
+## Intro to Worldcoin
+
+The Worldcoin project started on the premise of giving a token to every human on earth and creating a worldwide UBI project where the value created by [AGI](https://en.wikipedia.org/wiki/Artificial_general_intelligence) gets equitatively distributed to all people across the globe. To achieve that scale in the far future, we are working towards onboarding the first billion people to crypto and solving Sybil resistance. We need scalable infrastructure to make these services accessible for all without compromising on network economic security and decentralization.
+
+![EIP4844.com](/images/blog/4844.png)
+Source: [EIP4844.com](https://www.eip4844.com/) and the [Optimistic Dev Blog](https://dev.optimism.io/eip-4844-an-optimistic-bet-on-rollup-scalability/)
+
+## EIP4844 Motivation
+
+More than 870k people have signed up to the Worldcoin Beta App so far - with currently more than 69k weekly active users. Our infrastructure right now is mainly composed of our [Privacy-Preserving Proof-of-Personhood Protocol](https://worldcoin.org/the-worldcoin-protocol) called *World Id* (currently based on [Semaphore](http://semaphore.appliedzkp.org/)) and a non-custodial Ethereum Wallet (more specifically, a Smart Contract Wallet that already sets the stage for future EIPs around account abstraction).
+
+[EIP4844](https://eip4844.com/) introduces a new kind of transaction type to Ethereum which accepts "blobs" of data to be persisted in the beacon node for a short period of time. Currently L2s like [Optimism](https://www.optimism.io/) or [Starknet](https://starknet.io/) post fraud or validity proofs to Ethereum calldata which is limited. As of now transactions with small amounts (\<$10) are infeasible, especially in periods of high network demand (more on [l2fees.info](https://l2fees.info/)). After EIP4844 they would submit these proofs to blobspace which provides [more storage](https://notes.ethereum.org/@vbuterin/proto_danksharding_faq#What-is-proto-danksharding-aka-EIP-4844) and a separate fee market thus making fees on L2s a lot cheaper and allowing applications like Worldcoin to benefit from full Ethereum security for all of its users. You can learn more about L2s at [L2Beat](l2beat.com/) and [The Complete Guide to Rollups by Delphi Digital](https://members.delphidigital.io/reports/the-complete-guide-to-rollups/).
+
+In the past, we have built a new sequencer implementation of [Hubble](https://github.com/worldcoin/hubble-commander) (a [project](https://github.com/thehubbleproject) originally started by the EF PSE team), which is an payment optimized optimistic rollup using BLS signature aggregation and custom transaction encoding. 
+Although this leads to a massive throughput boost for transfers (\<400 gas per transfer), this limits users to simple payments. However, they should be able to access the entire space of web3 applications and buy, sell, send and receive any token. 
+
+We are really excited to launch as early as possible on one (or many) of the EVM rollups out there. This will expose a new generation of web3 users to all the applications built in the Ethereum ecosystem and allow them to interact with DeFi, NFTs, games, and more!
+
+## EIP4844 contribution
+
+To scale Ethereum, we looked at the intersection of our skillset and the bottlenecks that EIP4844 is facing and started contributing to the areas we think can move it forward:
+
+- [kzg-ceremony-sequencer implementation](https://github.com/ethereum/kzg-ceremony-sequencer)
+- [a KZG ceremony participant client](https://github.com/worldcoin/kzg-ceremony-participant)
+- support for cryptography libraries (ECC, KZG)
+- coordination / pushing EIP forward in the community
+
+## Summary
+
+We believe that Ethereum should prioritize scaling and coordinate to push EIP4844 forward in a timely manner. Our timeline estimation would be to get the EIP into the Capella/Shanghai hard fork unless a major setback happens. For more information on this Ethereum protocol change, check out the [EIP4844.com](https://www.eip4844.com/) website.
+
+## Authors
+
+[dcbuilder.eth](https://twitter.com/DCbuild3r). Special thanks to [Tim Beiko](https://twitter.com/TimBeiko), [Philipp Sippl](https://twitter.com/philzip), [Remco Bloemen](https://twitter.com/recmo) and [Miguel Piedrafita](https://twitter.com/m1guelpf) for reviewing this article.
