@@ -1,3 +1,3 @@
 export type ApiGetBlogCategoriesResponse = {
-  categories: Array<string>
-}
+  categories: Array<string>;
+};

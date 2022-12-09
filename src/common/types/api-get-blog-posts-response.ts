@@ -1,6 +1,6 @@
-import {PageMeta} from './page-meta'
+import { PageMeta } from "./page-meta";
 
 export type ApiGetBlogPostsResponse = {
-  posts: Array<PageMeta>
-  total: number
-}
+  posts: Array<PageMeta>;
+  total: number;
+};

@@ -1,15 +1,18 @@
-import {ArrowLink} from 'common/ArrowLink'
-import {Hero} from 'common/Hero'
-import {ApiGetBlogCategoriesResponse, ApiGetBlogPostsResponse} from 'common/types'
-import Image from 'next/image'
-import heroImage from 'public/images/hero.svg'
-import {Fragment, memo} from 'react'
-import {BlogList} from './BlogList'
+import { ArrowLink } from "common/ArrowLink";
+import { Hero } from "common/Hero";
+import {
+  ApiGetBlogCategoriesResponse,
+  ApiGetBlogPostsResponse,
+} from "common/types";
+import Image from "next/image";
+import heroImage from "public/images/hero.svg";
+import { Fragment, memo } from "react";
+import { BlogList } from "./BlogList";
 
 export type HomePageProps = {
-  categories: ApiGetBlogCategoriesResponse['categories']
-  posts: ApiGetBlogPostsResponse['posts']
-}
+  categories: ApiGetBlogCategoriesResponse["categories"];
+  posts: ApiGetBlogPostsResponse["posts"];
+};
 
 export const Home = memo(function Home(props: HomePageProps) {
   return (
@@ -26,10 +29,13 @@ export const Home = memo(function Home(props: HomePageProps) {
         }
       >
         <div className="md:w-min space-y-7.5 md:space-y-5">
-          <h1 className="text-36 2xl:text-42 md:whitespace-nowrap font-bold xl:pr-13">The Worldcoin Tech Blog</h1>
+          <h1 className="text-36 2xl:text-42 md:whitespace-nowrap font-bold xl:pr-13">
+            The Worldcoin Tech Blog
+          </h1>
 
           <h2 className="text-20 2xl:text-24 font-serif tracking-[-0.005em]">
-            Completely free resource for blockchain technology and community services
+            Completely free resource for blockchain technology and community
+            services
           </h2>
         </div>
 
@@ -41,5 +47,5 @@ export const Home = memo(function Home(props: HomePageProps) {
 
       <BlogList categories={props.categories} posts={props.posts} />
     </Fragment>
-  )
-})
+  );
+});

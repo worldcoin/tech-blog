@@ -1,18 +1,18 @@
-import clsx from 'clsx'
-import {Link} from 'common/Link'
-import {Fragment, memo} from 'react'
+import clsx from "clsx";
+import { Link } from "common/Link";
+import { Fragment, memo } from "react";
 
 export const BreadcrumbItem = memo(function BreadcrumbItem(props: {
-  className?: string
-  label: string
-  last: boolean
-  link?: string
-  position: number
+  className?: string;
+  label: string;
+  last: boolean;
+  link?: string;
+  position: number;
 }) {
   return (
     <Fragment>
       <li
-        className={clsx('whitespace-nowrap', props.className)}
+        className={clsx("whitespace-nowrap", props.className)}
         itemProp="itemListElement"
         itemScope
         itemType="https://schema.org/ListItem"
@@ -36,5 +36,5 @@ export const BreadcrumbItem = memo(function BreadcrumbItem(props: {
 
       {!props.last && <span>/</span>}
     </Fragment>
-  )
-})
+  );
+});

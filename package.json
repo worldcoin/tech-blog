@@ -11,7 +11,8 @@
     "build": "next build",
     "prestart": "nvm use 16.17.0",
     "start": "next start",
-    "format": "ofmt './src/**/*.{ts,tsx}'",
+    "format": "prettier -w ./",
+    "format:check": "prettier --check ./",
     "lint": "olint './src/**/*.{ts,tsx}'",
     "lint-next": "npx next lint -- --dir ./src",
     "typecheck": "tsc",
@@ -50,7 +51,6 @@
     "@babel/core": "^7.20.2",
     "@ottofeller/eslint-config-ofmt": "1.5.1",
     "@ottofeller/ofmt": "1.5.1",
-    "@ottofeller/prettier-config-ofmt": "1.5.1",
     "@testing-library/react": "^13.4.0",
     "@types/body-scroll-lock": "^3.1.0",
     "@types/react-scroll": "^1.8.5",
@@ -66,7 +66,6 @@
     "tailwindcss": "^3.2.4",
     "ts-jest": "^29.0.3"
   },
-  "prettier": "@ottofeller/prettier-config-ofmt",
   "babel": {
     "presets": [
       "next/babel"

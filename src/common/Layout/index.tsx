@@ -1,23 +1,23 @@
-import clsx from 'clsx'
-import {Cta} from 'common/Cta'
-import {layout} from 'common/styles'
-import {SubscribeForm} from 'common/SubscribeForm'
-import {MenuItem} from 'common/types'
-import {memo, ReactNode} from 'react'
-import {Footer} from './Footer'
-import {Header} from './Header'
+import clsx from "clsx";
+import { Cta } from "common/Cta";
+import { layout } from "common/styles";
+import { SubscribeForm } from "common/SubscribeForm";
+import { MenuItem } from "common/types";
+import { memo, ReactNode } from "react";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
 
 export type LayoutProps = {
-  children: ReactNode
-  footerBorder?: boolean
-  menuItems: Array<MenuItem>
-}
+  children: ReactNode;
+  footerBorder?: boolean;
+  menuItems: Array<MenuItem>;
+};
 
 export const Layout = memo(function Layout(props: LayoutProps) {
   return (
     <div
       className={clsx(
-        'grid grid-rows-auto/1fr/auto min-h-screen selection:text-ffffff selection:bg-4940e0 bg-ffffff text-010101',
+        "grid grid-rows-auto/1fr/auto min-h-screen selection:text-ffffff selection:bg-4940e0 bg-ffffff text-010101"
       )}
     >
       <Header menuItems={props.menuItems} />
@@ -25,9 +25,9 @@ export const Layout = memo(function Layout(props: LayoutProps) {
 
       <section
         className={clsx(
-          'flex flex-col md:flex-row gap-40 md:gap-40 justify-between md:items-center py-15 md:py-28',
-          'bg-dde7ea text-010101',
-          layout.paddingHorizontal,
+          "flex flex-col md:flex-row gap-40 md:gap-40 justify-between md:items-center py-15 md:py-28",
+          "bg-dde7ea text-010101",
+          layout.paddingHorizontal
         )}
       >
         <p className="text-24 md:text-32 font-semibold">
@@ -44,11 +44,11 @@ export const Layout = memo(function Layout(props: LayoutProps) {
       </section>
 
       {/* FIXME: add link */}
-      <Cta href={'#!'} text={'Faq'} className="bg-010101 text-ffffff">
+      <Cta href={"#!"} text={"Faq"} className="bg-010101 text-ffffff">
         Have questions?
       </Cta>
 
       <Footer footerBorder={props.footerBorder} />
     </div>
-  )
-})
+  );
+});
