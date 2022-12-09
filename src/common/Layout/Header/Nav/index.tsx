@@ -79,63 +79,6 @@ export const Nav = memo(
           </div>
 
           <SubscribeForm className="lg:hidden w-full" isStaticArrow />
-
-          <div className="grid lg:hidden gap-x-5 gap-y-7.5 grid-cols-2">
-            <Link
-              href="/press"
-              onClick={props.closeMenu}
-              className={clsx(
-                "justify-self-start text-16",
-                generateDecoratedLinkClassName({
-                  activeCondition: "hover:before:w-full",
-                })
-              )}
-            >
-              Press
-            </Link>
-
-            {/* FIXME: add link */}
-            <Link
-              href="#!"
-              onClick={props.closeMenu}
-              className={clsx(
-                "row-start-2 justify-self-start text-16",
-                generateDecoratedLinkClassName({
-                  activeCondition: "hover:before:w-full",
-                })
-              )}
-            >
-              Become a Partner
-            </Link>
-
-            <a
-              href="http://twitter.com/worldcoin"
-              target="_blank"
-              className={clsx(
-                "justify-self-start text-16",
-                generateDecoratedLinkClassName({
-                  activeCondition: "hover:before:w-full",
-                })
-              )}
-              rel="noreferrer"
-            >
-              Twitter
-            </a>
-
-            <a
-              href="https://www.linkedin.com/company/worldcoinfoundation"
-              target="_blank"
-              className={clsx(
-                "justify-self-start text-16",
-                generateDecoratedLinkClassName({
-                  activeCondition: "hover:before:w-full",
-                })
-              )}
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-          </div>
         </div>
       </div>
     );
