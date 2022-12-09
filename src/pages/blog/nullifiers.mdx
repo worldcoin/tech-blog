@@ -1,0 +1,258 @@
+<Meta>
+  <title>Nullifiers</title>
+  <description>
+    Privacy preserving protocols often use a device called a *nullifier* to
+    keep users anonymous.
+  </description>
+  <author picture="/images/authors/remco_bloemen.jpg">Remco Bloemen</author>
+  <date>2022/12/09</date>
+  <poster src="/images/blog/4844-testimonial/4844-header.png" /> <!-- TODO -->
+  <category>Crypto & Blockchain</category>
+</Meta>
+
+# Nullifiers
+
+$$
+\gdef\F{\mathbb{F}}
+\gdef\G{\mathbb{G}}
+\gdef\g{\mathrm{G}}
+\gdef\H{\mathsf{H}}
+\gdef\S{\mathcal{S}}
+\gdef\HF{\H_{\F}}
+\gdef\HG{\H_{\G}}
+\gdef\ZKP{\mathsf{ZKP}}
+$$
+
+In privacy-preserving protocols we sometimes want to prevent users from doing an action twice while keeping them anonymous. This is somewhat paradoxical: the property of “having done the action” is potentially observable: Users could be asked to “try the action again”. This will either succeed or fail, revealing if they did the action before. This splits the users in two groups, thus reducing the anonymity set size. Fortunately, this requires users to actively participate.
+
+We also need to specify the set of users in some way, otherwise people can just create new user-accounts and do the action many times this way. To do the action, users will need to proof that they are members of this set. To preserve anonymity, they need to do this in a zero-knowledge way.
+
+Finally, in some applications we want to attach data to the action. For example in a basic election we want to attach the user's preferred choice to the "vote" action. Together, this means we need a zero-knowledge proof that the user:
+
+* is a member of the set of users (*membership*),
+* has not done this action before (*one-shot*), and
+* wants to attach this data (*message*).
+
+The first and last have simple solutions, but the one-shot does not have an obvious solution. A common solution is to use *nullifiers*. The general scheme is as follows:
+
+## Basic Nullifiers
+
+To set up the users create public-private key-pairs $(P_i, p_i)$, the operator creates a set commitment of the public keys $\S = \set{P_i}$, and the operator creates a mutable set of nullifiers $\mathcal N$, initially empty.
+
+To do the action users $i$ create a zero-knowledge proof with public inputs $\S$, $\mathsf{action}$, $\mathsf{message}$ and a new value called $\mathsf{nullifier}$ that proofs that
+
+1. it knows the private key $p_i$ to a public key $P_i$ in the set $\S$,
+2. $\mathsf{nullifier} = \H\p{p_i, \mathsf{action}}$,
+
+To verify a proof the operator
+
+1. verifies the zero-knowledge proof and set commitment $\S$,
+2. rejects if $\mathsf{nullifier} ∈ \mathcal N$,
+3. inserts $\mathsf{nullifier} ∈ \mathcal N$,
+4. executes the $\mathsf{action}$ with $\mathsf{message}$.
+
+## General structure
+
+For a zero-knowledge proof and its verification I introduce the following notation
+
+$$
+\begin{aligned}
+π &= \ZKP\p{
+\begin{array}{c}
+\text{public inputs} \\
+\hdashline
+\text{private inputs}
+\end{array}
+\middle\vert
+\text{claim}
+}&
+\mathsf{Verify}\p{π,\text{public inputs}}
+\end{aligned}
+$$
+
+## Zerocoin Nullifiers
+
+[MGGR13]
+
+[MGGR13]: http://spar.isi.jhu.edu/%7Emgreen/ZerocoinOakland.pdf
+
+RSA Accumulators working on primes.
+
+$$
+c = \mod{g^S ⋅ h^r}_p
+$$
+
+$$
+π = \ZKP\p{
+\begin{array}{c}
+\S, \mathsf{nullifier} \\
+\hdashline
+p
+\end{array}
+\middle\vert
+\begin{aligned}
+\mathsf{secret} &= \HF\p{p_{\mathsf{trapdoor}}, p_{\mathsf{nullifier}}} \\
+\mathsf{id} &= \HF\p{\mathsf{secret}} \\
+\mathsf{id} &∈ \S \\
+\mathsf{nullifier} &= \HF\p{p_{\mathsf{nullifier}}, \mathsf{context}}
+\end{aligned}
+}
+$$
+
+With public inputs $\S$, $N$, $m$ and private inputs $P$, $c$, $s$ compute a proof $π$ of
+
+$$
+\begin{aligned}
+P &= \HF\p{s} \\
+P &∈ \S \\
+N &= \HF\p{m, s}
+\end{aligned}
+$$
+
+In the paper the set commitment and membership proof is done using RSA accumulators.
+
+## Semaphore Nullifiers
+
+[Semaphore] introduced anonymity as a stand-alone protocol and added the $\mathsf{context}$ and $\mathsf{message}$ parts to the claim. It uses a $\ZKP$ scheme with field $\F$, a snark-friendly hash function $\HF$ and a set membership proof. In the current [implementation] these are Circom-Groth16, Posseidon and Posseidon-Merkle trees.
+
+[semaphore]: https://semaphore.appliedzkp.org/
+[implementation]: https://github.com/semaphore-protocol
+
+**Setup.** Each users create two random private keys $p_{\mathsf{trapdoor}}, p_{\mathsf{nullifier}} ∈ \F$ and computes identity commitment
+
+$$
+\mathsf{id} = \HF\p{\HF\p{p_{\mathsf{trapdoor}}, p_{\mathsf{nullifier}}}}
+$$
+
+The verifier constructs a set commitment $\S = \set{\mathsf{id}, …}$ of identity commitments and picks a $\mathsf{context} ∈ \F$.
+
+**Claim.** Given a $\mathsf{context}$ the user can decide on a $\mathsf{message} ∈ \F$ and compute the zero-knowledge proof
+
+$$
+π = \ZKP\p{
+\begin{array}{c}
+\S,\mathsf{context}, \\
+\mathsf{nullifier}, \mathsf{message} \\
+\hdashline
+p_{\mathsf{trapdoor}}, p_{\mathsf{nullifier}}
+\end{array}
+\middle\vert
+\begin{aligned}
+\mathsf{secret} &= \HF\p{p_{\mathsf{trapdoor}}, p_{\mathsf{nullifier}}} \\
+\mathsf{id} &= \HF\p{\mathsf{secret}} \\
+\mathsf{id} &∈ \S \\
+\mathsf{nullifier} &= \HF\p{p_{\mathsf{nullifier}}, \mathsf{context}}
+\end{aligned}
+}
+$$
+
+**Note.** This scheme is re-usable in that the verifier can create new sets $\S$ and $\mathsf{context}$s while the users can keep using the same private keys and $\mathsf{id}$s.
+
+The extra $p_{\mathsf{trapdoor}}$ provides some protection against attacks on the snark-friendly hash function $\HF$.
+
+### Semaphore Variants
+
+If we use a 'standard' hash functions for $\H$ like SHA256, then we only need one private key $p$ and we can simplify the proof to
+
+$$
+π = \ZKP\p{
+\begin{array}{c}
+\S,\mathsf{context}, \\
+\mathsf{nullifier}, \mathsf{message} \\
+\hdashline
+p
+\end{array}
+\middle\vert
+\begin{aligned}
+\mathsf{id} &= \H\p{p} \\
+\mathsf{id} &∈ \S \\
+\mathsf{nullifier} &= \H\p{p, \mathsf{context}}
+\end{aligned}
+}
+$$
+
+This has the additional advantage that the protocol becomes proof-system agnostic. If in the future a different proof system is desirable, the users can keep the same private key $p$ and identities $\mathsf{id}$. If the sets $\S$ are public they can be recomputed using a proof system friendly set membership protocol.
+
+Another useful variant is to replace $\mathsf{id} = \H\p{p}$ with $\mathsf{id} = p⋅\g$ for some generator $\g$ of an elliptic curve. This makes the keys and identities to be compatible with existing elliptic curve signature schemes, allowing the creation of anonymity sets $\S$ out of existing sets.
+
+## Gupta Nullifiers
+
+Aayush Gupta ([@yush_g][yush_g]) developed a nullifier scheme that
+
+[yush_g]: <https://twitter.com/yush_g>
+
+1. uses existing public keys as identities and,
+2. does not require the ZK-prover to know the private key.
+
+The advantage is that large anonymity sets can be constructed out of existing sets of public keys and that the protocol can be implemented in resource constrained (hardware) wallets. See the [thesis], the [repo] and the [talk].
+
+[thesis]: <https://aayushg.com/thesis.pdf>
+[repo]: <https://github.com/zk-nullifier-sig/zk-nullifier-sig>
+[talk]: <https://www.youtube.com/watch?v=dZKFG2i1gec>
+
+Take an elliptic curve $\G$ with scalar field $\F$ and a generator $\g$, a hash-to-field $\HF$, a hash-to-curve $\HG$ and a $\ZKP$ with field $\F'$.
+
+**Setup.** Each users wallet creates a private key $p ∈ \F$ and public key $\mathsf{id} = p ⋅ \g$. The verifier constructs a set commitment $\S = \set{\mathsf{id}, …}$ and decides on a $\mathsf{context}$.
+
+**Claim.** Given a $\mathsf{context}$ the user can decide on a $\mathsf{message} ∈ \F'$ and interact with the wallet holding the private key as
+
+$$
+\begin{array}{|c|c|}
+\text{Wallet} & \text{User} \\
+\hline
+& H = \HG\p{\mathsf{id}, \mathsf{context}} \\
+\mathsf{nullifier} = p ⋅ H & & \\
+r ∈ \F & & \\
+r⋅\g & & \\
+r⋅H & & \\
+& c = \HF\p{\begin{array}{c}
+    \g , \mathsf{id}, H, \mathsf{nullifier}, \\
+     r⋅\g , r⋅H 
+    \end{array}
+}\\
+s = r + c ⋅ p & & \\
+&
+π = \ZKP\p{
+\begin{array}{c}
+\S,\mathsf{context}, \\
+\mathsf{nullifier}, \mathsf{message} \\
+\hdashline
+\mathsf{id},c,s
+\end{array}
+}
+\\
+\end{array}
+$$
+
+where the $\ZKP$ proofs the claim
+
+$$
+π = \ZKP\p{
+\begin{array}{c}
+\S,\mathsf{context}, \\
+\mathsf{nullifier}, \mathsf{message} \\
+\hdashline
+\mathsf{id},c,s
+\end{array}
+\middle\vert
+\begin{aligned}
+\mathsf{id} &∈ \S \\
+c &= \HF\p{\begin{array}{c}
+    \g, \mathsf{id}, H, \mathsf{nullifier}, \\
+    s⋅\g - c⋅\mathsf{id},  \\
+    s⋅H - c⋅\mathsf{nullifier}
+\end{array}}  \\
+\end{aligned}
+}
+$$
+
+Completeness follows because the last two arguments to $\HG$ in the $\ZKP$ expand to equal those from the construction of $c$
+
+$$
+\begin{array}{ll}
+s⋅\g - c⋅\mathsf{id} &= \p{r + c⋅p} ⋅ \g - c⋅\p{p⋅\g} = r⋅\g \\
+s⋅H - c⋅\mathsf{nullifier} \mskip{-0.7em} &= \p{r + c⋅p} ⋅H - c ⋅ \p{p ⋅ H} = r⋅H
+\end{array}
+$$
+
+for soundness, anonymity, security of private key and other properties see the [thesis].
