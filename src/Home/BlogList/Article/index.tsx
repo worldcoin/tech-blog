@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { ArrowLink } from "common/ArrowLink";
 import { renderReadTime } from "common/helpers";
 import { PageMeta } from "common/types";
 import dayjs from "dayjs";
