@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { Cta } from "common/Cta";
 import { layout } from "common/styles";
 import { SubscribeForm } from "common/SubscribeForm";
 import { MenuItem } from "common/types";
@@ -42,11 +41,6 @@ export const Layout = memo(function Layout(props: LayoutProps) {
           variant="cta"
         />
       </section>
-
-      {/* FIXME: add link */}
-      <Cta href={"#!"} text={"Faq"} className="bg-010101 text-ffffff">
-        Have questions?
-      </Cta>
 
       <Footer footerBorder={props.footerBorder} />
     </div>
