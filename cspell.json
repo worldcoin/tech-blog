@@ -3,7 +3,14 @@
   "enabled": true,
   "language": "en-US",
   "allowCompoundWords": true,
-  "dictionaries": ["typescript", "node", "npm", "html"],
+  "dictionaries": ["typescript", "node", "npm", "html", "authors"],
+  "dictionaryDefinitions": [
+    {
+      "name": "authors",
+      "path": "./authors.txt",
+      "addWords": true
+    }
+  ],
   "enabledLanguageIds": [
     "typescript",
     "typescriptreact",
@@ -13,17 +20,23 @@
     "json"
   ],
   "words": [
+    "AFAFAF",
     "arbitrum",
     "clsx",
     "fren",
     "JWT",
     "keccak",
+    "mathjax",
     "merkle",
     "nullifer",
-    "ofmt",
-    "olint",
+    "PrismJS",
+    "rehype",
     "secp256k1",
+    "sindresorhus",
+    "testid",
     "toastify",
+    "webm",
+    "webp",
     "Worldcoin"
   ]
 }

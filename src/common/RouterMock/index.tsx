@@ -14,8 +14,8 @@ export const RouterMock = (props: { children: ReactNode }) => {
   // @ts-ignore
   Router.router = mockRouter;
 
-  // @ts-ignore
   return (
+    // @ts-ignore
     <RouterContext.Provider value={mockRouter}>
       {props.children}
     </RouterContext.Provider>

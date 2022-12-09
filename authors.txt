@@ -1,0 +1,9 @@
+# This file is used to recognize author names in spell check.
+dcbuilder
+m1guelpf
+Recmo
+TimBeiko
+Philzip
+paolodamico
+sandroherbig
+chrisbrndl
