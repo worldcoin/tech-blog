@@ -140,7 +140,7 @@ export async function getStaticProps(
   );
   const meta = getMetadata(fileSource, url);
   const relatedPosts = (await getBlogPosts({ limit: 5 })).posts.filter(
-    (post) => post.url !== url
+    (post) => post?.url !== url
   );
   const toc = collectHeadings(pageElement);
 

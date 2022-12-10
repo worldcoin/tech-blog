@@ -47,9 +47,14 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
         return getMetadata(fileString, filePathToUrl(file, { base: "blog" }));
       })
     )
-  ).filter((meta) => typeof meta.title === "string");
+  ).filter((meta) => typeof meta?.title === "string");
 
-  const filterPost = (post: PageMeta) => {
+  const filterPost = (post?: Partial<PageMeta>) => {
+    // NOTE: filter if error in meta
+    if (!post) {
+      return false;
+    }
+
     // NOTE: filter by query
     if (query) {
       const _query = query.toLocaleLowerCase();
@@ -67,9 +72,13 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
     return true;
   };
 
-  const sortPost = (first: PageMeta, second: PageMeta) => {
+  const sortPost = (first?: Partial<PageMeta>, second?: Partial<PageMeta>) => {
     const a = orderDir === "ASC" ? first : second;
     const b = orderDir === "ASC" ? second : first;
+
+    if (!a || !b) {
+      return 0;
+    }
 
     if (isSimpleOrderField(orderBy)) {
       return a[orderBy]?.localeCompare(b[orderBy] || "ZZZ") || 0;
