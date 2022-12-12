@@ -40,11 +40,8 @@ function CookieListModal({ onClose }: { onClose: () => void }): JSX.Element {
           </h3>
           <ul className="list-disc pl-8 [&_code]:font-bold">
             <li>
-              <code>token</code>. Stores authentication credentials.
-            </li>
-            <li>
               <code>cookieBanner</code>. Whether you have accepted or rejected
-              the cookie banner.
+              this cookie banner.
             </li>
             <li>
               <code>ph_phc_id</code>. Used for analytics.
@@ -78,12 +75,8 @@ export function CookieBanner(): JSX.Element | null {
           .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
       });
 
-      // Clear all localStorage data (except for `token`; absolutely necessary for app to work)
-      const token = window.localStorage.getItem("token");
+      // Clear all localStorage data
       window.localStorage.clear();
-      if (token) {
-        window.localStorage.setItem("token", token);
-      }
     }
 
     window.localStorage.setItem(
@@ -114,8 +107,7 @@ export function CookieBanner(): JSX.Element | null {
             </a>
           </h3>
           <span>
-            We use two non-optional cookies, and one optional cookie for
-            product-improvement analytics. Sg?
+            We use an optional cookie for anonymous website analytics. Sg?
             <a
               className="ml-2 text-4940e0 cursor-pointer"
               onClick={() => setCookieListModalVisible(true)}
