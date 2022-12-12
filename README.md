@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/worldcoin/tech-blog/main/worldcoin-logo.svg" alt="Worldcoin logo" width="300" />
+<img src="worldcoin-logo.svg" alt="Worldcoin logo" width="300" />
 
 # Worldcoin Tech Blog
 
