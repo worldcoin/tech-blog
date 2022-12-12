@@ -1,5 +1,6 @@
 import { getMetadata } from "common/helpers";
 import { PageMeta } from "common/types";
+import dayjs from "dayjs";
 import { readFile } from "fs/promises";
 import { filePathToUrl } from "./file-path-to-url";
 import { getMdxFiles } from "./get-mdx-files";
@@ -24,7 +25,7 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
   const category = options?.category;
   const query = options?.query;
   const orderBy = options?.orderBy ?? "date";
-  const orderDir = (options?.orderDir ?? "ASC").toUpperCase();
+  const orderDir = (options?.orderDir ?? "DESC").toUpperCase();
   const start = Number(options?.start ?? 0);
   const limit = Number(options?.limit ?? 3);
 
@@ -89,12 +90,11 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
     }
 
     if (orderBy === "date") {
-      return Number(a[orderBy]) - Number(b[orderBy]);
+      return Number(dayjs(a[orderBy])) - Number(dayjs(b[orderBy]));
     }
 
     return 0;
   };
-
   return {
     posts: allPostsMeta.filter(filterPost).sort(sortPost),
     total: allPostsMeta.length,
