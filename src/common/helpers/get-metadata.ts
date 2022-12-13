@@ -5,6 +5,8 @@ import parse from "node-html-parser";
 import { renderToString } from "react-dom/server";
 import { BlogCategory } from "../../../types";
 
+export class MetaCategoryError extends Error {}
+
 /**
  * Parse metadata from ReactElement or html string
  * @param arg {ReactElement | string} React element or html string
@@ -12,11 +14,8 @@ import { BlogCategory } from "../../../types";
  */
 
 export function getMetadata(arg: string, url: string) {
-  const meta: Partial<PageMeta> = {
-    url,
-  };
-
   try {
+    const meta: Partial<PageMeta> = { url };
     const pageString = typeof arg === "string" ? arg : renderToString(arg);
     const pageHtml = parse(pageString);
     const metaElement = pageHtml.querySelector("meta");
@@ -63,7 +62,18 @@ export function getMetadata(arg: string, url: string) {
     }
 
     if (categoryElement) {
-      meta.category = categoryElement.textContent as BlogCategory;
+      const categories = Object.values(BlogCategory) as Array<string>;
+      const category = categoryElement.textContent;
+
+      if (!categories.includes(category)) {
+        throw new MetaCategoryError(
+          `Blog post category should be in list "${categories.join(
+            '", "'
+          )}", but received "${category}"`
+        );
+      } else {
+        meta.category = category as BlogCategory;
+      }
     }
 
     if (readTimeElement) {
@@ -73,8 +83,11 @@ export function getMetadata(arg: string, url: string) {
       metaElement.remove();
       meta.readTime = calculateReadingTime(pageHtml.textContent);
     }
+
+    return meta;
   } catch (err) {
-  } finally {
-    return meta as PageMeta;
+    if (err instanceof MetaCategoryError) {
+      throw err;
+    }
   }
 }

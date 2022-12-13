@@ -61,6 +61,7 @@ module.exports = {
       colors: {
         ...mirrorHexColors([
           "#000000",
+          "#00c313",
           "#010101",
           "#181b1f",
           "#183c4a",
@@ -112,7 +113,9 @@ module.exports = {
           "#f4f4f4",
           "#f7f7f7",
           "#f9f9f9",
+          "#fafafa",
           "#fb7e67",
+          "#ff5a76",
           "#ff6848",
           "#fff0ed",
           "#ffffff",

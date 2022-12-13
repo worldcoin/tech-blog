@@ -3,7 +3,14 @@ import { Icon } from "common/Icon";
 import { Link } from "common/Link";
 import { layout } from "common/styles";
 import { MenuItem } from "common/types";
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Fragment,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useToggle } from "usehooks-ts";
 import { Nav } from "./Nav";
 const scrollDelta = 68;
@@ -82,10 +89,12 @@ export const Header = memo(function Header(props: {
       )}
     >
       <Link href="/" className={clsx("flex items-center transition-colors")}>
-        <Icon
-          name="logo"
-          className={clsx("w-[142px] lg:w-[154px] h-6 lg:h-6.5")}
-        />
+        <Fragment>
+          <Icon
+            name="logo"
+            className={clsx("w-[142px] lg:w-[154px] h-6 lg:h-6.5")}
+          />
+        </Fragment>
       </Link>
 
       <button
