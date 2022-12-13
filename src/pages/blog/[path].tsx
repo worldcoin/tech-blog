@@ -14,9 +14,9 @@ import {
 } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { basename, extname, resolve } from "path";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import rehypeKatex from "rehype-katex";
-import rehypeDocument from 'rehype-document'
+import rehypeDocument from "rehype-document";
 import remarkMath from "remark-math";
 
 const components: MDXRemoteProps["components"] = {
@@ -81,14 +81,14 @@ const getFileSource = async (path: string) => {
       await readFile(resolve(base, `${path}.md`))
     ).toString();
     result.format = "md";
-  } catch (err) { }
+  } catch (err) {}
 
   try {
     result.fileSource = await (
       await readFile(resolve(base, `${path}.mdx`))
     ).toString();
     result.format = "mdx";
-  } catch (err) { }
+  } catch (err) {}
 
   return result as Required<typeof result>;
 };
@@ -115,12 +115,7 @@ export async function getStaticProps(
   const source = await serialize(fileSource, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex, {
-        output: "html",
-      },
-        rehypeDocument, {
-          css: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
-        }],
+      rehypePlugins: [[rehypeKatex, { output: "html" }, rehypeDocument]],
       format: format ?? "detect",
     },
   });
