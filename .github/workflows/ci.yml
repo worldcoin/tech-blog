@@ -62,9 +62,8 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
-      # FIXME: denis-ottofeller tests are not passing
-      # - name: Run tests
-      #   run: yarn test --all
+      - name: Run tests
+        run: yarn test --all
 
   test-build:
     name: Test production build

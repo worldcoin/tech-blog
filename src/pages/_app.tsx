@@ -9,6 +9,7 @@ import { Fragment, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import posthog from "posthog-js";
+import { CookieBanner } from "common/CookieBanner/CookieBanner";
 
 const SITE_NAME = "Tech blog • Worldcoin";
 const { publicRuntimeConfig } = getConfig();
@@ -127,6 +128,7 @@ export default function App(props: NextAppProps<AppProps>) {
         <props.Component {...props.pageProps} />
       </Layout>
 
+      <CookieBanner />
       <ToastContainer />
     </Fragment>
   );

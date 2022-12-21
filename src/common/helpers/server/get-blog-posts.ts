@@ -1,5 +1,6 @@
 import { getMetadata } from "common/helpers";
 import { PageMeta } from "common/types";
+import dayjs from "dayjs";
 import { readFile } from "fs/promises";
 import { filePathToUrl } from "./file-path-to-url";
 import { getMdxFiles } from "./get-mdx-files";
@@ -24,7 +25,7 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
   const category = options?.category;
   const query = options?.query;
   const orderBy = options?.orderBy ?? "date";
-  const orderDir = (options?.orderDir ?? "ASC").toUpperCase();
+  const orderDir = (options?.orderDir ?? "DESC").toUpperCase();
   const start = Number(options?.start ?? 0);
   const limit = Number(options?.limit ?? 3);
 
@@ -47,9 +48,14 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
         return getMetadata(fileString, filePathToUrl(file, { base: "blog" }));
       })
     )
-  ).filter((meta) => typeof meta.title === "string");
+  ).filter((meta) => typeof meta?.title === "string");
 
-  const filterPost = (post: PageMeta) => {
+  const filterPost = (post?: Partial<PageMeta>) => {
+    // NOTE: filter if error in meta
+    if (!post) {
+      return false;
+    }
+
     // NOTE: filter by query
     if (query) {
       const _query = query.toLocaleLowerCase();
@@ -67,9 +73,13 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
     return true;
   };
 
-  const sortPost = (first: PageMeta, second: PageMeta) => {
+  const sortPost = (first?: Partial<PageMeta>, second?: Partial<PageMeta>) => {
     const a = orderDir === "ASC" ? first : second;
     const b = orderDir === "ASC" ? second : first;
+
+    if (!a || !b) {
+      return 0;
+    }
 
     if (isSimpleOrderField(orderBy)) {
       return a[orderBy]?.localeCompare(b[orderBy] || "ZZZ") || 0;
@@ -80,12 +90,11 @@ export const getBlogPosts = async (options?: getBlogPostsOptions) => {
     }
 
     if (orderBy === "date") {
-      return Number(a[orderBy]) - Number(b[orderBy]);
+      return Number(dayjs(a[orderBy])) - Number(dayjs(b[orderBy]));
     }
 
     return 0;
   };
-
   return {
     posts: allPostsMeta.filter(filterPost).sort(sortPost),
     total: allPostsMeta.length,

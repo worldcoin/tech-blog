@@ -14,22 +14,13 @@ import {
 } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { basename, extname, resolve } from "path";
-import { ReactNode, useEffect, useState } from "react";
-import rehypeMathJaxSvg from "rehype-mathjax";
+import { ReactNode } from "react";
+import rehypeKatex from "rehype-katex";
+import rehypeDocument from "rehype-document";
 import remarkMath from "remark-math";
 
 const components: MDXRemoteProps["components"] = {
   Meta: () => null,
-
-  // NOTE: fix hydration error for mathjax
-  // @ts-ignore -- need for workaround style tag
-  style: (args: [string]) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
-    const [style, setStyle] = useState<string>("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks -- necessary rule for object key
-    useEffect(() => setStyle(args[0]), [args]);
-    return <style>{style}</style>;
-  },
 
   h2: (props: { children?: ReactNode }) => (
     <h2 id={slugify(props.children as string)}>{props.children}</h2>
@@ -124,7 +115,7 @@ export async function getStaticProps(
   const source = await serialize(fileSource, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeMathJaxSvg],
+      rehypePlugins: [[rehypeKatex, { output: "html" }, rehypeDocument]],
       format: format ?? "detect",
     },
   });
@@ -140,7 +131,7 @@ export async function getStaticProps(
   );
   const meta = getMetadata(fileSource, url);
   const relatedPosts = (await getBlogPosts({ limit: 5 })).posts.filter(
-    (post) => post.url !== url
+    (post) => post?.url !== url
   );
   const toc = collectHeadings(pageElement);
 
