@@ -14,7 +14,7 @@ import {
 } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import { basename, extname, resolve } from "path";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import rehypeKatex from "rehype-katex";
 import rehypeDocument from "rehype-document";
 import remarkMath from "remark-math";
@@ -49,14 +49,45 @@ export default function BlogPage(props: {
   toc: TOC;
   relatedPosts: Array<PageMeta>;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // ANCHOR: map all katex elements, if width > container - scale down
+  useEffect(() => {
+    const Root = ref.current;
+
+    if (!Root) {
+      return;
+    }
+
+    const TexElements = Array.from(
+      ref.current.querySelectorAll(
+        ".katex-html"
+      ) as unknown as Array<HTMLDivElement>
+    );
+
+    TexElements.map((Element) => {
+      const baseWidth = Element.getBoundingClientRect().width;
+      const realWidth = Array.from(Element.children).reduce((result, child) => {
+        return result + child.getBoundingClientRect().width;
+      }, 0);
+
+      if (baseWidth < realWidth) {
+        Element.style.transform = `scale(${baseWidth / realWidth})`;
+        Element.style.transformOrigin = "left";
+      }
+    });
+  }, []);
+
   return (
-    <Article
-      meta={props.meta}
-      toc={props.toc}
-      relatedPosts={props.relatedPosts}
-    >
-      <MDXRemote {...props.source} components={components} />
-    </Article>
+    <div className="contents" ref={ref}>
+      <Article
+        meta={props.meta}
+        toc={props.toc}
+        relatedPosts={props.relatedPosts}
+      >
+        <MDXRemote {...props.source} components={components} />
+      </Article>
+    </div>
   );
 }
 
@@ -77,14 +108,14 @@ const getFileSource = async (path: string) => {
   } = { format: undefined, fileSource: undefined };
 
   try {
-    result.fileSource = await (
+    result.fileSource = (
       await readFile(resolve(base, `${path}.md`))
     ).toString();
     result.format = "md";
   } catch (err) {}
 
   try {
-    result.fileSource = await (
+    result.fileSource = (
       await readFile(resolve(base, `${path}.mdx`))
     ).toString();
     result.format = "mdx";
