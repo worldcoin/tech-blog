@@ -6,6 +6,7 @@ export type PageMeta = {
   date?: string;
   description?: string;
   poster?: string;
+  socialImage?: string;
   title: string;
   readTime: number;
   url: string;
