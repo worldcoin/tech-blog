@@ -1,18 +1,19 @@
 <Meta>
   <title>Nullifiers</title>
   <description>
-    Privacy preserving protocols often use a device called a *nullifier* to
-    keep users anonymous.
+    Privacy preserving protocols often use a device called a *nullifier* to keep
+    users anonymous.
   </description>
   <author picture="/images/authors/remco_bloemen.jpg">Remco Bloemen</author>
   <date>2022/12/09</date>
-  <poster src="/images/blog/4844-testimonial/4844-header.png" /> <!-- TODO -->
+  <poster src="/images/blog/4844-testimonial/4844-header.png" />
   <category>Crypto & Blockchain</category>
 </Meta>
 
 # Nullifiers
 
 $$
+\gdef\p#1{\left(#1\right)}
 \gdef\F{\mathbb{F}}
 \gdef\G{\mathbb{G}}
 \gdef\g{\mathrm{G}}
@@ -29,11 +30,11 @@ We also need to specify the set of users in some way, otherwise people can just 
 
 Finally, in some applications we want to attach data to the action. For example in a basic election we want to attach the user's preferred choice to the "vote" action. Together, this means we need a zero-knowledge proof that the user:
 
-* is a member of the set of users (*membership*),
-* has not done this action before (*one-shot*), and
-* wants to attach this data (*message*).
+- is a member of the set of users (_membership_),
+- has not done this action before (_one-shot_), and
+- wants to attach this data (_message_).
 
-The first and last have simple solutions, but the one-shot does not have an obvious solution. A common solution is to use *nullifiers*. The general scheme is as follows:
+The first and last have simple solutions, but the one-shot does not have an obvious solution. A common solution is to use _nullifiers_. The general scheme is as follows:
 
 ## Basic Nullifiers
 
@@ -74,7 +75,7 @@ $$
 
 [MGGR13]
 
-[MGGR13]: http://spar.isi.jhu.edu/%7Emgreen/ZerocoinOakland.pdf
+[mggr13]: http://spar.isi.jhu.edu/%7Emgreen/ZerocoinOakland.pdf
 
 RSA Accumulators working on primes.
 
@@ -179,16 +180,16 @@ Another useful variant is to replace $\mathsf{id} = \H\p{p}$ with $\mathsf{id} =
 
 Aayush Gupta ([@yush_g][yush_g]) developed a nullifier scheme that
 
-[yush_g]: <https://twitter.com/yush_g>
+[yush_g]: https://twitter.com/yush_g
 
 1. uses existing public keys as identities and,
 2. does not require the ZK-prover to know the private key.
 
 The advantage is that large anonymity sets can be constructed out of existing sets of public keys and that the protocol can be implemented in resource constrained (hardware) wallets. See the [thesis], the [repo] and the [talk].
 
-[thesis]: <https://aayushg.com/thesis.pdf>
-[repo]: <https://github.com/zk-nullifier-sig/zk-nullifier-sig>
-[talk]: <https://www.youtube.com/watch?v=dZKFG2i1gec>
+[thesis]: https://aayushg.com/thesis.pdf
+[repo]: https://github.com/zk-nullifier-sig/zk-nullifier-sig
+[talk]: https://www.youtube.com/watch?v=dZKFG2i1gec
 
 Take an elliptic curve $\G$ with scalar field $\F$ and a generator $\g$, a hash-to-field $\HF$, a hash-to-curve $\HG$ and a $\ZKP$ with field $\F'$.
 
@@ -207,7 +208,7 @@ r⋅\g & & \\
 r⋅H & & \\
 & c = \HF\p{\begin{array}{c}
     \g , \mathsf{id}, H, \mathsf{nullifier}, \\
-     r⋅\g , r⋅H 
+     r⋅\g , r⋅H
     \end{array}
 }\\
 s = r + c ⋅ p & & \\

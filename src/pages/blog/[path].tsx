@@ -112,10 +112,26 @@ export async function getStaticProps(
     };
   }
 
+  const macros = {};
+
   const source = await serialize(fileSource, {
     mdxOptions: {
       remarkPlugins: [remarkMath],
-      rehypePlugins: [[rehypeKatex, { output: "html" }, rehypeDocument]],
+      rehypePlugins: [
+        [
+          rehypeKatex,
+          {
+            output: "html",
+            delimiters: [
+              { left: "$$", right: "$$", display: true },
+              { left: "$", right: "$", display: false },
+            ],
+            maxExpand: 50,
+            macros,
+          },
+          rehypeDocument,
+        ],
+      ],
       format: format ?? "detect",
     },
   });
