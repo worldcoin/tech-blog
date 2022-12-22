@@ -50,7 +50,10 @@ export function getMetadata(arg: string, url: string) {
     }
 
     if (descriptionElement) {
-      meta.description = descriptionElement?.textContent;
+      meta.description = descriptionElement?.textContent.replace(
+        /^\s+|\s+$/g,
+        ""
+      );
     }
 
     if (authorElement) {
