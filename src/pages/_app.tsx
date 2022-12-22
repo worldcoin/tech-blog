@@ -5,7 +5,7 @@ import { PageMeta, TOC } from "common/types";
 import { usePostHog } from "hooks/use-posthog";
 import { AppProps as NextAppProps } from "next/app";
 import getConfig from "next/config";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useMemo } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import posthog from "posthog-js";
@@ -48,27 +48,19 @@ export default function App(props: NextAppProps<AppProps>) {
     }
   }, []);
 
+  const metaProps = useMemo(() => {
+    const { title, description, poster: imageUrl } = props.pageProps.meta || {};
+
+    return {
+      title: `${title ? `${title} | ` : ""}${SITE_NAME}`,
+      description,
+      imageUrl,
+    };
+  }, [props.pageProps.meta]);
+
   return (
     <Fragment>
-      <Meta title={SITE_NAME} description={""}>
-        <meta key="og:type" property="og:type" content="website" />
-        <meta key="og:site_name" property="og:site_name" content={SITE_NAME} />
-        <meta
-          key="og:url"
-          property="og:url"
-          content={process.env.NEXT_PUBLIC_APP_URL}
-        />
-        {/* FIXME: add image */}
-        {/* <meta key="og:image" property="og:image" content={metaImageUrl} /> */}
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content={SITE_NAME} />
-        <meta
-          key="twitter:url"
-          property="og:url"
-          content={process.env.NEXT_PUBLIC_APP_URL}
-        />
-        {/* FIXME: add image */}
-        {/* <meta name="twitter:image" property="twitter:image" content={metaImageUrl} /> */}
+      <Meta {...metaProps}>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="apple-touch-icon"
