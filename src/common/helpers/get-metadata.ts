@@ -25,12 +25,19 @@ export function getMetadata(arg: string, url: string) {
     }
 
     const titleElement = metaElement.querySelector(":scope > title");
+
     const authorElement = metaElement.querySelector(":scope > author");
     const descriptionElement = metaElement.querySelector(
       ":scope > description"
     );
+
     const dateElement = metaElement.querySelector(":scope > date");
     const posterElement = metaElement.querySelector(":scope > poster");
+
+    const socialImageElement = metaElement.querySelector(
+      ":scope > social-image"
+    );
+
     const categoryElement = metaElement.querySelector(":scope > category");
     const readTimeElement = metaElement.querySelector(":scope > readtime");
 
@@ -59,6 +66,10 @@ export function getMetadata(arg: string, url: string) {
 
     if (posterElement && posterElement.hasAttribute("src")) {
       meta.poster = posterElement.getAttribute("src");
+    }
+
+    if (socialImageElement && socialImageElement.hasAttribute("src")) {
+      meta.socialImage = socialImageElement.getAttribute("src");
     }
 
     if (categoryElement) {

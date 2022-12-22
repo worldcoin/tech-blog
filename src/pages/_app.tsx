@@ -49,12 +49,13 @@ export default function App(props: NextAppProps<AppProps>) {
   }, []);
 
   const metaProps = useMemo(() => {
-    const { title, description, poster: imageUrl } = props.pageProps.meta || {};
+    const { title, description, poster, socialImage } =
+      props.pageProps.meta || {};
 
     return {
       title: `${title ? `${title} | ` : ""}${SITE_NAME}`,
       description,
-      imageUrl,
+      imageUrl: socialImage ?? poster,
     };
   }, [props.pageProps.meta]);
 
