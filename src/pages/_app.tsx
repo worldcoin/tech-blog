@@ -52,7 +52,7 @@ export default function App(props: NextAppProps<AppProps>) {
     const { title, description, poster: imageUrl } = props.pageProps.meta || {};
 
     return {
-      title: `${title}${title && ` | `}${SITE_NAME}`,
+      title: `${title ? `${title} | ` : ""}${SITE_NAME}`,
       description,
       imageUrl,
     };
