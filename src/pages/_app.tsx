@@ -29,8 +29,6 @@ type AppProps =
     };
 
 export default function App(props: NextAppProps<AppProps>) {
-  console.log(props);
-
   usePostHog();
 
   useEffect(() => {
@@ -51,7 +49,7 @@ export default function App(props: NextAppProps<AppProps>) {
   }, []);
 
   const metaProps = useMemo(() => {
-    const { title, description, poster: imageUrl } = props.pageProps.meta;
+    const { title, description, poster: imageUrl } = props.pageProps.meta || {};
 
     return {
       title: `${title}${title && ` | `}${SITE_NAME}`,
