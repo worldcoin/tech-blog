@@ -81,6 +81,8 @@ export const Meta = memo(function Meta(props: {
         </Fragment>
       )}
 
+      <meta name="twitter:card" content="summary" />
+
       {props.children}
     </Head>
   );
