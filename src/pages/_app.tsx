@@ -55,7 +55,7 @@ export default function App(props: NextAppProps<AppProps>) {
     return {
       title: `${title ? `${title} | ` : ""}${SITE_NAME}`,
       description,
-      imageUrl: socialImage ?? poster,
+      imageUrl: socialImage ?? poster ?? "/images/default-preview.png",
     };
   }, [props.pageProps.meta]);
 
