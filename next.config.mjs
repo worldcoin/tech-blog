@@ -33,7 +33,7 @@ const config = {
       // REVIEW: Should we have this one?
       {
         source: "/blog/eip-4844",
-        destination: "https://worldcoin.org/blog/developers/blog/eip-4844",
+        destination: "https://worldcoin.org/blog/developers/eip-4844",
         permanent: true,
       },
     ];
