@@ -26,7 +26,7 @@ const config = {
       },
       {
         source: "/blog/4844-testimonial",
-        destination: "/blog/eip-4844",
+        destination: "https://worldcoin.org/blog/developers/eip-4844",
         permanent: true,
       },
 
