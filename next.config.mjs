@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-export default {
+const config = {
   reactStrictMode: true,
   swcMinify: true,
   pageExtensions: ["ts", "tsx"],
@@ -16,4 +16,27 @@ export default {
       )
     ),
   },
+
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "https://worldcoin.org/blog/developers",
+        permanent: true,
+      },
+      {
+        source: "/blog/4844-testimonial",
+        destination: "https://worldcoin.org/blog/developers/eip-4844",
+        permanent: true,
+      },
+
+      {
+        source: "/blog/eip-4844",
+        destination: "https://worldcoin.org/blog/developers/eip-4844",
+        permanent: true,
+      },
+    ];
+  },
 };
+
+export default config;
