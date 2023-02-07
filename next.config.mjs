@@ -30,7 +30,6 @@ const config = {
         permanent: true,
       },
 
-      // REVIEW: Should we have this one?
       {
         source: "/blog/eip-4844",
         destination: "https://worldcoin.org/blog/developers/eip-4844",
