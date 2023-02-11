@@ -20,13 +20,7 @@ Most of the Worldcoin protocol's critical systems are designed in such a way tha
 
 Additionally, privacy and data ownership go hand in hand. Within the Worldcoin ecosystem, the user is always in control of any personal data that is actually captured. For instance, as shown in the screenshots below, a user can very easily request deletion of all their personal data with just a few taps in the World App.
 
-<img
-  src="/images/blog/privacy-deep-dive/b-privacy-1.jpg"
-  alt="Screenshots of privacy and personal data deletion request in the World App."
-  width="400px"
-/>
-
-_Screenshots of privacy and personal data deletion request in the World App._
+![Screenshots of privacy and personal data deletion request in the World App.](/images/blog/privacy-deep-dive/b-privacy-1.jpg 'Screenshots of privacy and personal data deletion request in the World App.')
 
 **Anyone can use the World App and their World ID fully pseudonymously**. Users don't have to provide personal information to register. No emails, no phone numbers, no social profiles, no names, everything is optional.
 
@@ -119,9 +113,7 @@ The iris code cannot be a simple hash of the texture of the iris. This is becaus
 
 The iris code is computed by applying a set of 2D Gabor filters at various points of the iris texture, which leads to complex-valued filter responses. Only the phase information of the filter responses is taken into account (which means there is permanent information loss) and subsequently quantized in two bits. In other words: For each Gabor wavelet and each point of interest in the iris texture two bits are computed. Concatenating all these bits makes up the iris code.
 
-![Diagram of an iris image transformed into an iris code.](/images/blog/privacy-deep-dive/b-privacy-3.jpg)
-
-_An iris image transformed into an iris code._
+![Diagram of an iris image transformed into an iris code.](/images/blog/privacy-deep-dive/b-privacy-3.jpg 'An iris image transformed into an iris code.')
 
 An example iris code is shown above. In red, a second array can be seen that represents the mask applied to the image, these are pixels of the image that don't represent part of the iris texture, like eyelids, which are of course ignored when computing the Hamming distance between irises.
 
