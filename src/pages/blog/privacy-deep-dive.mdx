@@ -87,11 +87,11 @@ A user's journey of enrolling for a verified World ID is as follows:
 1. With the sensors' inputs, the Orb locally runs a set of Machine Learning models that detect fraud, identify the eyes and control the image capture. This ends with the capturing of two in-focus iris images.
 1. With the user's iris images, an algorithm that computes the iris code (more details on the iris code below) is run, fully on-device.
 1. All images are destroyed unless a person explicitly requests to back up their data for future upgrades and improvements of the system's security and inclusivity. More details on this in the following section.
-1. The Orb submits to the signup service a message with the iris code. The message is signed by the Orb's private key which lives in the Trusted Platform Module (TPM), to authenticate the message came from a legitimate Orb.
-1. The signup service together with the uniqueness service compares the proposed iris code to all the iris codes previously seen by comparing their Hamming distance. If the distance is below a certain threshold, then the backend considers this signup a duplicate and rejects the enrollment.
+1. The Orb submits to the sign up service a message with the iris code. The message is signed by the Orb's private key which lives in the Trusted Platform Module (TPM), to authenticate the message came from a legitimate Orb.
+1. The sign up service together with the uniqueness service compares the proposed iris code to all the iris codes previously seen by comparing their Hamming distance. If the distance is below a certain threshold, then the backend considers this sign up a duplicate and rejects the enrollment.
    - Beyond running the deduplication on the iris code, the process also includes the verification of the signature and that it comes from a valid Orb.
    - If all conditions are met, the uniqueness service[^2] submits a request to include the user's identity commitment in the list of verified commitments. The list lives in a smart contract on-chain.
-   - To prevent duplicate signups, the iris code is stored in a database containing iris codes previously seen and identity commitments. A user never shares their identity commitment when using World ID, ZKPs make sure it's impossible to know the identity commitment or iris code of a specific person, even if this database were public.
+   - To prevent duplicate sign ups, the iris code is stored in a database containing iris codes previously seen and identity commitments. A user never shares their identity commitment when using World ID, ZKPs make sure it's impossible to know the identity commitment or iris code of a specific person, even if this database were public.
 
 #### Image Custody Opt-In
 
