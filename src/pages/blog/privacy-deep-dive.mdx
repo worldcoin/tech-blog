@@ -73,7 +73,7 @@ Given biometrics are involved, privacy must be held to the highest standard. In 
 
 A user's journey of enrolling for a verified World ID is as follows:
 
-![Diagram showing the enrollment process for a verified World ID.](/images/blog/privacy-deep-dive/b-privacy-2.svg)
+![Diagram outlining the enrollment process to obtain a verified World ID at an Orb.](/images/blog/privacy-deep-dive/b-privacy-2.svg "Diagram outlining the enrollment process to obtain a verified World ID at an Orb.")
 
 1. User downloads the World App. The app generates two cryptographically-secure random private keys, one is for the user's World ID, one for the user's crypto wallet. Keys are generated in the user's device using randomness from the device. To make it very clear, both **private keys are randomly generated, completely independent of any biometric information, and each other**. In fact, keys are generated before the Orb is involved.
 1. From the user's World ID private key, an identity commitment is created, which is analogous to a public key in a traditional elliptic curve mechanism. The identity commitment is generated using [Semaphore](https://semaphore.appliedzkp.org/docs/guides/identities#:~:text=An%20identity%20commitment%2C%20similarly%20to%20Ethereum%20addresses%2C%20is%20a%20public%20value%20used%20in%20Semaphore%20groups%20to%20represent%20the%20identity%20of%20a%20group%20member.%20The%20secret%20values%20are%20similar%20to%20Ethereum%20private%20keys%20and%20are%20used%20to%20generate%20Semaphore%20zero%2Dknowledge%20proofs%20and%20authenticate%20signals). Note that this identity commitment comes from a completely independent private key from the wallet's private key, wallet address or any biometric data.
@@ -138,7 +138,7 @@ In a nutshell: A person's biometrics are not linked in any way when World ID is 
 
 This is the process an application follows so that a user can prove they are a unique human without revealing personal information.
 
-![Diagram showing how an application can verify someone is a unique human with World ID.](/images/blog/privacy-deep-dive/b-privacy-4.svg)
+![Diagram outlining how an application verifies someone is a unique human with World ID.](/images/blog/privacy-deep-dive/b-privacy-4.svg "Diagram outlining how an application verifies someone is a unique human with World ID.")
 
 1. A verification process is triggered by an app (usually with a QR code or deeplink). Scanning the QR code opens the World App. A verification request is sent through [WalletConnect](https://github.com/WalletConnect) with the context for the verification, which scopes the uniqueness set and an optional message, called a _signal_ (more details below).
    - The context is a combination of an app ID (unique to each app) and optionally additional data from the app, in case the app has multiple actions requiring sybil resistance.
