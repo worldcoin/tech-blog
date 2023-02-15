@@ -34,5 +34,5 @@ jobs:
           done
           file_names="[${file_names%,}]"
           FILE_NAMES_JSON=$(echo "$file_names" | jq -c '.')
-          API_BODY="{\"documents\":$FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": $GITHUB_REVALIDATION_SECRET}"
-          curl -X POST -d "$API_BODY" $GITHUB_REVALIDATION_URL -H "Content-Type: application/json"
+          API_BODY="{\"documents\":$FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": $GH_REVALIDATION_SECRET}"
+          curl -X POST -d "$API_BODY" $GH_REVALIDATION_URL -H "Content-Type: application/json"
