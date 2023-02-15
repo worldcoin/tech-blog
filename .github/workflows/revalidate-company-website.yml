@@ -22,24 +22,21 @@ jobs:
         with:
           files: src/pages/blog/*.{md,mdx}
 
-      - name: Test secret
+      - name: Get file names (slugs) and send it to revalidate API
         env:
           revalidationUrl: ${{ secrets.GH_REVALIDATION_URL }}
+          revalidationSecret: ${{ secrets.GH_REVALIDATION_SECRET }}
         run: |
-          echo "GH_REVALIDATION_URL is: $revalidationUrl"
+          ALL_CHANGED_FILES="${{steps.changed-files.outputs.all_changed_files}}"
+          IFS=' ' read -r -a file_array <<< "$ALL_CHANGED_FILES"
 
-      # - name: Get file names (slugs) and send it to revalidate API
-      #   run: |
-      #     ALL_CHANGED_FILES="${{steps.changed-files.outputs.all_changed_files}}"
-      #     IFS=' ' read -r -a file_array <<< "$ALL_CHANGED_FILES"
-
-      #     file_names=""
-      #     for file in "${file_array[@]}"; do
-      #       file_name="$(echo "$file" | awk -F/ '{print $NF}' | awk -F. '{print $1}')"
-      #       file_names="$file_names\"$file_name\","
-      #     done
-      #     file_names="[${file_names%,}]"
-      #     FILE_NAMES_JSON=$(echo "$file_names" | jq -c '.')
-      #     API_BODY="{\"documents\":$FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": $GH_REVALIDATION_SECRET}"
-      #     echo "GH_REVALIDATION_URL is: $GH_REVALIDATION_URL"
-      #     curl -X POST -d "$API_BODY" $GH_REVALIDATION_URL -H "Content-Type: application/json"
+          file_names=""
+          for file in "${file_array[@]}"; do
+            file_name="$(echo "$file" | awk -F/ '{print $NF}' | awk -F. '{print $1}')"
+            file_names="$file_names\"$file_name\","
+          done
+          file_names="[${file_names%,}]"
+          FILE_NAMES_JSON=$(echo "$file_names" | jq -c '.')
+          API_BODY="{\"documents\":$FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": $revalidationSecret}"
+          echo "revalidationUrl is: $revalidationUrl"
+          curl -X POST -d "$API_BODY" $revalidationUrl -H "Content-Type: application/json"
