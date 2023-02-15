@@ -21,7 +21,7 @@ jobs:
         uses: tj-actions/changed-files@v35
         with:
           files: src/pages/blog/*.{md,mdx}
-          
+
       - name: Get file names (slugs) and send it to revalidate API
         run: |
           ALL_CHANGED_FILES="${{steps.changed-files.outputs.all_changed_files}}"
@@ -34,6 +34,6 @@ jobs:
           done
           file_names="[${file_names%,}]"
           FILE_NAMES_JSON=$(echo "$file_names" | jq -c '.')
-          API_BODY="{\"documents\":$FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": $GH_REVALIDATION_SECRET}"
-          echo "GH_REVALIDATION_URL is: $GH_REVALIDATION_URL"
-          curl -X POST -d "$API_BODY" $GH_REVALIDATION_URL -H "Content-Type: application/json"
+          API_BODY="{\"documents\":$FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": ${{ secrets.GH_REVALIDATION_SECRET}"
+          echo "GH_REVALIDATION_URL is: ${{ secrets.GH_REVALIDATION_URL }}"
+          curl -X POST -d "$API_BODY" ${{ secrets.GH_REVALIDATION_URL }} -H "Content-Type: application/json"
