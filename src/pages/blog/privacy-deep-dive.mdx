@@ -87,7 +87,7 @@ A user's journey of enrolling for a verified World ID is as follows:
    - If all conditions are met, the uniqueness service[^2] submits a request to include the user's identity commitment in the list of verified commitments. The list lives in a smart contract on-chain.
    - To prevent duplicate sign ups, the iris code is stored in a database containing iris codes previously seen and identity commitments. A user never shares their identity commitment when using World ID, ZKPs make sure it's impossible to know the identity commitment or iris code of a specific person, even if this database were public.
 
-#### Image Custody Opt-In
+#### Image Custody Opt-In.
 
 Users have the option to opt-in to back up their images. This option exists because the algorithm that computes the iris code is still evolving to make sure it can support signing up everyone. This means using the images for training to improve the security and inclusivity of the network and to automatically update the user's iris code. Users who do not opt-in, can simply go back to an Orb to maintain their World ID verified. Updates are expected to be infrequent. In the near future, people will be able to backup this data self-custodially, and possibly, upgrade their iris code locally. More details below.
 
@@ -170,7 +170,7 @@ _The World ID Protocol is open source and the different components of the Worldc
 
 {/* REFERENCES:START */}
 [^1]: Further details on the Orb's sensors can be found in the [Opening the Orb](https://worldcoin.org/blog/engineering/opening-orb-look-inside-worldcoin-biometric-imaging-device) blog post. Not all sensors physically on the device are in use today.
-[^2]: A research project currently on the way will introduce decentralization to this service. The correct enrollment of an identity commitment is publicly verifiable. In the meantime it is fully [open source](https://github.com/worldcoin/signup-sequencer).
+[^2]: A research project currently on the way will introduce decentralization to this service. The correct enrollment of an identity commitment is publicly verifiable. In the meantime it is fully [open source](https://github.com/worldcoin/signup-sequencer)
 {/* REFERENCES:END */}
 
 {/* AUTHORS:START */}
