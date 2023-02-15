@@ -2,9 +2,9 @@ name: Revalidate Company Website
 
 on:
   push:
-    paths:
-      - src/pages/blog/*.md
-      - src/pages/blog/*.mdx
+    # paths:
+    #   - src/pages/blog/*.md
+    #   - src/pages/blog/*.mdx
     branches:
       - main
       - michaelkhakhel-web-144-rebuild-the-app-after-files-changed-in
