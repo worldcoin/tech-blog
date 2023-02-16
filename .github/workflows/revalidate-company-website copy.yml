@@ -1,0 +1,57 @@
+  name: Revalidate Company Website
+
+  on:
+    push:
+      paths:
+        - src/pages/blog/*.md
+        - src/pages/blog/*.mdx
+      branches:
+        - main
+
+  jobs:
+    revalidate:
+      name: Revalidate Company Website blogs
+      runs-on: ubuntu-20.04
+      steps:
+        - uses: actions/checkout@v3
+
+        - name: Get modified files
+          id: changed-files
+          uses: tj-actions/changed-files@v35
+          with:
+            files: src/pages/blog/*.{md,mdx}
+
+        - name: Get file names (slugs) and send it to revalidate API
+          env:
+            revalidationUrl: ${{ secrets.GH_REVALIDATION_URL }}
+            revalidationSecret: ${{ secrets.GH_REVALIDATION_SECRET }}
+            vercelProtectionBypass: ${{ secrets.VERCEL_PROTECTION_BYPASS }}
+          run: |
+            ALL_CHANGED_FILES="${{steps.changed-files.outputs.all_changed_files}}"
+            IFS=' ' read -r -a file_array <<< "$ALL_CHANGED_FILES"
+
+            file_names=""
+            for file in "${file_array[@]}"; do
+              file_name="$(echo "$file" | awk -F/ '{print $NF}' | awk -F. '{print $1}')"
+              file_names="$file_names\"$file_name\","
+            done
+            file_names="[${file_names%,}]"
+            FILE_NAMES_JSON=$(echo "$file_names" | jq -c '.')
+            API_BODY="{\"documents\": $FILE_NAMES_JSON, \"type\":\"api-update\", \"secret\": \"$revalidationSecret\"}"
+            echo "file_names is: $file_names"
+            response=$(
+              curl --request POST \
+                --url $revalidationUrl \
+                --header 'Content-Type: application/json' \
+                --header "x-vercel-protection-bypass: $vercelProtectionBypass" \
+                --write-out "HTTP_STATUS=%{http_code}\n" \
+                --data "$API_BODY"
+            )
+            
+            status=$(echo "$response" | grep HTTP_STATUS | awk -F= '{print $2}')
+            if [ "$status" -eq 200 ]; then
+              echo "Request succeeded"
+            else
+              echo "Request failed with status code $status"
+              exit 1
+            fi
