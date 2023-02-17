@@ -20,7 +20,7 @@ Most of the Worldcoin protocol's critical systems are designed in such a way tha
 
 Additionally, privacy and data ownership go hand in hand. Within the Worldcoin ecosystem, the user is always in control of any personal data that is actually captured. For instance, as shown in the screenshots below, a user can very easily request deletion of all their personal data with just a few taps in the World App.
 
-![Screenshots of privacy and personal data deletion request in the World App.](/images/blog/privacy-deep-dive/b-privacy-1.jpg 'Screenshots of privacy and personal data deletion request in the World App.')
+![Screenshots of privacy and personal data deletion request in the World App.](/images/blog/privacy-deep-dive/b-privacy-1.jpg "Screenshots of privacy and personal data deletion request in the World App.")
 
 **Anyone can use the World App and their World ID fully pseudonymously**. Users don't have to provide personal information to register. No emails, no phone numbers, no social profiles, no names, everything is optional.
 
@@ -73,7 +73,7 @@ Given biometrics are involved, privacy must be held to the highest standard. In 
 
 A user's journey of enrolling for a verified World ID is as follows:
 
-![Diagram showing the enrollment process for a verified World ID.](/images/blog/privacy-deep-dive/b-privacy-2.svg)
+![Diagram outlining the enrollment process to obtain a verified World ID at an Orb.](/images/blog/privacy-deep-dive/b-privacy-2.svg "Diagram outlining the enrollment process to obtain a verified World ID at an Orb.")
 
 1. User downloads the World App. The app generates two cryptographically-secure random private keys, one is for the user's World ID, one for the user's crypto wallet. Keys are generated in the user's device using randomness from the device. To make it very clear, both **private keys are randomly generated, completely independent of any biometric information, and each other**. In fact, keys are generated before the Orb is involved.
 1. From the user's World ID private key, an identity commitment is created, which is analogous to a public key in a traditional elliptic curve mechanism. The identity commitment is generated using [Semaphore](https://semaphore.appliedzkp.org/docs/guides/identities#:~:text=An%20identity%20commitment%2C%20similarly%20to%20Ethereum%20addresses%2C%20is%20a%20public%20value%20used%20in%20Semaphore%20groups%20to%20represent%20the%20identity%20of%20a%20group%20member.%20The%20secret%20values%20are%20similar%20to%20Ethereum%20private%20keys%20and%20are%20used%20to%20generate%20Semaphore%20zero%2Dknowledge%20proofs%20and%20authenticate%20signals). Note that this identity commitment comes from a completely independent private key from the wallet's private key, wallet address or any biometric data.
@@ -93,7 +93,7 @@ Users have the option to opt-in to back up their images. This option exists beca
 
 If a user opts-in to image custody, images are stored on an encrypted hard drive in the Orb before being uploaded. When a user does not opt-in, images are only processed in memory, and they never go through the hard drive. Furthermore, images for users who opted-in have a second layer of encryption via a public key of the server to make them irretrievable in the unlikely event of a compromised Orb. Uploads also happen over TLS. Once images are safely transmitted, they are encrypted at rest with AES-256.
 
-Users can always change their mind and delete their stored images. The process is simple and processed quickly (see above for app screenshots). Further, the team is working on leveraging synthetic data to minimize the need for real images, which means only a small percentage of users would need to opt in for training purposes and only for a limited period of time to make sure the system is adapted to everyone, including people with eye diseases.
+Users can always change their mind and delete their stored images. The process is simple and processed quickly (see above for app screenshots). Further, the team is working on leveraging synthetic data to minimize the need for real images. This would further reduce the number of users that would even be needed to opt-in for training purposes.
 
 While opt-in exists, different avenues to increase privacy are being researched. One such project entails giving users their signed images, transmitted end-to-end encrypted to their phone for self-custody. Images would be kept safely by the user in his or her device. Under this system, when a new algorithm is released, the user could transmit the images themselves for temporary processing in a secure server and update their iris code and World ID.
 
@@ -113,7 +113,7 @@ The iris code cannot be a simple hash of the texture of the iris. This is becaus
 
 The iris code is computed by applying a set of 2D Gabor filters at various points of the iris texture, which leads to complex-valued filter responses. Only the phase information of the filter responses is taken into account (which means there is permanent information loss) and subsequently quantized in two bits. In other words: For each Gabor wavelet and each point of interest in the iris texture two bits are computed. Concatenating all these bits makes up the iris code.
 
-![Diagram of an iris image transformed into an iris code.](/images/blog/privacy-deep-dive/b-privacy-3.jpg 'An iris image transformed into an iris code.')
+![Diagram of an iris image transformed into an iris code.](/images/blog/privacy-deep-dive/b-privacy-3.jpg "An iris image transformed into an iris code.")
 
 An example iris code is shown above. In red, a second array can be seen that represents the mask applied to the image, these are pixels of the image that don't represent part of the iris texture, like eyelids, which are of course ignored when computing the Hamming distance between irises.
 
@@ -138,7 +138,7 @@ In a nutshell: A person's biometrics are not linked in any way when World ID is 
 
 This is the process an application follows so that a user can prove they are a unique human without revealing personal information.
 
-![Diagram showing how an application can verify someone is a unique human with World ID.](/images/blog/privacy-deep-dive/b-privacy-4.svg)
+![Diagram outlining how an application verifies someone is a unique human with World ID.](/images/blog/privacy-deep-dive/b-privacy-4.svg "Diagram outlining how an application verifies someone is a unique human with World ID.")
 
 1. A verification process is triggered by an app (usually with a QR code or deeplink). Scanning the QR code opens the World App. A verification request is sent through [WalletConnect](https://github.com/WalletConnect) with the context for the verification, which scopes the uniqueness set and an optional message, called a _signal_ (more details below).
    - The context is a combination of an app ID (unique to each app) and optionally additional data from the app, in case the app has multiple actions requiring sybil resistance.
@@ -163,7 +163,6 @@ To integrate World ID, an application simply needs to add the JS SDK to their fr
 - The [SDK](https://github.com/worldcoin/idkit-js), [docs](https://github.com/worldcoin/world-id-docs) & [Developer Portal](https://github.com/worldcoin/developer-portal) are all open source. For instance, even for the cloud version running on the Developer Portal you can see [here](https://github.com/worldcoin/developer-portal/blob/ae9c9a483c9f965eecb97db3386e8d1abb68fac1/web/pages/api/v1/verify.ts#L181) how it's actually only calling the verification on-chain, and not storing any additional user data.
 - You can try out World ID's proofs for yourself by using our [Simulator](https://simulator.worldcoin.org/) & [example SDK](https://id.worldcoin.org/use?action_id=test_action_id&signal=test_signal&return_to=https://localhost:3000). You can get the output from the World App and verify it's a valid ZKP in the Debugger found in the Developer Portal.
   - You can even go deep into the cryptography behind World ID by taking a look at the [Semaphore library](https://github.com/semaphore-protocol) and how it generates and handles the ZK circuits.
-- Worldcoin is committed to process data in accordance with all applicable laws as stated in our privacy policy. Additionally, we are in dialogue with data protection authorities that are regulating us in the countries where Worldcoin operates in.
 - Security and privacy reviews are being planned with reputable and independent audit firms that can objectively attest to the privacy of the system.
 
 _The World ID Protocol is open source and the different components of the Worldcoin system are also being progressively open sourced. If you find a security issue or vulnerability you can help by reporting it at [security@worldcoin.org](mailto:security@worldcoin.org), and a bug bounty program is launching soon._
