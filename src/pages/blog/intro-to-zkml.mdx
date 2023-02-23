@@ -1,0 +1,114 @@
+<Meta>
+  <title>An introduction to zero-knowledge machine learning (ZKML)</title>
+  <description>
+    Zero-Knowledge machine learning (ZKML) is a field of research and
+    development that has been making waves in cryptography circles recently. But
+    what is it and why is it useful? First, let's break down the term into its
+    two constituents and explain what they are.
+  </description>
+  <author picture="/images/authors/dcbuilder.webp">dcbuilder.eth</author>
+  <date>2023/02/23</date>
+  <category>Research and Engineering</category>
+</Meta>
+
+Zero-Knowledge machine learning (ZKML) is a field of research and development that has been making waves in cryptography circles recently. But what is it and why is it useful? First, let's break down the term into its two constituents and explain what they are.
+
+## What is ZK?
+
+A zero-knowledge proof is a cryptographic protocol in which one party, the prover, can prove to another party, the verifier, that a given statement is true, without revealing any additional information beyond the fact that the statement is true. It is an area of study that has been making great progress on all fronts, from research to protocol implementations and applications.
+
+The two main “primitives” (or, building blocks) that ZK brings to the table are the ability to create proofs of computational integrity for a set of given computations, where the proof is significantly easier to verify than it is to perform the computation itself. (We call this property “succinctness.”) ZK proofs also provide the option to hide parts of said computation whilst preserving computational correctness. (We call this property “zero-knowledge.”)
+
+Generating zero-knowledge proofs is very computationally intensive, about 100 times as expensive as the original computation. This means that there are some computations for which it is infeasible to compute zero-knowledge proofs because the time it'd take to create them on the best hardware available makes them impractical. However, advancements in the field of cryptography, hardware, and distributed systems in recent years have allowed zero-knowledge proofs to become feasible for ever more intensive computations. These advancements have allowed for the creation of protocols that can use proofs of intensive computations, thus expanding the design space for new applications.
+
+## ZK Use Cases
+
+Zero-knowledge cryptography is one of the most popular technologies in the Web3 space since it allows developers to build scalable and/or private applications. Here are a few examples of how it is being used in practice (though note that many of these projects are works-in-progress):
+
+- Scaling ethereum with ZK rollups
+  - [Starknet](https://starkware.co/starknet/)
+  - [Scroll](https://scroll.io/)
+  - [Polygon Zero](https://polygon.technology/solutions/polygon-zero), [Polygon Miden](https://polygon.technology/solutions/polygon-miden), [Polygon zkEVM](https://polygon.technology/solutions/polygon-zkevm)
+  - [zkSync](https://zksync.io/)
+- Building privacy-preserving applications
+  - [Semaphore](https://semaphore.appliedzkp.org/)
+  - [MACI](https://privacy-scaling-explorations.github.io/maci/)
+  - [Penumbra](https://penumbra.zone/)
+  - [Aztec Network](https://aztec.network/)
+- Identity primitives and data provenance
+  - [WorldID](https://id.worldcoin.org/)
+  - [Sismo](https://sismo.io/)
+  - [Clique](https://www.clique.social/)
+  - [Axiom](https://www.axiom.xyz/)
+- Layer 1 protocols
+  - [Zcash](https://z.cash/)
+  - [Mina](https://minaprotocol.com/)
+
+As ZK tech matures we believe that there will be a Cambrian explosion of new applications since the tooling used to build them will require less domain expertise and will be a lot easier to use for developers.
+
+## Machine learning
+
+Machine learning is a field of artificial intelligence (“AI”) that enables computers to automatically learn and improve from experience without being explicitly programmed. It involves the use of algorithms and statistical models to analyze and identify patterns in data, and then make predictions or decisions based on those patterns. The ultimate goal of machine learning is to develop intelligent systems that can adapt and learn on their own, without human intervention, and solve complex problems in various domains such as healthcare, finance, and transportation. Recently you may have seen advances in large language models like chatGPT and Bard or text-to-image models like DALL-E 2, Midjourney, or Stable Diffusion. As these models get better and better and are able to perform a wider variety of tasks, it will be important to know who performed these actions. Whether the action was performed by a specific model versus another, or whether it was performed by a human instead. We will explore this trail of thoughts in the upcoming sections.
+
+## Motivation and Current efforts in ZKML
+
+We live in a world where AI/ML-generated content is becoming indistinguishable from content generated by humans. Zero-knowledge cryptography will allow us to make statements like: “a given piece of content C came out of model M applied to some input X.” We'd be able to verify that a given output was created by a large language model like chatGPT, a text-to-image model like DALL-E 2 or any other model that we create a [zero-knowledge circuit representation](https://medium.com/web3studio/simple-explanations-of-arithmetic-circuits-and-zero-knowledge-proofs-806e59a79785) for. The zero-knowledge property of these proofs would allow us to also hide parts of the input or the model as well if need be. A good example of this would be applying a machine learning model on some sensitive data where a user would be able to know the result of model inference on their data without revealing their input to any third party (e.g., in the medical industry).
+
+Note: When we talk about ZKML, we are talking about creating zero-knowledge proofs of the inference step of the ML model, not about the ML model training (which, in and of itself, is already very computationally intensive).
+The current state of the art of zero-knowledge systems coupled with performant hardware still falls a few orders of magnitude short of being able to prove something as big as currently available large language models (“LLMs”), but there has been some progress in creating proofs of smaller models.
+
+We did some research on the state of the art of zero-knowledge cryptography in the context of creating proofs for ML models and created an aggregation of the relevant research, articles, applications, and codebases that belong to this domain. Resources on ZKML can be found on the ZKML community's [awesome-zkml](https://github.com/zkml-community/awesome-zkml) repository on GitHub.
+
+The [Modulus Labs](https://www.moduluslabs.xyz/) team recently released a paper titled [“The cost of intelligence”](https://medium.com/@ModulusLabs/chapter-5-the-cost-of-intelligence-da26dbf93307), where they benchmark existing ZK proof systems against a wide range of models of different sizes. It is currently possible to create proofs for models of around 18M parameters in about 50 seconds running on a powerful AWS machine using a proving system like [plonky2](https://polygon.technology/blog/plonky2-a-deep-dive). A graph from this paper can be found below:
+
+![ZKML benchmark Modulus](../../../public/images/blog/intro-to-zkml/zkml-benchmark-modulus.png)
+
+Another initiative that is working on improving the state of the art of ZKML systems is Zkonduit's [ezkl](https://github.com/zkonduit/ezkl) library which allows you to create ZK proofs of ML models exported using ONNX. This enables any ML engineer to create ZK proofs of the inference step of their models and to prove the output to any correctly implemented verifier.
+
+There are several teams working on improving ZK technology, creating optimized hardware for the operations that occur inside ZK proofs, and building optimized implementations of these protocols for specific use cases. As the technology matures, bigger models will be ZK-provable on less powerful machines and in a shorter period of time. We hope these advancements will allow new ZKML applications and use cases to emerge.
+
+## Potential use cases
+
+In order to decide whether ZKML could be used for a given application, we can examine how the properties of ZK cryptography would address an issue with machine learning. This can be illustrated as a Venn Diagram:
+
+![ZKML use case Venn diagram](../../../public/images/blog/intro-to-zkml/zkml-venn.png)
+
+Definitions:
+
+- [**Heuristic optimization**](<https://en.wikipedia.org/wiki/Heuristic_(computer_science)>) - A problem-solving approach that uses rules of thumb or "heuristics" to find good solutions to problems that are difficult to solve using traditional optimization methods. Rather than trying to find the optimal solution to a problem, heuristic optimization methods aim to find a good or "good enough" solution in a reasonable amount of time given the relative importance of the problem to the overall system and the difficulty in optimizing it.
+- **FHE ML** - [Fully Homomorphic Encryption](https://en.wikipedia.org/wiki/Homomorphic_encryption) ML allows developers to train and evaluate models in a privacy-preserving fashion; however, there’s no way to cryptographically prove the correctness of the computations being performed like with ZK proofs.
+  - Teams like [Zama.ai](https://www.zama.ai/) are working on this domain
+- **ZK vs. Validity** - These terms are oftentimes used interchangeably in the industry since validity proofs are ZK proofs that don't hide parts of the computation or its results. In the context of ZKML, most current applications are leveraging the validity proof aspect of ZK proofs.
+- **Validity ML** - ZK proofs of ML models where no computations or results are being made private. They prove computational correctness.
+
+Here are a few examples of potential ZKML use cases:
+
+- Computational integrity (validity ML)
+  - [Modulus Labs](https://www.moduluslabs.xyz/)
+    - On-chain verifiable ML trading bot - [RockyBot](https://github.com/Modulus-Labs/RockyBot)
+    - Blockchains that self-improve vision (examples):
+    - Enhancing the [Lyra finance](https://www.lyra.finance/) options protocol AMM with intelligent features
+    - Creating a transparent AI-based reputation system for [Astraly](https://www.astraly.xyz/) (ZK oracle)
+    - Working on the technical breakthroughs needed for contract-level compliance tools using ML for [Aztec Protocol](https://aztec.network/) (a zk-rollup with privacy features)
+  - [ML as a Service](https://twitter.com/daniel_d_kang/status/1582519854405255168?s=20&t=16FXZixQvD5G_B9IFVzmaA) (MLaaS) transparency
+  - ZK anomaly/fraud detection
+    - Enables the creation of a ZK proof for [exploitability](https://blog.trailofbits.com/2020/05/21/reinventing-vulnerability-disclosure-using-zero-knowledge-proos/)/fraud. Anomaly detection models could be trained on smart contract data and agreed upon by DAOs as interesting metrics to be able to automate security procedures such as pausing contracts in a more proactive, preventive way. There are startups already looking at using ML models for security purposes in a smart contract context, so ZK anomaly detection proofs feel like the natural next step.
+  - Generic validity proof for ML inference: the ability to easily prove and verify that the output is the product of a given model and input pair.
+  - Privacy (ZKML)
+  - Decentralized [Kaggle](https://www.kaggle.com/): proof that a model has greater than x% accuracy on some test data without revealing weights.
+  - Privacy-preserving inference: medical diagnostics on private patient data get fed into the model and the sensitive inference (e.g., cancer test result) gets sent to the patient. (source: [vCNN paper](https://eprint.iacr.org/2020/584.pdf), page 2/16)
+- Worldcoin
+  - IrisCode upgradeability: [World ID](https://id.worldcoin.org/) users would be able to self-custody their biometrics in the encrypted storage of their mobile device, download the ML model for IrisCode generation and create a zero-knowledge proof locally that their IrisCode was created successfully. This IrisCode could then be permissionlessly inserted into the set of registered Worldcoin users since the receiving smart contract would be able to verify the zero-knowledge proof which validates the creation of the IrisCode. This would mean that, if Worldcoin ever upgrades the machine learning model to create the IrisCode in a way that’d break compatibility with its previous iteration, users wouldn’t have to go to an Orb again, and could create this zero-knowledge proof locally on-device. - Orb security: Currently the orb enforces several fraud and tampering detection mechanisms in its trusted environment. However, we could create a zero-knowledge proof that these mechanisms are live when the image was taken and the IrisCode was generated in order to provide better liveness guarantees to the Worldcoin protocol since we’d have complete certainty that these mechanisms would be running throughout the IrisCode generation process.
+  - Orb security: Currently the Orb enforces several fraud and tampering detection mechanisms in its trusted environment. However, we could create a zero-knowledge proof that these mechanisms are live when the image was taken and the IrisCode was generated in order to provide better liveness guarantees to the Worldcoin protocol since we’d have complete certainty that these mechanisms would be running throughout the IrisCode generation process.
+
+## Learn More and Contribute
+
+During the second half of 2022, a few different teams and individuals working in the ZKML domain got together and created the [ZKML community](http://t.me/zkmlcommunity). It is an open community where its members discuss the latest research and experiments in the ZKML domain and share their findings. If you want to learn more about ZKML and start talking to people working in the field, it is a great place to ask questions and get familiarized with the topic. Also, check out the [awesome-zkml](https://github.com/zkml-community/awesome-zkml) resource aggregator!
+
+{/* AUTHORS:START */}
+
+## Authors
+
+dcbuilder.eth, and the Worldcoin Team
+
+{/* AUTHORS:END */}
