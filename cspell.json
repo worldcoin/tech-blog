@@ -3,13 +3,7 @@
   "enabled": true,
   "language": "en-US",
   "allowCompoundWords": true,
-  "dictionaries": [
-    "typescript",
-    "node",
-    "npm",
-    "html",
-    "authors"
-  ],
+  "dictionaries": ["typescript", "node", "npm", "html", "authors"],
   "dictionaryDefinitions": [
     {
       "name": "authors",
