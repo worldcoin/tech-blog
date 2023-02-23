@@ -61,7 +61,7 @@ We did some research on the state of the art of zero-knowledge cryptography in t
 
 The [Modulus Labs](https://www.moduluslabs.xyz/) team recently released a paper titled [“The cost of intelligence”](https://medium.com/@ModulusLabs/chapter-5-the-cost-of-intelligence-da26dbf93307), where they benchmark existing ZK proof systems against a wide range of models of different sizes. It is currently possible to create proofs for models of around 18M parameters in about 50 seconds running on a powerful AWS machine using a proving system like [plonky2](https://polygon.technology/blog/plonky2-a-deep-dive). A graph from this paper can be found below:
 
-![ZKML benchmark Modulus](../../../public/images/blog/intro-to-zkml/zkml-benchmark-modulus.png)
+![Source: “The Cost of Intelligence: Proving Machine Learning Inference with Zero-Knowledge.” Modulus Labs. Fig. 2, pp. 12. January 20, 2023.](/images/blog/intro-to-zkml/zkml-benchmark-modulus.png "Source: “The Cost of Intelligence: Proving Machine Learning Inference with Zero-Knowledge.” Modulus Labs. Fig. 2, pp. 12. January 20, 2023.")
 
 Another initiative that is working on improving the state of the art of ZKML systems is Zkonduit's [ezkl](https://github.com/zkonduit/ezkl) library which allows you to create ZK proofs of ML models exported using ONNX. This enables any ML engineer to create ZK proofs of the inference step of their models and to prove the output to any correctly implemented verifier.
 
@@ -71,7 +71,9 @@ There are several teams working on improving ZK technology, creating optimized h
 
 In order to decide whether ZKML could be used for a given application, we can examine how the properties of ZK cryptography would address an issue with machine learning. This can be illustrated as a Venn Diagram:
 
-![ZKML use case Venn diagram](../../../public/images/blog/intro-to-zkml/zkml-venn.png)
+![Venn Diagram explaining how ZK and ML primitives and technologies can be combined together](/images/blog/intro-to-zkml/zkml-venn.png "Venn Diagram explaining how ZK and ML primitives and technologies can be combined together")
+
+![Source: “The Cost of Intelligence: Proving Machine Learning Inference with Zero-Knowledge.” Modulus Labs. Fig. 2, pp. 12. January 20, 2023.](/images/blog/intro-to-zkml/zkml-benchmark-modulus.png "Source: “The Cost of Intelligence: Proving Machine Learning Inference with Zero-Knowledge.” Modulus Labs. Fig. 2, pp. 12. January 20, 2023.")
 
 Definitions:
 
