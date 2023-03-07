@@ -7,6 +7,7 @@
     "npm": "8.1.0"
   },
   "scripts": {
+    "dev": "cd company-website && npm install && npm run dev",
     "format": "prettier -w ./",
     "format:check": "prettier --check ./",
     "typecheck": "tsc",
