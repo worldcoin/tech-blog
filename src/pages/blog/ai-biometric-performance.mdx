@@ -60,7 +60,7 @@ The probability for the _i_-th (legitimate) user to run into a false match error
 
 $$
 \begin{aligned}
-P_{\textrm{FM}}(i) = 1 - P_{\textrm{no match with i-1 users in DB}}= 1 - (1-p)^{i-1}.
+P_{\textrm{FM}}(i) = 1 - P_{\textrm{no match with i-1 users in DB}}= 1 - (1-p)^{i-1}
 \end{aligned}
 $$
 
@@ -96,7 +96,7 @@ The derivation of the above equation can be found [here](https://www.wolframalph
 
 $$
 \begin{aligned}
-N_\textrm{FM}(i) = \frac{1}{2} (i-1)ip + \mathcal{O}(i^3p^2) \approx \frac{1}{2} (i-1)ip,
+N_\textrm{FM}(i) = \frac{1}{2} (i-1)ip + \mathcal{O}(i^3p^2) \approx \frac{1}{2} (i-1)ip
 \end{aligned}
 $$
 
@@ -108,7 +108,7 @@ When it comes to fraudulent users, the probability of them not being matched sta
 
 $$
 \begin{aligned}
-P_{\textrm{FNM}} = \textrm{FNMR}.
+P_{\textrm{FNM}} = \textrm{FNMR}
 \end{aligned}
 $$
 
@@ -116,7 +116,7 @@ The number of expected false non matches can be calculated with
 
 $$
 \begin{aligned}
-N_{\textrm{FNM}}(j) = j  \cdot P_{\textrm{FNM}} = j \cdot \textrm{FNMR},
+N_{\textrm{FNM}}(j) = j  \cdot P_{\textrm{FNM}} = j \cdot \textrm{FNMR}
 \end{aligned}
 $$
 
