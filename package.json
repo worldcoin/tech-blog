@@ -11,7 +11,7 @@
     "format": "prettier -w ./",
     "format:check": "prettier --check ./",
     "typecheck": "tsc",
-    "spellcheck": "cspell src/*.{ts,js,tsx,json,md,mdx}"
+    "spellcheck": "cspell **/*.{md,mdx}"
   },
   "dependencies": {
     "typescript": "4.9.3"
