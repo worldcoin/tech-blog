@@ -1,0 +1,46 @@
+<svg width="800" height="214" viewBox="0 0 800 214" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line y1="-0.542373" x2="62.9415" y2="-0.542373" transform="matrix(0.706602 0.707611 -0.706602 0.707611 18.4414 17.9233)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="62.9415" y2="-0.542373" transform="matrix(0.706602 0.707611 -0.706602 0.707611 150.781 150.452)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="61.4063" y2="-0.542373" transform="matrix(0.706602 -0.707611 0.706602 0.707611 150.781 62.4619)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="61.4063" y2="-0.542373" transform="matrix(0.706602 -0.707611 0.706602 0.707611 19.5273 193.903)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="155.946" y2="-0.542373" transform="matrix(0.925135 0.379638 -0.378712 0.925515 328.137 17.9238)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="155.946" y2="-0.542373" transform="matrix(0.925135 0.379638 -0.378712 0.925515 328.137 136.33)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="155.946" y2="-0.542373" transform="matrix(0.925135 0.379638 -0.378712 0.925515 328.137 77.127)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="155.946" y2="-0.542373" transform="matrix(-0.925135 0.379638 -0.378712 -0.925515 472.406 17.9233)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="155.946" y2="-0.542373" transform="matrix(-0.925135 0.379638 -0.378712 -0.925515 472.406 134.701)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="155.946" y2="-0.542373" transform="matrix(-0.925135 0.379638 -0.378712 -0.925515 472.406 77.127)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="185.952" y2="-0.542373" transform="matrix(0.775852 0.630915 -0.629831 0.776732 328.137 18.4673)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="185.953" y2="-0.542373" transform="matrix(-0.772466 0.635056 -0.633974 -0.773354 472.09 18.082)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="185.953" y2="-0.542373" transform="matrix(-0.772466 0.635056 -0.633974 -0.773354 472.32 77.6704)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="185.952" y2="-0.542373" transform="matrix(0.775852 0.630915 -0.629831 0.776732 328.137 77.6704)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="190.388" y2="-0.542373" transform="matrix(0.367492 0.930027 -0.929668 0.3684 658.441 17.9233)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="190.694" y2="-0.542373" transform="matrix(0.930053 0.367425 -0.366519 0.93041 604.746 71.6953)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="190.19" y2="-0.542373" transform="matrix(0.929668 -0.3684 0.367492 0.930027 604.746 141.762)" stroke="white" stroke-width="1.08475"/>
+<line y1="-0.542373" x2="190.893" y2="-0.542373" transform="matrix(-0.366519 0.93041 -0.930053 -0.367425 728.406 17.9233)" stroke="white" stroke-width="1.08475"/>
+<rect x="18.9838" y="18.4657" width="175.729" height="175.981" stroke="white" stroke-width="1.08475"/>
+<rect x="62.9135" y="63.0043" width="87.322" height="87.4483" stroke="white" stroke-width="1.08475"/>
+<ellipse cx="18.1695" cy="18.1954" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="150.509" cy="151.267" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="150.509" cy="62.7335" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="194.982" cy="18.1954" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="62.1031" cy="62.7335" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="62.1031" cy="151.267" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="18.1695" cy="195.261" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="327.865" cy="18.1954" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="327.865" cy="77.3986" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="327.865" cy="136.602" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="327.865" cy="195.805" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="472.134" cy="18.1954" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="472.134" cy="77.3986" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="472.134" cy="136.602" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="472.134" cy="195.805" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="658.169" cy="18.1954" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="658.169" cy="195.805" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="728.134" cy="18.1954" rx="18.1695" ry="18.1954" fill="#00B979"/>
+<ellipse cx="728.134" cy="195.805" rx="18.1695" ry="18.1954" fill="#FF7C2E"/>
+<ellipse cx="781.831" cy="71.9669" rx="18.1954" ry="18.1695" transform="rotate(90 781.831 71.9669)" fill="#FF7C2E"/>
+<ellipse cx="604.475" cy="71.9669" rx="18.1954" ry="18.1695" transform="rotate(90 604.475 71.9669)" fill="#00B979"/>
+<ellipse cx="781.831" cy="142.033" rx="18.1954" ry="18.1695" transform="rotate(90 781.831 142.033)" fill="#00B979"/>
+<ellipse cx="604.475" cy="142.033" rx="18.1954" ry="18.1695" transform="rotate(90 604.475 142.033)" fill="#FF7C2E"/>
+<ellipse cx="194.982" cy="195.262" rx="18.1695" ry="18.1954" fill="#00B979"/>
+</svg>
