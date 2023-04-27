@@ -43,20 +43,20 @@ Distributed systems like public blockchains have limited computational power sin
 
 ### Building privacy-preserving applications
 
-The zero-knowledge property of ZK proofs enables hiding parts of the computation being proven which is really useful to create applications that preserve users'  privacy and personal data when making cryptographic attestations. Examples:
+The zero-knowledge property of ZK proofs enables hiding parts of the computation being proven which is really useful to create applications that preserve users' privacy and personal data when making cryptographic attestations. Examples:
 
   - [Semaphore](https://semaphore.appliedzkp.org/)
   - [MACI](https://privacy-scaling-explorations.github.io/maci/)
   - [Penumbra](https://penumbra.zone/)
   - [Aztec Network](https://aztec.network/)
 
-  Aztec is building a private scalability solution for Ethereum (ZK rollup) where users'  balances and transactions are fully hidden to any outside observer.
+  Aztec is building a private scalability solution for Ethereum (ZK rollup) where users' balances and transactions are fully hidden to any outside observer.
 
 ### Identity primitives and data provenance
 
   - [WorldID](https://id.worldcoin.org/)
 
-  At Worldcoin we are building WorldID, which is our privacy-preserving proof-of-personhood protocol. It allows any person with a WorldID to make a cryptographic attestation signalling that they are a unique human being and that they haven' t performed an action before (like signing up for a social network) without revealing their identity.
+  At Worldcoin we are building WorldID, which is our privacy-preserving proof-of-personhood protocol. It allows any person with a WorldID to make a cryptographic attestation signalling that they are a unique human being and that they haven't performed an action before (like signing up for a social network) without revealing their identity.
 
   - [Sismo](https://sismo.io/)
   - [Clique](https://www.clique.social/)
@@ -98,7 +98,7 @@ In order to decide whether ZKML could be used for a given application, we can ex
 
 **[Heuristic optimization](https://en.wikipedia.org/wiki/Heuristic_(computer_science))** - A problem-solving approach that uses rules of thumb or "heuristics" to find good solutions to problems that are difficult to solve using traditional optimization methods. Rather than trying to find the optimal solution to a problem, heuristic optimization methods aim to find a good or "good enough" solution in a reasonable amount of time given the relative importance of the problem to the overall system and the difficulty in optimizing it.
 
-**[Fully Homomorphic Encryption](https://en.wikipedia.org/wiki/Homomorphic_encryption)** (FHE) ML - FHE allows developers to perform operations on encrypted data and when decrypted the result will be the output of the operation performed on the original unencrypted input. Enables evaluating models in a privacy-preserving fashion (full data privacy, unlike ZKML where the prover needs access to all data); however, there' s no way to cryptographically prove the correctness of the computations being performed like with ZK proofs. For example, [Zama](https://www.zama.ai/) is working on creating a FHE ML framework called [Concrete ML](https://docs.zama.ai/concrete-ml).
+**[Fully Homomorphic Encryption](https://en.wikipedia.org/wiki/Homomorphic_encryption)** (FHE) ML - FHE allows developers to perform operations on encrypted data and when decrypted the result will be the output of the operation performed on the original unencrypted input. Enables evaluating models in a privacy-preserving fashion (full data privacy, unlike ZKML where the prover needs access to all data); however, there's no way to cryptographically prove the correctness of the computations being performed like with ZK proofs. For example, [Zama](https://www.zama.ai/) is working on creating a FHE ML framework called [Concrete ML](https://docs.zama.ai/concrete-ml).
 
 **ZK proofs vs. Validity proofs** - These terms are oftentimes used interchangeably in the industry since validity proofs are ZK proofs that don't hide parts of the computation or its results. In the context of ZKML, most current applications are leveraging the validity proof aspect of ZK proofs.
 
@@ -138,7 +138,7 @@ Besides validity proofs, we can also hide parts of the computation in order to e
 
 #### Potential use cases at Worldcoin
 
-One potential use of ZKML in the context of Worldcoin is iris code upgradeability. World ID users would be able to self-custody their signed biometrics in the encrypted storage of their mobile device, download the ML model for iris code generation and create a zero-knowledge proof locally that proves their iris code was indeed generated from signed images using the correct model. This iris code could then be permissionlessly inserted into the set of registered Worldcoin users since the receiving smart contract would be able to verify the zero-knowledge proof which validates the creation of the iris code. This would mean that, if Worldcoin ever upgrades the algorithm to create the iris code in a way that' d break compatibility with its previous iteration, users wouldn' t have to go back to an Orb, but could just compute the upgrade locally on-device.
+One potential use of ZKML in the context of Worldcoin is iris code upgradeability. World ID users would be able to self-custody their signed biometrics in the encrypted storage of their mobile device, download the ML model for iris code generation and create a zero-knowledge proof locally that proves their iris code was indeed generated from signed images using the correct model. This iris code could then be permissionlessly inserted into the set of registered Worldcoin users since the receiving smart contract would be able to verify the zero-knowledge proof which validates the creation of the iris code. This would mean that, if Worldcoin ever upgrades the algorithm to create the iris code in a way that'd break compatibility with its previous iteration, users wouldn't have to go back to an Orb, but could just compute the upgrade locally on-device.
 
 ## Learn More and Contribute
 
