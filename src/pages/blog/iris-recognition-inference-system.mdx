@@ -3,7 +3,7 @@
   <description>
     Worldcoin requires a system that can accurately verify one's uniqueness among billions of users. In this article, we will explain how our biometric pipeline processes iris images to enable uniqueness verification on a large scale.
   </description>
-  <date>2023/06/02</date>
+  <date>2023/06/05</date>
   <category>Research and Engineering</category>
   <hero-text-color>false</hero-text-color>
   <header-background-color>#000000</header-background-color>
@@ -42,7 +42,7 @@ The eye is a remarkable system that exhibits various dynamic behaviors, includin
 
 ## Segmentation
 
-Iris recognition was first developed in 1993 by John Daugmann ([Daugman 1993](https://www.cl.cam.ac.uk/~jgd1000/PAMI93.pdf) [2]) and, although the field has advanced since the turn of the millennium, it continues to be heavily influenced by legacy methods and practices. Historically, the morphology of the eye in iris recognition has been identified using classical computer vision methods such as the Hough Transform or circle fitting ([Daugman 2004](https://ieeexplore.ieee.org/document/1262028) [^4]). In recent years, Deep Learning has brought about significant improvements in the field of computer vision, providing new tools for understanding and analysing the eye physiology with unprecedented depth.
+Iris recognition was first developed in 1993 by John Daugmann ([Daugman 1993](https://www.cl.cam.ac.uk/~jgd1000/PAMI93.pdf) [^2]) and, although the field has advanced since the turn of the millennium, it continues to be heavily influenced by legacy methods and practices. Historically, the morphology of the eye in iris recognition has been identified using classical computer vision methods such as the Hough Transform or circle fitting ([Daugman 2004](https://ieeexplore.ieee.org/document/1262028) [^4]). In recent years, Deep Learning has brought about significant improvements in the field of computer vision, providing new tools for understanding and analysing the eye physiology with unprecedented depth.
 
 We have proposed a novel method for segmenting high-resolution infrared iris images in [Lazarski et al](https://arxiv.org/pdf/2209.15471.pdf) [^5]. Our architecture consists of an encoder that is shared by two decoders: one that estimates the geometry of the eye (pupil, iris, and eyeball) and the other that focuses on noise, i.e., non-eye-related elements that overlay the geometry and potentially obscure the iris texture (eyelashes, hair strands, etc.). This dichotomy allows for easy processing of overlapping elements and provides a high degree of flexibility in training these detectors. The architecture takes into account the [DeepLabv3+](https://arxiv.org/abs/1802.02611) [^6] architecture with a MobilNet v2 backbone.
 
