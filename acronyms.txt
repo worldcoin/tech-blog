@@ -1,0 +1,7 @@
+# This file is used to recognize acronyms in spell check.
+RMSE
+BSIF
+FNMR
+MACI
+IREX
+JWT

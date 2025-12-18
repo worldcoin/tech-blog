@@ -6,18 +6,14 @@ on:
 jobs:
   lint:
     name: Source code formatting & spellcheck
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
-      - name: Set up Node 18
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: "yarn"
+      - uses: pnpm/action-setup@v4
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: pnpm i
 
       - name: Spellcheck
-        run: yarn spellcheck
+        run: pnpm spellcheck
