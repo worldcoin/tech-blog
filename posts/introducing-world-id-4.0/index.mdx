@@ -73,7 +73,7 @@ Aside from providing the required entropy for computing the nullifiers, two addi
 
 **Blinded Inputs.** When requesting an OPRF evaluation to construct the required nullifier, a user will query each OPRF node independently, and importantly, do so with blinded inputs. Instead of querying each OPRF node where the query is the user’s `leafIndex`, the user generates a random blinding factor $\beta\ \xleftarrow{\text{Unif}} \mathbb{Z}$. The user then generates their query for the server nodes as $Q = \beta \cdot H(x)$ where x represents the actual query the user intends (which in this case is the hash of the `leafIndex`, `rpId` and `action`, and the H function is a hash to field function. 
 
-The OPRF nodes then perform the computation on the blinded query  $Q'=k\cdot Q$ . Finally, the user can unblind the query using $\beta^{-1}$. This means deriving the output value of $H(x)\cdot k=n$ , but without any node ever learning the actual query, i.e. the nullifier is computed as $n=H'(x, (\beta^{-1}\cdot Q'))$.
+The OPRF nodes then perform the computation on the blinded query  $Q'=k\cdot Q$ . Finally, the user can un-blind the query using $\beta^{-1}$. This means deriving the output value of $H(x)\cdot k=n$ , but without any node ever learning the actual query, i.e. the nullifier is computed as $n=H'(x, (\beta^{-1}\cdot Q'))$.
 
 Note that if the user had not performed the blinding, the OPRF nodes could easily learn the user’s `leafIndex` by trying all values (the `rpId` and `action` are public inputs). With the blinded query, however, it’s impossible for a node to know what the original query was due to the same discrete logarithm problem that makes elliptic curve cryptography secure (such as in TLS).
 

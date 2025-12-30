@@ -3,7 +3,15 @@
   "enabled": true,
   "language": "en-US",
   "allowCompoundWords": true,
-  "dictionaries": ["typescript", "node", "npm", "html", "authors", "acronyms"],
+  "dictionaries": [
+    "typescript",
+    "node",
+    "npm",
+    "html",
+    "authors",
+    "acronyms",
+    "latex"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "acronyms",
@@ -22,7 +30,8 @@
     "javascript",
     "markdown",
     "yaml",
-    "json"
+    "json",
+    "latex"
   ],
   "words": [
     "anonymization",
@@ -38,6 +47,7 @@
     "inclusivity",
     "Kaggle",
     "keccak",
+    "mathbb",
     "mathjax",
     "merkle",
     "Miden",
@@ -55,6 +65,7 @@
     "Sismo",
     "testid",
     "textrm",
+    "Unif",
     "webm",
     "webp",
     "Worldcoin",
