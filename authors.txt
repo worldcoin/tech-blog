@@ -22,3 +22,5 @@ Jeanneau
 Wiktor
 Daugmann
 DeepLabv3
+TACEO
+Vitalik
