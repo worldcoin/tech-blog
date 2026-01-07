@@ -27,8 +27,8 @@ World ID is at the frontier of privacy and to remain there, the protocol must ev
 - **Rotation.** In case of compromise, the secret key can be rotated by revoking the old one.
 - **Reduced attack scope.** The scope of potential past activity that could be compromised is significantly reduced, even under coercion. If an attacker gains access to a user’s unrevoked secret, the attacker cannot de-anonymize past activity without collusion of other parties.
 - **Enabling recovery.** Being able to recover a World ID in case of loss of all Authenticators.
-- **Authenticator plurality.** Beyond ****increasing resilience of the Protocol, entirely new classes of Authenticators will now be possible. For example, Authenticators that rely on secure hardware modules, or Authenticators which use more widespread identification mechanisms.
-- **Granular permissions (Future).** In the future, granular controls and permissions for different Authenticators.
+- **Authenticator plurality.** Beyond increasing resilience of the Protocol, entirely new classes of Authenticators will now be possible. For example, Authenticators that rely on secure hardware modules, or Authenticators which use more widespread identification mechanisms.
+- **Granular permissions.** In the future, granular controls and permissions for different Authenticators.
 
 This update will also bring added privacy benefits. Chief among them is the protocol-level protection for nullifier anonymity. This means that with the new protocol version, new protections are introduced so nullifiers can only ever be used once, preventing nullifiers from becoming a pseudonymous identifier. 
 
@@ -48,9 +48,9 @@ Achieving this abstraction while maintaining user privacy is not simple. The Wor
    nullifier = H(rpId || action || identity_secret_key)
 ```
 
-A single World ID holder will always generate the same nullifier for the same context (`rpId`, `action`), which means that an RP gets a provable guarantee that this user is only doing something once (since the entire ZKP that the user provides encompasses the correct computation of the Nullifier).
+A single World ID holder will always generate the same nullifier for the same context `(rpId, action)`, which means that an RP gets a provable guarantee that this user is only doing something once (since the entire ZKP that the user provides encompasses the correct computation of the Nullifier).
 
-Even though deterministic, the Nullifier is privacy preserving, and anonymous when correctly used. This is because it is uniformly distributed across the output space through a hashing function and critically reliant on the entropy provided by the user, which remains secret (i.e.the user’s secret). The inclusion of the user’s secret in the hashing computation makes it computationally infeasible to brute-force or “guess” nullifiers.
+Even though deterministic, the Nullifier is privacy preserving, and anonymous when correctly used. This is because it is uniformly distributed across the output space through a hashing function and critically reliant on the entropy provided by the user, which remains secret (i.e. the user's secret). The inclusion of the user’s secret in the hashing computation makes it computationally infeasible to brute-force or “guess” nullifiers.
 
 In the updated protocol, we can no longer rely on the user's secret because there is no single secret. Further, if we were to rely on a secret that can be rotated, then the deterministic property of nullifiers would no longer hold. A single user would be able to perform an action multiple times.
 
@@ -58,7 +58,7 @@ In the updated protocol, we can no longer rely on the user's secret because ther
 
 To address this, we introduce a distributed multi-party network based on Verifiable Oblivious Pseudorandom Functions (or vOPRF for short — more about OPRF [^2]). This network, called **OPRF Nodes**, provide the required secret entropy to ensure the determinism of nullifiers. In a nutshell, these functions are analogous to keyed-hash functions where a specific input is hashed with the inclusion of a secret.
 
-For World ID 4.0, a nullifier **n** is computed by performing $n = \text{OPRF}(k_{rp}, DS \mid\mid \texttt{leafIndex} \mid\mid \texttt{rpId} \mid\mid \texttt{action})$ where:
+For World ID 4.0, a nullifier $n$ is computed by performing $n = \text{OPRF}(k_{rp}, DS \mid\mid \texttt{leafIndex} \mid\mid \texttt{rpId} \mid\mid \texttt{action})$ where:
 
 - $k_{rp}$ is a secret key specific to the RP publicly committed in a smart contract. When verifying the user’s Proof, the RP verifies the nullifier was generated with their committed key.
 - OPRF is the output of the function provided by each OPRF node. Importantly, a threshold of outputs must be met from different OPRF nodes for n to be correctly computed. This provides fault-tolerance and censorship-resistance. The threshold computation is accomplished because each node has an Shamir secret-share of $k_{rp}$.
@@ -146,7 +146,7 @@ At launch, one Recovery Agent will be available — recovery through Orb-based b
 
 We have previously set out a list of [building blocks](https://whitepaper.world.org/#building-blocks) which make the universally-accessible proof of human possible. Here is how the new protocol stacks up:
 
-| Building Block | Status with World ID 4.0 | Notes |
+| **Building Block** | **Status with World ID 4.0** | **Notes** |
 | --- | --- | --- |
 | **Deduplication**
 Being able to uniquely identify humans. | ✅ Available | Deduplication is accomplished through the issuance of PoH-specific credentials. |
@@ -163,11 +163,11 @@ At the core of the proposal, World ID 4.0 reiterates the protocol’s commitment
 
 ## Request for Comments
 
-The product and technical specs for World ID 4.0 are [publicly available][specs]. All the Protocol components are open source and permissively licensed. A testnet will be launching soon. To all contributors to the World ID Protocol, we strongly encourage anyone to review the proposed specs, try the Protocol out and provide comments on the proposed World ID 4.0 update.
+The product and technical specs for World ID 4.0 are [publicly available][specs]. All the Protocol components are open source and permissively licensed. A testnet will be launching soon. To all contributors to the World ID Protocol, we strongly encourage anyone to review the proposed specs, try the Protocol out and [provide comments](https://github.com/worldcoin/world-id-protocol/discussions) on the proposed World ID 4.0 update.
 
 A special thanks to all contributors from TACEO, Tools for Humanity and World Foundation.
 
-[specs]: https://github.com/worldcoin/world-id-protocol
+[specs]: https://github.com/worldcoin/world-id-protocol/blob/main/docs/world-id-4-specs/README.md
 
 
 {/* REFERENCES:START */}
