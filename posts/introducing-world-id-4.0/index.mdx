@@ -36,7 +36,7 @@ This update will also bring added privacy benefits. Chief among them is the prot
 
 Analogous to how the Ethereum ecosystem introduced [Account Abstraction](https://ethereum.org/roadmap/account-abstraction/), we propose a similar instance of accounts in the World ID Protocol. To put it another way, a World ID is no longer a single secret but an abstract record on a public on-chain registry. Here, multiple Authenticators can be authorized to act on its behalf. This registry is called the `WorldIDRegistry`.
 
-![Visual representation of the World ID Registry.](world_id_registry.png)
+![Visual representation of the World ID Registry.](world-id-registry-mobile.png|world-id-registry-desktop.png)
 
 ### Nullifiers
 
@@ -113,7 +113,7 @@ Query Proofs are used for the Authenticator to prove to all the OPRF Nodes that 
 
 1. The user knows the secret key that matches a public key committed to for the specific `leafIndex` in the `WorldIDRegistry`.
 
-![Query Proof Inputs & Outputs.](query_proof.png)
+![Query Proof Inputs & Outputs.](query-proof-mobile.png|query-proof-desktop.png)
 
 In addition to verifying the Query Proof, the OPRF Nodes also perform a signature validation outside of the ZK circuit. Each node verifies the user has a signed message from the RP for the specific context (action and nonce) where the signature comes from a committed public key which the RP registered in the `RpRegistry`. This signals intent from the RP, and maximizes the privacy of the system. Requesting a World ID Proof requires RP consent; an attacker cannot request a proof intended for a different RP without the RP’s consent.
 
@@ -128,7 +128,7 @@ This is the final proof the user generates and provides to an RP for verificatio
     2. The Credential has certain committed metadata. A subset of that committed metadata can then be verified by the OPRF nodes and the RP. For example, the expiration is verified at this step.
 4. The provided signal and nonce must match the provided public inputs.
 
-![Uniqueness Proof Inputs & Outputs.](uniqueness_proof.png)
+![Uniqueness Proof Inputs & Outputs.](uniqueness-proof-mobile.png|uniqueness-proof-desktop.png)
 
 ## Introducing Recovery
 
