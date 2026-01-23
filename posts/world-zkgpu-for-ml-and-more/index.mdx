@@ -5,11 +5,8 @@
   </description>
   <date>2025-05-11</date>
   <category>Research and Engineering</category>
+  <author>Ryan Cao, Vishruti Ganesh, and the Tools for Humanity Applied Research Team</author>
 </Meta>
-
-[Ryan Cao](https://x.com/nayr_oac), [Vishruti Ganesh](https://vishruti.me/), and the Tools for Humanity Applied Research Team
-
----
 
 Today we'd like to announce the open-sourcing of *Remainder* (Reasonable Machine Learning Doubly-Efficient Prover), Tools for Humanity’s in-house [GKR](https://www.microsoft.com/en-us/research/wp-content/uploads/2008/01/GoldwasserKR08a.pdf) + [Hyrax](https://eprint.iacr.org/2017/1132.pdf) proof system. *Remainder* enables World’s users to run ML models locally over private data and prove that they executed them correctly, allowing powerful use-cases like on-device iris code upgrade from images without re-visiting an Orb. The **open-source codebase is available [here](https://github.com/worldcoin/Remainder_CE)** along with the companion *Remainder* Book (highly recommended!) [here](http://worldcoin.github.io/remainder-documentation). 
 
@@ -194,7 +191,7 @@ $$
 \widetilde{V}_i(g) = \sum_{x, y \in \{0, 1\}^{2s_j}} \widetilde{\text{gate}}_{i, j}(g, x, y) \cdot \big[ \widetilde{V}_j(x) \odot \widetilde{V}_j(y)\big].
 $$
 
-In order to verify the claim on the value of $\widetilde{V}_i(g)$, we run the sumcheck protocol between a prover and verifier. In the last round of sumcheck, the prover sends the value $k$, which is purprotedly the value:
+In order to verify the claim on the value of $\widetilde{V}_i(g)$, we run the sumcheck protocol between a prover and verifier. In the last round of sumcheck, the prover sends the value $k$, which is purportedly the value:
 
 $$
 \widetilde{\text{gate}}_{i, j}(g, u, v) \cdot \big[ \widetilde{V}_j(u) \odot \widetilde{V}_j(v)\big].
@@ -280,6 +277,8 @@ If you’re interested in working on problems related to privacy-preserving proo
 
 Catch you next time!
 
+*[Ryan Cao](https://x.com/nayr_oac), [Vishruti Ganesh](https://vishruti.me/), and the Tools for Humanity Applied Research Team*
+
 ### References
 
 1. [Modulus Labs. (2024). Scaling Intelligence: Verifiable Decision Forest Inference with *Remainder.*](https://github.com/Modulus-Labs/Papers/blob/master/remainder-paper.pdf)
@@ -288,5 +287,3 @@ Catch you next time!
 4. [Riad S. Wahby, Ioanna Tzialla, abhi shelat, Justin Thaler, & Michael Walfish. (2017). Doubly-efficient zkSNARKs without trusted setup.](https://ia.cr/2017/1132)
 5. [Riad S. Wahby, Ye Ji, Andrew J. Blumberg, abhi shelat, Justin Thaler, Michael Walfish, & Thomas Wies. (2017). Full accounting for verifiable outsourcing.](https://ia.cr/2017/242)
 6. [Tiancheng Xie, Jiaheng Zhang, Yupeng Zhang, Charalampos Papamanthou, & Dawn Song. (2019). Libra: Succinct Zero-Knowledge Proofs with Optimal Prover Computation.](https://ia.cr/2019/317)
-
----
