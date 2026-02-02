@@ -3,12 +3,12 @@
   <description>
     Today we announce the open-sourcing of Remainder (Reasonable Machine Learning Doubly-Efficient Prover), Tools for Humanity's in-house GKR + Hyrax proof system. Remainder enables World's users to run ML models locally over private data and prove that they executed them correctly.
   </description>
-  <date>2025-05-11</date>
+  <date>2026-02-02</date>
   <category>Research and Engineering</category>
   <author>Ryan Cao, Vishruti Ganesh, and the Tools for Humanity Applied Research Team</author>
 </Meta>
 
-Today we'd like to announce the open-sourcing of *Remainder* (Reasonable Machine Learning Doubly-Efficient Prover), Tools for Humanity’s in-house [GKR](https://www.microsoft.com/en-us/research/wp-content/uploads/2008/01/GoldwasserKR08a.pdf) + [Hyrax](https://eprint.iacr.org/2017/1132.pdf) proof system. *Remainder* enables World’s users to run ML models locally over private data and prove that they executed them correctly, allowing powerful use-cases like on-device iris code upgrade from images without re-visiting an Orb. The **open-source codebase is available [here](https://github.com/worldcoin/Remainder_CE)** along with the companion *Remainder* Book (highly recommended!) [here](http://worldcoin.github.io/remainder-documentation). 
+Today we'd like to announce the open-sourcing of *Remainder* (<u>Re</u>asonable <u>Ma</u>chine Learn<u>i</u>ng <u>D</u>oubly-<u>E</u>fficient P<u>r</u>over), Tools for Humanity's in-house [GKR](https://www.microsoft.com/en-us/research/wp-content/uploads/2008/01/GoldwasserKR08a.pdf) + [Hyrax](https://eprint.iacr.org/2017/1132.pdf) proof system. *Remainder* enables World’s users to run ML models locally over private data and prove that they executed them correctly, allowing powerful use-cases like on-device iris code upgrade from images without re-visiting an Orb. The **open-source codebase is available [here](https://github.com/worldcoin/Remainder_CE)** along with the companion *Remainder* Book (highly recommended!) [here](http://worldcoin.github.io/remainder-documentation). 
 
 ## Introduction
 
@@ -37,7 +37,7 @@ The primary challenge here is thus performance—mobile devices are compute- and
 
 More details can be found in [this blog](https://world.org/blog/engineering/iris-recognition-inference-system), but at a high level, the IrisCode algorithm is highly structured and layered. In other words, this algorithm can be divided into clear steps (encoded as layers of a circuit), where the output of each step is the input of the next, and almost every step can be encoded as a function whose output label is directly computable from its input label. We wish to take advantage of these two properties of the IrisCode algorithm within *Remainder*—**hence, we use the GKR proof system** with several algorithmic optimizations and a zero-knowledge wrapper over GKR proofs via the Hyrax interactive protocol.
 
-### *Remainder* Features!
+### *Remainder*   Features!
 
 Typically, GKR is associated with two different styles of layerwise computation.
 
@@ -108,7 +108,7 @@ A naive implementation of a sumcheck prover for the above would require looping 
 
 See our documentation page [here](https://worldcoin.github.io/remainder-documentation/gkr_theory/structured_gkr.html#structured-layerwise-relationship) for more details.
 
-"Structured" layerwise relationships follow from Theorem 1 of [Tha13] and describe a relationship between layer values where bits of the index of the "destination" value in the $i$th layer are a(n optionally subset) permutation of the bits of the index of the "source" value in the $*j*$th layer for $*j > i*$. For example, a structured relationship that takes one "source" MLE $\widetilde{V}_j$ and computes products of adjacent values within it to produce $\widetilde{V}_i$ would be described as follows — 
+"Structured" layerwise relationships follow from Theorem 1 of [Tha13] and describe a relationship between layer values where bits of the index of the "destination" value in the $i$th layer are a(n optionally subset) permutation of the bits of the index of the "source" value in the $j$th layer for $j > i$. For example, a structured relationship that takes one "source" MLE $\widetilde{V}_j$ and computes products of adjacent values within it to produce $\widetilde{V}_i$ would be described as follows — 
 
 $$
 \widetilde{V}_i(g_1, g_2) = \sum_{b_1, b_2 \in \{0, 1\}^2} \widetilde{\text{eq}}(g_1, g_2; b_1, b_2) \cdot \widetilde{V}_j(b_1, b_2, 0) \cdot \widetilde{V}_j(b_1, b_2, 1)
@@ -177,7 +177,7 @@ $$
 
 In fact, we can even think of the original layer as repeating the same (even smaller) circuit $4$ times, and the first two variables of the original $\widetilde{V}_j$ as indexing into which “copy” of the circuit we are working with. 
 
-As opposed to above, the time it would take to verify this single sumcheck equation would be $\log{2n} = 1 + \log{n}$ as opposed to $2\log{n}$. In other words, **with dataparallelism, verification time increases by an additive logarithmic factor with the number of copies of the circuit** we would like to verify, ****as opposed to the naive strategy, which would scale linearly. 
+As opposed to above, the time it would take to verify this single sumcheck equation would be $\log{2n} = 1 + \log{n}$ as opposed to $2\log{n}$. In other words, **with dataparallelism, verification time increases by an additive logarithmic factor with the number of copies of the circuit** we would like to verify, as opposed to the naive strategy, which would scale linearly. 
 
 A lot of compute in machine learning is performed in a dataparallel manner, making GKR’s natural support for dataparallel computation meaningful when applied to validating machine learning inference.
 
@@ -267,7 +267,7 @@ Here, the added cost comes from the larger sumcheck equation. In *Remainder,* we
 
 Finally, we offer an extremely accessible interface to build circuits yourself in *Remainder.* We highly recommend checking out our [quickstart](https://worldcoin.github.io/remainder-documentation/quickstart.html) if you would like to get started right away! It offers a step-by-step guide to building your own circuit and running the proving/verifying process within *Remainder*.
 
-Additionally, if you would like to learn more about the theory and the math behind what goes into *Remainder,* we wrote a comprehensive overview in our [*Remainder* Book](https://worldcoin.github.io/remainder-documentation), along with extra resources that helped us understand GKR and Hyrax!
+Additionally, if you would like to learn more about the theory and the math behind what goes into *Remainder,* we wrote a comprehensive overview in our [*Remainder* Book](https://worldcoin.github.io/remainder-documentation/gkr_theory/theory_overview.html), along with extra resources that helped us understand GKR and Hyrax!
 
 ## Conclusion
 
@@ -277,13 +277,13 @@ If you're interested in working on problems related to privacy-preserving proof-
 
 Catch you next time!
 
-*[Ryan Cao](https://x.com/nayr_oac), [Vishruti Ganesh](https://vishruti.me/), and the Tools for Humanity Applied Research Team*
+*[Ryan Cao](https://www.linkedin.com/in/ryan-cao/), [Vishruti Ganesh](https://vishruti.me/), and the Tools for Humanity Applied Research Team*
 
 ### References
 
-1. [Modulus Labs. (2024). Scaling Intelligence: Verifiable Decision Forest Inference with *Remainder.*](https://github.com/Modulus-Labs/Papers/blob/master/remainder-paper.pdf)
-2. [Justin Thaler. (2013). Time-Optimal Interactive Proofs for Circuit Evaluation.](https://ia.cr/2013/351)
-3. [Justin Thaler. (2013). Proofs, Arguments, and Zero-Knowledge.](https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf)
+1. [Justin Thaler. (2013). Time-Optimal Interactive Proofs for Circuit Evaluation.](https://ia.cr/2013/351)
+2. [Justin Thaler. (2013). Proofs, Arguments, and Zero-Knowledge.](https://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf)
+3. [Modulus Labs. (2024). Scaling Intelligence: Verifiable Decision Forest Inference with *Remainder.*](https://github.com/Modulus-Labs/Papers/blob/master/remainder-paper.pdf)
 4. [Riad S. Wahby, Ioanna Tzialla, abhi shelat, Justin Thaler, & Michael Walfish. (2017). Doubly-efficient zkSNARKs without trusted setup.](https://ia.cr/2017/1132)
 5. [Riad S. Wahby, Ye Ji, Andrew J. Blumberg, abhi shelat, Justin Thaler, Michael Walfish, & Thomas Wies. (2017). Full accounting for verifiable outsourcing.](https://ia.cr/2017/242)
 6. [Tiancheng Xie, Jiaheng Zhang, Yupeng Zhang, Charalampos Papamanthou, & Dawn Song. (2019). Libra: Succinct Zero-Knowledge Proofs with Optimal Prover Computation.](https://ia.cr/2019/317)
