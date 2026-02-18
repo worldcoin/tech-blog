@@ -38,7 +38,7 @@ The primary challenge here is thus performance—mobile devices are compute- and
 
 More details can be found in [this blog](https://world.org/blog/engineering/iris-recognition-inference-system), but at a high level, the IrisCode algorithm is highly structured and layered. In other words, this algorithm can be divided into clear steps (encoded as layers of a circuit), where the output of each step is the input of the next, and almost every step can be encoded as a function whose output label is directly computable from its input label. We wish to take advantage of these two properties of the IrisCode algorithm within *Remainder*—**hence, we use the GKR proof system** with several algorithmic optimizations and a zero-knowledge wrapper over GKR proofs via the Hyrax interactive protocol.
 
-### *Remainder*   Features!
+### *Remainder*  Features!
 
 Typically, GKR is associated with two different styles of layerwise computation.
 
